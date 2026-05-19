@@ -1,0 +1,312 @@
+body{
+  background-color:#dab1ea;
+  height:auto;
+  margin: 0;
+  min-height: 100vh;
+  padding-top: 90px;
+  box-sizing: border-box;
+}
+.navbar{
+display: flex;
+justify-content:space-between;
+align-items:center;
+background-color: #e5bdf6;
+top: 0;
+left: 0;
+right: 0;
+padding: 5px 15px;
+position:fixed;
+z-index: 1000;
+height:75px;
+}
+
+/* Keep navbar layout LTR so logo stays on the left and links on the right
+   even if the page uses dir="rtl". Individual link text remains RTL. */
+.navbar {
+  direction: ltr;
+}
+.options ul {
+    list-style-type:none;
+    list-style-position: inside;
+    display:flex;
+  margin: 0;
+  padding: 0;
+
+}
+
+/* Ensure the link text itself reads right-to-left while the flex layout
+   of the navbar remains stable. */
+.options {
+  direction: rtl;
+}
+.options li {
+    margin:10px;
+}
+.options a {
+  color:#9d6ab0;
+}
+.options a:hover{
+  color: #5d3f6a;
+}
+.logo img {
+  height: auto;
+  width:100px;
+  justify-content:space-between;
+}
+.welcome{
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-style: italic;
+  color: #ffffff;
+  text-align: center;
+  margin: 9rem auto 0;
+  padding: 0 1rem;
+  }
+.des1
+{
+  display: flex;
+  align-items:center;
+  position: inherit;
+  justify-content: center;
+  padding: 1.5rem 1rem 2rem;
+}
+.des1 img
+{
+width:min(200px, 70vw);
+max-width: 100%;
+height: auto;
+}
+
+.content {
+  width: min(920px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.page-header {
+  margin: 1.25rem 0 1.5rem;
+  padding: 1.2rem 1.25rem;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  backdrop-filter: blur(4px);
+}
+
+.page-header h1 {
+  margin: 0 0 0.4rem;
+  color: #5d3f6a;
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+}
+
+.page-header p {
+  margin: 0;
+  color: #4b3754;
+  line-height: 1.8;
+}
+
+.questions-form {
+  padding-bottom: 2rem;
+}
+
+.controls,
+.questions,
+.form-actions,
+.save-status {
+  margin-top: 1rem;
+}
+
+.controls {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+}
+
+.toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #5d3f6a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Make the checkbox look like a switch */
+.toggle-label input[type="checkbox"] {
+  /* keep input accessible but visually hidden */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.toggle-label .switch {
+  width: 46px;
+  height: 26px;
+  background: #d9d9d9;
+  border-radius: 18px;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  transition: background .18s ease;
+}
+
+.toggle-label .switch::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  top: 3px;
+  left: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: transform .18s ease, left .18s ease;
+}
+
+.toggle-label input[type="checkbox"]:checked + .switch {
+  background: #9d6ab0; /* purple track when on */
+}
+
+.toggle-label input[type="checkbox"]:checked + .switch::after {
+  transform: translateX(20px);
+}
+
+.toggle-label input[type="checkbox"]:focus + .switch {
+  box-shadow: 0 0 0 4px rgba(157,106,176,0.14);
+}
+
+.questions {
+  display: grid;
+  gap: 1rem;
+}
+
+.question-card {
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 18px;
+  padding: 1.6rem 1.1rem 1rem;
+  border: 0;
+  margin: 0;
+  min-inline-size: 0;
+  position: relative;
+  box-shadow: 0 10px 28px rgba(93, 63, 106, 0.08);
+}
+
+.question-card legend {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem; /* respects RTL layout */
+  font-weight: 700;
+  color: #4b3754;
+  padding: 0 0.2rem;
+  margin: 0;
+}
+
+.question-options {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.flowers-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.flower-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flower-wrapper input[type="radio"] {
+  display: none;
+}
+
+.flower-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
+.flower-img {
+    margin-top: 20px;
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.flower-caption {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #3f3146;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.submit-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  background: #9d6ab0;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #875b98;
+}
+
+.save-status {
+  min-height: 1.4em;
+  color: #4b3754;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding-top: 78px;
+  }
+
+  .navbar {
+    height: auto;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .logo img {
+    width: 72px;
+  }
+
+  .options ul {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .options li {
+    margin: 4px 0;
+  }
+
+  .welcome {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-top: 9rem;
+  }
+
+  .des1 {
+    padding-top: 1rem;
+  }
+
+  .content {
+    width: calc(100% - 1rem);
+  }
+
+  .page-header,
+  .controls,
+  .question-card {
+    border-radius: 14px;
+  }
+}
