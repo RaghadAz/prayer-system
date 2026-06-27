@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentDailyProgramController extends Controller
 {
+
      public function saveDailyProgram(Request $request)
 {
+
 
     $studentId = Auth::user()->studentProfile->id;
     $date = now()->toDateString();
@@ -29,6 +31,7 @@ class StudentDailyProgramController extends Controller
             ]
         );
     }
+
 
     return response()->json(['message' => 'تم حفظ الإجابات بنجاح']);
 }
@@ -54,4 +57,16 @@ private function calculatePoints($questionId, $answerText)
 
     return 0;
 }
+public function getTodayAnswers()
+{
+    $studentId = Auth::user()->studentProfile->id;
+    $date = now()->toDateString();
+
+    $answers = DailyProgramAnswer::where('student_id', $studentId)
+        ->where('date', $date)
+        ->pluck('answer_text', 'question_id');
+
+    return response()->json($answers);
+}
+
 }

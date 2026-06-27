@@ -310,3 +310,313 @@ height: auto;
     border-radius: 14px;
   }
 }
+.dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #6a2fa0;
+    margin-bottom: 25px;
+}
+
+.dashboard-card {
+    background: #f7e9ff;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+    border: 2px solid #e8cfff;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.dashboard-card h5 {
+    color: #6a2fa0;
+    font-weight: 600;
+}
+
+.dashboard-card h3 {
+    font-weight: bold;
+    color: #9b3de8;
+}
+
+
+/* البوكسات الكبيرة */
+.dashboard-box {
+    background: #fdf7ff; /* بنفسجي فاتح جداً */
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    border: 2px solid #e8cfff;
+    margin-top: 25px;
+}
+
+.dashboard-box h4 {
+    color: #6a2fa0;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* جدول أفضل 3 */
+.table {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.table th {
+    background: #e8cfff;
+    color: #4a2a6a;
+    font-weight: bold;
+}
+
+.table td {
+    background: #faf0ff;
+}
+
+/* زر تسجيل الخروج */
+.logout-btn {
+    background: #d9534f;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #c9302c;
+}
+body {
+    background: linear-gradient(135deg, #d97ef5, #eee9ec);
+    font-family: "Tajawal", sans-serif;
+}
+/* خلفية عامة مثل الهوم */
+body {
+    background: linear-gradient(135deg, #d97ef5, #eee9ec);
+    font-family: "Tajawal", sans-serif;
+}
+
+/* عنوان الداشبورد */
+.dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #6a2fa0;
+    margin-bottom: 25px;
+}
+
+/* كروت الإحصائيات */
+.dashboard-card {
+    background: #f7e9ff; /* لافندر فاتح */
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+    border: 2px solid #e8cfff;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.dashboard-card h4 {
+    color: #6a2fa0;
+    font-weight: 600;
+}
+
+.dashboard-card h2 {
+    font-weight: bold;
+    color: #9b3de8;
+}
+
+/* بوكس أفضل 3 */
+.dashboard-box {
+    background: #fdf7ff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    border: 2px solid #e8cfff;
+    margin-top: 25px;
+}
+
+.dashboard-box h4 {
+    color: #6a2fa0;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* جدول أفضل 3 */
+.list-group-item {
+    background: #faf0ff;
+    border: 1px solid #e8cfff;
+    border-radius: 10px !important;
+    margin-bottom: 8px;
+}
+
+/* زر عرض الطالبات */
+.btn-purple {
+    background: #b45de8;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.btn-purple:hover {
+    background: #9b3de8;
+}
+
+/* زر تسجيل الخروج */
+.logout-btn {
+    background: #d9534f;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #c9302c;
+}
+.btn-students {
+    display: block;
+    width: 60%;
+    margin: 20px auto;
+    background: #b45de8;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 14px;
+    border: none;
+    transition: 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.btn-students:hover {
+    background: #9b3de8;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+/* عنوان الصفحة */
+.students-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #6a2fa0;
+    margin-bottom: 25px;
+}
+
+/* صندوق الجدول */
+.students-box {
+    background: #fdf7ff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    border: 2px solid #e8cfff;
+}
+
+/* تنسيق الجدول */
+.table {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    background: #e8cfff;
+    color: #4a2a6a;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table td {
+    background: #faf0ff;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* الروابط داخل الجدول */
+.student-link {
+    color: #6a2fa0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.student-link:hover {
+    color: #9b3de8;
+    text-decoration: underline;
+}
+.student-page {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #fdf7ff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    font-family: "Tajawal", sans-serif;
+}
+
+.student-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.student-header h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #6a2fa0;
+}
+
+.section-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 2px solid #e8cfff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.section-box h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #6a2fa0;
+    font-weight: bold;
+    border-right: 4px solid #b45de8;
+    padding-right: 10px;
+}
+
+/* جدول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+table th {
+    background: #e8cfff;
+    color: #4a2a6a;
+    font-weight: bold;
+}
+
+table td {
+    background: #faf0ff;
+    font-weight: 600;
+}
+
+table tr:hover td {
+    background: #f3e6ff;
+}

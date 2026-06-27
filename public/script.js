@@ -1229,7 +1229,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ⭐ أول تحميل
     toggle.checked = false;
-    renderQuestions();
+// ⭐ بعد ما تنرسم الأسئلة
+renderQuestions();
+
+// ⭐ هلق منجيب إجابات اليوم
+fetch(getTodayAnswersUrl)
+    .then(res => res.json())
+    .then(saved => {
+        for (let qid in saved) {
+            const answerText = saved[qid];
+
+            // منلاقي السؤال
+            const activeSet = questionSets[getActiveSetName()];
+            const question = activeSet.find(q => q.id === qid);
+
+            if (!question) continue;
+
+            // منلاقي رقم الخيار
+            const index = question.options.indexOf(answerText);
+            if (index === -1) continue;
+
+            const value = (index + 1).toString();
+            const radio = document.getElementById(`${qid}_${value}`);
+
+            if (radio) {
+                radio.checked = true;
+                collectedAnswers[qid] = answerText;
+            }
+        }
+
+        // تحديث شكل الزهرات
+        for (let qid in saved) {
+            updateFlowersForQuestion(qid);
+        }
+    });
 
     // ⭐ زر السيف
     saveBtn.addEventListener('click', function () {

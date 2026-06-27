@@ -49,7 +49,14 @@
 
 <body>
 
-    <div class="login-card">
+
+
+
+    <div class="login-card app-card">
+<div class="text-center mb-3">
+            <img src="{{asset('stylingtools/logo.png')}}" width="60"alt="الإنجاز">
+
+        </div>
         <h3 class="text-center mb-4">تسجيل الدخول</h3>
 
         <form action="{{ route('login.submit') }}" method="POST">

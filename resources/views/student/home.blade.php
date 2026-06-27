@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.navbar')
-{{-- <div class="navbar">
+<div class="navbar">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 
 
@@ -19,7 +19,7 @@
         </ul>
     </div>
 
-</div> --}}
+</div>
 
 <div class="welcome">
     <br> {  وقل اعملوا فسيرى الله عملكم }

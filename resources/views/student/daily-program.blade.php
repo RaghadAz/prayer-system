@@ -38,6 +38,10 @@
     </form>
 </main>
 <script>
+    const getTodayAnswersUrl = "{{ route('student.daily.today') }}";
+</script>
+
+<script>
     const saveDailyProgramUrl = "{{ route('student.daily.save') }}";
 </script>
 

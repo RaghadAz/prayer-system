@@ -122,5 +122,7 @@ Route::get('/student/weekly-sunnah', function () {
 Route::post('/student/daily-program/save', [StudentDailyProgramController::class, 'saveDailyProgram'])
     ->name('student.daily.save');
 
+Route::get('/student/daily-program/today', [StudentDailyProgramController::class, 'getTodayAnswers'])
+    ->name('student.daily.today');
 
 });
