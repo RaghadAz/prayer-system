@@ -54,7 +54,9 @@
 
     <div class="login-card app-card">
 <div class="text-center mb-3">
-            <img src="{{asset('stylingtools/logo.png')}}" width="60"alt="الإنجاز">
+            <a href="https://www.facebook.com/share/1NzVRJ1ULk/"><img src="{{asset('stylingtools/logo.png')}}" width="100"alt="الإنجاز">
+            </a><hr>
+        {{-- <a href="https://www.facebook.com/share/1NzVRJ1ULk/" style="color: #e19af7">جامع الخير</a> --}}
 
         </div>
         <h3 class="text-center mb-4">تسجيل الدخول</h3>
