@@ -22,6 +22,9 @@ Route::post('/logout', function () {
 })->name('logout');
 
 
+Route::get('/offline', function () {
+    return view('offline');
+});
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
