@@ -9,6 +9,9 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 Route::get('/login', function () {
     return view('login');
@@ -50,7 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('admin.showTeacher');
 
 
-    Route::post('/prayer-records', [PrayerRecordController::class,'store']);
+    Route::post('/prayer-records', [PrayerRecordController::class, 'store']);
 
     Route::post('/teachers', [TeacherController::class, 'store']);
     Route::post('/students', [StudentController::class, 'store']);
@@ -58,7 +61,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/user-created/{id}', [AdminController::class, 'userCreated'])
         ->name('admin.userCreated');
-    });
+});
 
 
 Route::middleware(['auth', 'teacher'])->group(function () {
@@ -67,7 +70,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
         ->name('teacher.dashboard');
 
 
-      //  Route::post('/student/daily-program/save', [StudentDailyProgramController::class, 'saveDailyProgram']);
+    //  Route::post('/student/daily-program/save', [StudentDailyProgramController::class, 'saveDailyProgram']);
 
 
 
@@ -84,18 +87,15 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('/teacher/top-three', [TeacherController::class, 'topThree'])
         ->name('teacher.topThree');
 
-Route::get('/teacher/students/{id}', [TeacherController::class, 'showStudent'])
-    ->name('teacher.students.show');
-
-
-
-        });
+    Route::get('/teacher/students/{id}', [TeacherController::class, 'showStudent'])
+        ->name('teacher.students.show');
+});
 
 
 
 Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/student/home', function () {
-    return view('student.home');
+        return view('student.home');
     })->name('student.home');
 
 
@@ -111,18 +111,17 @@ Route::middleware(['auth', 'student'])->group(function () {
 
 
 
-Route::get('/student/daily-program', [StudentController::class, 'dailyProgram'])
-    ->name('student.daily.program');
+    Route::get('/student/daily-program', [StudentController::class, 'dailyProgram'])
+        ->name('student.daily.program');
 
-Route::get('/student/weekly-sunnah', function () {
-    return view('student.weekly-sunnah');
-})->name('student.weekly.sunnah');
+    Route::get('/student/weekly-sunnah', function () {
+        return view('student.weekly-sunnah');
+    })->name('student.weekly.sunnah');
 
 
-Route::post('/student/daily-program/save', [StudentDailyProgramController::class, 'saveDailyProgram'])
-    ->name('student.daily.save');
+    Route::post('/student/daily-program/save', [StudentDailyProgramController::class, 'saveDailyProgram'])
+        ->name('student.daily.save');
 
-Route::get('/student/daily-program/today', [StudentDailyProgramController::class, 'getTodayAnswers'])
-    ->name('student.daily.today');
-
+    Route::get('/student/daily-program/today', [StudentDailyProgramController::class, 'getTodayAnswers'])
+        ->name('student.daily.today');
 });

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@
             background: #fff;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             animation: fadeIn 0.6s ease;
         }
 
@@ -41,8 +42,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -53,10 +61,12 @@
 
 
     <div class="login-card app-card">
-<div class="text-center mb-3">
-            <a href="https://www.facebook.com/share/1NzVRJ1ULk/"><img src="{{asset('stylingtools/logo.png')}}" width="100"alt="الإنجاز">
-            </a><hr>
-        {{-- <a href="https://www.facebook.com/share/1NzVRJ1ULk/" style="color: #e19af7">جامع الخير</a> --}}
+        <div class="text-center mb-3">
+            <a href="https://www.facebook.com/share/1NzVRJ1ULk/"><img src="{{ asset('stylingtools/logo.png') }}"
+                    width="100"alt="جامع الخير">
+            </a>
+            <hr>
+            {{-- <a href="https://www.facebook.com/share/1NzVRJ1ULk/" style="color: #e19af7">جامع الخير</a> --}}
 
         </div>
         <h3 class="text-center mb-4">تسجيل الدخول</h3>
@@ -81,4 +91,5 @@
     </div>
 
 </body>
+
 </html>
