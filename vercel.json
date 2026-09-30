@@ -18,6 +18,10 @@
       "src": "/(css|js|images|favicon.ico)/(.*)"
     },
     {
+      "src": "/stylingtools/(.*)",
+      "dest": "/public/stylingtools/$1"
+    },
+    {
       "src": "/(css|js|images|favicon.ico)/(.*)",
       "dest": "/public/$1/$2"
     },

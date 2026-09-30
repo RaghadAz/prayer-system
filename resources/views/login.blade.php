@@ -62,7 +62,7 @@
 
     <div class="login-card app-card">
         <div class="text-center mb-3">
-            <a href="https://www.facebook.com/share/1NzVRJ1ULk/"><img src="{{ asset('stylingtools/logo.png') }}"
+            <a href="https://www.facebook.com/share/1NzVRJ1ULk/"><img src="{{ asset('/stylingtools/logo.png') }}"
                     width="100"alt="جامع الخير">
             </a>
             <hr>
