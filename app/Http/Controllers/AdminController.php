@@ -75,7 +75,8 @@ class AdminController extends Controller
             'role.required' => 'يجب اختيار نوع الحساب.',
         ]);
 
-        $password = Str::lower(Str::random(6));
+        $password = Str::password(6, letters: true, numbers: true, symbols: false, spaces: false);
+        $password = Str::lower($password);
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
