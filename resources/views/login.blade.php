@@ -73,7 +73,11 @@
 
         <form action="{{ route('login.submit') }}" method="POST">
             @csrf
-
+            @if ($errors->any())
+                <div style="color: red; margin-bottom: 10px;">
+                    {{ $errors->first() }}
+                </div>
+            @endif
             <div class="mb-3">
                 <label class="form-label">اسم المستخدم</label>
                 <input type="text" name="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
