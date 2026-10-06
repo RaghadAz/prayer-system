@@ -9,41 +9,45 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
 
         if (Auth::attempt($credentials)) {
+            // 1. إعادة تجديد الـ Session ID لحمايتها
+            $request->session()->regenerate();
 
-            if (Auth::user()->role === 'admin') {
+            $user = Auth::user();
+
+            // 2. حفظ الجلسة صراحةً لضمان ثباتها في Serverless (Vercel)
+            $request->session()->save();
+
+            // 3. التوجيه حسب دور المستخدم
+            if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
 
-            if (Auth::user()->role === 'teacher') {
+            if ($user->role === 'teacher') {
                 return redirect()->route('teacher.dashboard');
             }
 
-              if (Auth::user()->role === 'student') {
-        return redirect()->route('student.home');
-    }
-            return redirect()->route('student.dashboard');
+            if ($user->role === 'student') {
+                return redirect()->route('student.home');
+            }
+
+            return redirect()->route('login');
         }
 
         return back()->withErrors(['error' => 'اسم المستخدم أو كلمة السر غير صحيحة']);
     }
-protected function authenticated(Request $request, $user)
-{$user = Auth::user();
-    if ($user->role === 'student') {
-        return redirect()->route('student.home');
-    }
 
-    if ($user->role === 'teacher') {
-        return redirect()->route('teacher.dashboard');
-    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    if ($user->role === 'admin') {
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('login');
     }
-
-    return redirect('/');
 }
-
-    }
