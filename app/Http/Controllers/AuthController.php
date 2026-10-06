@@ -13,17 +13,15 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
-
-        if (Auth::attempt($credentials)) {
-            // 1. إعادة تجديد الـ Session ID لحمايتها
+        $user = \App\Models\User::whereRaw('LOWER(username) = ?', [strtolower($request->username)])->first();
+        if ($user && \Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
+            // تسجيل الدخول يدوياً وتجديد الجلسة
+            Auth::login($user);
             $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            // 2. حفظ الجلسة صراحةً لضمان ثباتها في Serverless (Vercel)
             $request->session()->save();
 
-            // 3. التوجيه حسب دور المستخدم
+            // التوجيه بحسب الدور (Role)
+            $role = strtolower(trim($user->role));
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
