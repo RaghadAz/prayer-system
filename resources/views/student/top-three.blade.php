@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h3 class="text-center mb-4">أفضل 3 طالبات عند أنستك</h3>
+    <h3 class="text-center mb-4">أفضل 3 طالبات  </h3>
 
     <div class="row justify-content-center">
         @foreach($topThree as $student)
