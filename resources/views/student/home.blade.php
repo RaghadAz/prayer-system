@@ -2,13 +2,15 @@
 
 @section('content')
 
-@include('layouts.navbar')
-<div class="navbar">
+@push('styles')
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+@endpush
 
+@include('layouts.navbar')
 
+<div class="navbar">
     <div class="logo">
-        <img src="{{ asset('stylingtools/logo.png') }}" alt="">
+        <img src="{{ asset('stylingtools/logo.png') }}" alt="Logo">
     </div>
 
     <div class="options">
@@ -18,16 +20,15 @@
             <li><a class="nav-link" href="{{ route('student.weekly.sunnah') }}">إحياء سنة</a></li>
         </ul>
     </div>
-
 </div>
 
 <div class="welcome">
-    <br> {  وقل اعملوا فسيرى الله عملكم }
+    <br> { وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ }
     <br> أسرة مسجد الخير ترحب بكِ في برنامج انجازاتي
 </div>
 
 <div class="des1">
-    <img src="{{ asset('stylingtools/Post by @aly-vettoretto · 1 image.gif') }}" alt="">
+    <img src="{{ asset('stylingtools/welcome-animation.gif') }}" alt="Welcome Animation">
 </div>
 
 @endsection
