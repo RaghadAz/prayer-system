@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbar')
     <div class="navbar">
-        <link rel="stylesheet" href="{{ asset('style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
         <div class="logo">

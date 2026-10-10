@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.navbar')
 
-@include('layouts.navbar')
-
-<link rel="stylesheet" href="{{ asset('style.css') }}">
-{{--
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {{--
 <div class="navbar">
 
     <div class="logo">
@@ -23,13 +22,12 @@
 
 </div> --}}
 
-<div class="welcome">
-    <br> سنة الأسبوع: السواك
-    <br> قال رسول الله صلى الله عليه وسلم: "السواك مطهرة للفم ومرضاة للرب"
-</div>
+    <div class="welcome">
+        <br> سنة الأسبوع: السواك
+        <br> قال رسول الله صلى الله عليه وسلم: "السواك مطهرة للفم ومرضاة للرب"
+    </div>
 
-<div class="des1">
-    <img src="{{ asset('stylingtools/Pink Flower with Green Leaves.gif') }}" alt="">
-</div>
-
+    <div class="des1">
+        <img src="{{ asset('stylingtools/Pink Flower with Green Leaves.gif') }}" alt="">
+    </div>
 @endsection
