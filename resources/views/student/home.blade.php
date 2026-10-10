@@ -10,13 +10,13 @@
             <img src="{{ asset('stylingtools/logo.png') }}" alt="">
         </div>
 
-        <div class="options">
+        {{-- <div class="options">
             <ul>
                 <li><a class="nav-link" href="{{ route('student.dashboard') }}">الصفحة الرئيسية</a></li>
                 <li><a class="nav-link" href="{{ route('student.daily.program') }}">البرنامج اليومي</a></li>
                 <li><a class="nav-link" href="{{ route('student.weekly.sunnah') }}">إحياء سنة</a></li>
             </ul>
-        </div>
+        </div> --}}
 
     </div>
 
