@@ -66,7 +66,7 @@ class PrayerRecordController extends Controller
     public function showForStudent( $student_id)
 {
     $records = PrayerRecord::where('student_id', $student_id)
-        ->orderBy('date', 'desc')
+        ->orderByDesc('date', 'desc')
         ->get();
 
     return response()->json([
@@ -79,7 +79,7 @@ public function weeklyForStudent( $student_id)
     $startDate = now()->subDays(6)->toDateString();
     $records = PrayerRecord::where('student_id', $student_id)
         ->where('date', '>=', $startDate)
-        ->orderBy('date', 'desc')
+        ->orderByDesc('date', 'desc')
         ->get();
 
     return response()->json([

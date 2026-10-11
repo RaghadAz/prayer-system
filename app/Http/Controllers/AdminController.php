@@ -167,7 +167,7 @@ class AdminController extends Controller
 
         // كل الصلوات
         $records = PrayerRecord::where('student_id', $id)
-            ->orderBy('date', 'desc')
+            ->orderByDesc('date', 'desc')
             ->get();
 
         return view('admin.show-student', compact(
