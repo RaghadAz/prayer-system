@@ -21,7 +21,7 @@
                         <li>
                             {{ $questionNames[$rec->question_id] ?? $rec->question_id }}
                             — {{ $rec->answer_text }}
-                            — {{ $rec->points }} نقطة
+                            {{-- — {{ $rec->points }} نقطة --}}
                         </li>
                     @endforeach
                 </ul>
@@ -29,9 +29,9 @@
 
             <h3>تقرير الأسبوع</h3>
             <p>عدد الإجابات: {{ $weeklyTotals['total_records'] }}</p>
-            <p>مجموع النقاط: {{ $weeklyTotals['total_points'] }}</p>
+            {{-- <p>مجموع النقاط: {{ $weeklyTotals['total_points'] }}</p> --}}
 
-            <ul>
+            {{-- <ul>
                 @foreach ($weekly as $rec)
                     <li>
                         {{ $questionNames[$rec->question_id] ?? $rec->question_id }}
@@ -39,7 +39,7 @@
                         — {{ $rec->points }} نقطة
                     </li>
                 @endforeach
-            </ul>
+            </ul> --}}
         </div>
 
         <div class="section-box">

@@ -37,16 +37,19 @@
 
             <ul class="list-group mb-4">
                 @forelse($topStudents as $index => $record)
-                    @if (isset($record->student) && optional($record->student)->user)
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>#{{ $index + 1 }} {{ $record->student->user->name ?? 'طالبة' }}</span>
-                            <span class="badge bg-success rounded-pill">{{ $record->total_points ?? 0 }} نقطة</span>
-                        </div>
-                    @endif
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>#{{ $index + 1 }}</strong>
+                            {{ optional($record->user)->name ?? 'طالبة' }}
+                        </span>
+                        <span class="badge bg-success rounded-pill">
+                            {{ $record->total_points ?? 0 }} نقطة
+                        </span>
+                    </li>
                 @empty
-                    <div class="text-center text-muted py-3">
-                        لا توجد نقاط أو إنجازات مسجلة حتى الآن.
-                    </div>
+                    <li class="list-group-item text-center text-muted py-3">
+                        لا توجد نقاط مسجلة حتى الآن.
+                    </li>
                 @endforelse
             </ul>
         </div>

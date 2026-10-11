@@ -14,7 +14,6 @@ class RankingController extends Controller
             ->withSum('prayerRecords as total_score', 'points')
             ->first();
 
-        $student->total_score = $student->total_score ?? 0;
 
         return response()->json($students);
     }
