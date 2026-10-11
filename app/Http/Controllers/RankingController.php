@@ -10,12 +10,12 @@ class RankingController extends Controller
     public function studentRanking($user_id)
     {
         $students = StudentProfile::where('user_id', $user_id)
+            ->with('user')
             ->withSum('prayerRecords as total_score', 'points')
-            ->orderByDesc('total_score', '>', 0)
-            ->get();
+            ->first();
 
+        $student->total_score = $student->total_score ?? 0;
 
-   
         return response()->json($students);
     }
 }
