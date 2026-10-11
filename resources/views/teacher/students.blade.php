@@ -5,7 +5,7 @@
 
     <div class="container mt-4">
 
-        <h2 class="students-title text-center">طالبات الأنسة</h2>
+        {{-- <h2 class="students-title text-center">الطالبات </h2> --}}
 
         <div class="students-box">
 
@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>الاسم</th>
-                        <th>اسم المستخدم</th>
+                        {{-- <th>اسم المستخدم</th> --}}
                         <th>النقاط</th>
                     </tr>
                 </thead>
@@ -27,11 +27,11 @@
                                 </a>
                             </td>
 
-                            <td>
+                            {{-- <td>
                                 <a href="{{ route('teacher.students.show', $student->id) }}" class="student-link">
                                     {{ $student->user->username }}
                                 </a>
-                            </td>
+                            </td> --}}
 
                             <td>{{ $student->total_points }}</td>
                         </tr>
