@@ -46,5 +46,5 @@
         const saveDailyProgramUrl = "{{ route('student.daily.save') }}";
     </script>
 
-    <script src="{{ asset('script.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

@@ -17,6 +17,9 @@
     {
   "src": "/css/style.css",
   "dest": "/public/css/style.css"
+},{
+  "src": "/js/script.js",
+  "dest": "/public/js/script.js"
 },
     {
       "src": "/(css|js|images|favicon.ico)/(.*)"
