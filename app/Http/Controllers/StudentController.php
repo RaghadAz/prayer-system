@@ -119,16 +119,22 @@ class StudentController extends Controller
             ->sum('points') ?? 0;
 
         $ranking = StudentProfile::withSum('prayerRecords as total_points', 'points')
-            ->orderByDesc('total_points')
             ->get()
+            ->sortByDesc(function ($item) {
+                return $item->total_points ?? 0;
+            })
             ->pluck('id')
-            ->search($student->id) + 1;
+            ->search($student->id);
+
+        $ranking = $ranking !== false ? $ranking + 1 : '—';
 
         $topThree = StudentProfile::with('user')
             ->withSum('prayerRecords as total_points', 'points')
-            ->orderByDesc('total_points')
-            ->take(3)
-            ->get();
+            ->get()
+            ->sortByDesc(function ($item) {
+                return $item->total_points ?? 0;
+            })
+            ->take(3);
 
         return view('student.dashboard', compact(
             'student',
