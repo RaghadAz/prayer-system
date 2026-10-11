@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.navbar')
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <div class="container mt-4">
@@ -35,16 +37,14 @@
         <div class="dashboard-box">
             <h4>🏆 أفضل 3 طالبات</h4>
 
-            {{-- <ul class="list-group mb-4">
+            <ul class="list-group mb-4">
                 @foreach ($topStudents as $student)
                     <li class="list-group-item d-flex justify-content-between">
                         <strong>{{ $student->user->name ?? '—' }}</strong>
                         <span>{{ $student->total_points ?? 0 }} نقطة</span>
                     </li>
                 @endforeach
-            </ul> --}}
-
-ُي
+            </ul>
         </div>
 
         <a href="{{ route('teacher.students') }}" class="btn-students text-white">عرض الطالبات</a>
