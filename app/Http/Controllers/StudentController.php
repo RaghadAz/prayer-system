@@ -60,9 +60,10 @@ class StudentController extends Controller
             ->where('date', '>=', $weekStart)
             ->get();
 
-        $totalPoints = PrayerRecord::where('student_id', $student_id)->sum('points');
+        $totalPoints = PrayerRecord::where('student_id', $student_id)->sum('points') ?? 0;
 
-        $weeklyPoints = $weeklyRecords->sum('points');
+        $weeklyPoints = $weeklyRecords->sum('points') ?? 0;
+
 
         $ranking = PrayerRecord::select('student_id')
             ->selectRaw('SUM(points) as total_points')
@@ -104,7 +105,7 @@ class StudentController extends Controller
 
         $todayPoints = $student->prayerRecords()
             ->where('date', now()->toDateString())
-            ->sum('points');
+            ->sum('points') ?? 0;
 
         $weekPoints = $student->prayerRecords()
             ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
