@@ -27,6 +27,7 @@ class AdminController extends Controller
         $topStudents = DailyProgramAnswer::select('student_id')
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
+            ->havingRaw('SUM(points) > 0')
             ->orderByDesc('total_points')
             ->take(5)
             ->get();
