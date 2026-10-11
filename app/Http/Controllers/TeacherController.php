@@ -168,7 +168,6 @@ class TeacherController extends Controller
         $topStudents = $teacher->students()
             ->with('user')
             ->withSum('prayerRecords as total_points', 'points')
-            ->havingRaw('SUM(points) > 0')
             ->orderByDesc('total_points')
             ->take(3)
             ->get();
