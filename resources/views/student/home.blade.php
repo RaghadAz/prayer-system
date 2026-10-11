@@ -2,15 +2,17 @@
 
 @section('content')
     @include('layouts.navbar')
-    <div class="navbar">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    {{-- <div class="navbar">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
         <div class="logo">
             <img src="{{ asset('stylingtools/logo.png') }}" alt="">
-        </div>
+        </div> --}}
 
-        {{-- <div class="options">
+    {{-- <div class="options">
             <ul>
                 <li><a class="nav-link" href="{{ route('student.dashboard') }}">الصفحة الرئيسية</a></li>
                 <li><a class="nav-link" href="{{ route('student.daily.program') }}">البرنامج اليومي</a></li>
