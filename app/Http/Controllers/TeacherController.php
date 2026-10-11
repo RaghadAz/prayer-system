@@ -168,9 +168,16 @@ class TeacherController extends Controller
         $topStudents = $teacher->students()
             ->with('user')
             ->withSum('prayerRecords as total_points', 'points')
-            ->orderByDesc('total_points')
-            ->take(3)
-            ->get();
+            ->get()
+            ->map(function ($student) {
+                $student->total_points = $student->total_points ?? 0;
+                return $student;
+            })
+            ->filter(function ($student) {
+                return $student->total_points > 0;
+            })
+            ->sortByDesc('total_points')
+            ->take(3);
 
         return view('teacher.dashboard', [
             'studentsCount' => $students->count(),
