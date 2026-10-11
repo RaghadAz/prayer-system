@@ -60,16 +60,18 @@ class StudentController extends Controller
             ->where('date', '>=', $weekStart)
             ->get();
 
-        $totalPoints = PrayerRecord::where('student_id', $student_id)->sum('points') ?? 0;
+        $totalPoints = PrayerRecord::where('student_id', $student_id)->sum('points');
+        $totalPoints ?? 0;
 
         $weeklyPoints = $weeklyRecords->sum('points') ?? 0;
 
+        $todayPoints = $todayRecords->sum('points') ?? 0;
 
         $ranking = PrayerRecord::select('student_id')
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
             ->havingRaw('SUM(points) > 0')
-            ->orderByAsc('total_points')
+            ->orderByDesc('total_points')
             ->get();
 
         $rank = $ranking->search(function ($item) use ($student_id) {
@@ -79,7 +81,7 @@ class StudentController extends Controller
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
             ->havingRaw('SUM(points) > 0')
-            ->orderByAsc('total_points')
+            ->orderByDesc('total_points')
             ->pluck('student_id')
             ->toArray();
 
@@ -94,6 +96,7 @@ class StudentController extends Controller
                 'rank' => $rank,
                 'total_points' => $totalPoints,
                 'weekly_points' => $weeklyPoints,
+                'todayPoints' => $todayPoints,
             ],
             'today_records' => $todayRecords,
             'weekly_records' => $weeklyRecords,
@@ -109,11 +112,11 @@ class StudentController extends Controller
 
         $weekPoints = $student->prayerRecords()
             ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
-            ->sum('points');
+            ->sum('points') ?? 0;
 
         $monthPoints = $student->prayerRecords()
             ->whereMonth('date', now()->month)
-            ->sum('points');
+            ->sum('points') ?? 0;
 
         $ranking = StudentProfile::withSum('prayerRecords as total_points', 'points')
             ->orderByDesc('total_points')
