@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.navbar')
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <div class="container mt-4">

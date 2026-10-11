@@ -22,12 +22,12 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('admin.dashboard') }}">الإنجاز</a>
             <a href="javascript:history.back()" class="btn btn-primary">←</a>
         </div>
-    </nav>
+    </nav> --}}
 
     <div class="container mt-4">
         @yield('content')

@@ -272,9 +272,9 @@ height: auto;
   }
 
   .navbar {
-    height: auto;
-    padding: 8px 12px;
-    gap: 8px;
+   flex-direction: row;
+        padding: 10px;
+        gap: 15px;
   }
 
   .logo img {
@@ -282,11 +282,15 @@ height: auto;
   }
 
   .options ul {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
+    flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
   }
 
   .options li {
+    font-size: 14px;
     margin: 4px 0;
   }
 
