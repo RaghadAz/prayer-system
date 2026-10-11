@@ -42,18 +42,27 @@
         <div class="dashboard-box">
             <h4>🏆 أفضل 3 طالبات</h4>
 
-            <table class="table table-bordered text-center">
-                <tr>
-                    <th>الاسم</th>
-                    <th>النقاط</th>
-                </tr>
-
-                @foreach ($topThree as $student)
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ $student->user->name }}</td>
-                        <td>{{ $student->total_points }}</td>
+                        <th>اسم الطالبة</th>
+                        <th>مجموع النقاط</th>
                     </tr>
-                @endforeach
+                </thead>
+                <tbody>
+                    @forelse ($topThree as $student)
+                        <tr>
+                            <td>{{ $student->user->name ?? 'مستخدم غير متوفر' }}</td>
+                            <td>{{ $student->total_points }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="text-center text-muted py-3">
+                                لا توجد نقاط أو إنجازات مسجلة حتى الآن.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
 

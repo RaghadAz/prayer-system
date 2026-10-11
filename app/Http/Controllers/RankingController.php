@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class RankingController extends Controller
 {
-public function studentRanking($user_id)
-{
-    $students = StudentProfile::where('user_id', $user_id)
-        ->withSum('prayerRecords as total_score', 'points')
-        ->orderByDesc('total_score')
-        ->get();
+    public function studentRanking($user_id)
+    {
+        $students = StudentProfile::where('user_id', $user_id)
+            ->withSum('prayerRecords as total_score', 'points')
+            ->orderByDesc('total_score', '>', 0)
+            ->get();
 
-    return response()->json($students);
-}
 
+   
+        return response()->json($students);
+    }
 }

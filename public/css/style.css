@@ -272,9 +272,12 @@ height: auto;
   }
 
   .navbar {
-   flex-direction: row;
-        padding: 10px;
-        gap: 15px;
+  width: 100%;
+        max-width: 100%;
+        margin: 0;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
   }
 
   .logo img {
