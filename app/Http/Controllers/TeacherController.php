@@ -177,6 +177,7 @@ class TeacherController extends Controller
                 return $student->total_points > 0;
             })
             ->sortByDesc('total_points')
+            ->values()
             ->take(3);
 
         return view('teacher.dashboard', [

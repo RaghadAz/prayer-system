@@ -26,10 +26,10 @@
                     @endforeach
                 </ul>
             @endif
-
+            {{--
             <h3>تقرير الأسبوع</h3>
             <p>عدد الإجابات: {{ $weeklyTotals['total_records'] }}</p>
-            {{-- <p>مجموع النقاط: {{ $weeklyTotals['total_points'] }}</p> --}}
+            <p>مجموع النقاط: {{ $weeklyTotals['total_points'] }}</p> --}}
 
             {{-- <ul>
                 @foreach ($weekly as $rec)
