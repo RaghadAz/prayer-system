@@ -69,7 +69,7 @@ class StudentController extends Controller
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
             ->havingRaw('SUM(points) > 0')
-            ->orderByDesc('total_points')
+            ->orderByAsc('total_points')
             ->get();
 
         $rank = $ranking->search(function ($item) use ($student_id) {
@@ -79,7 +79,7 @@ class StudentController extends Controller
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
             ->havingRaw('SUM(points) > 0')
-            ->orderByDesc('total_points')
+            ->orderByAsc('total_points')
             ->pluck('student_id')
             ->toArray();
 
