@@ -35,13 +35,28 @@
         <div class="dashboard-box">
             <h4>🏆 أفضل 3 طالبات</h4>
 
-            <ul class="list-group mb-4">
+            {{-- <ul class="list-group mb-4">
                 @foreach ($topStudents as $student)
                     <li class="list-group-item d-flex justify-content-between">
                         <strong>{{ $student->user->name ?? '—' }}</strong>
                         <span>{{ $student->total_points ?? 0 }} نقطة</span>
                     </li>
                 @endforeach
+            </ul> --}}
+
+            <ul class="list-group mb-4">
+                @forelse($topStudents as $index => $record)
+                    @if (isset($record->student) && optional($record->student)->user)
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>#{{ $index + 1 }} {{ $record->student->user->name ?? 'طالبة' }}</span>
+                            <span class="badge bg-success rounded-pill">{{ $record->total_points ?? 0 }} نقطة</span>
+                        </div>
+                    @endif
+                @empty
+                    <div class="text-center text-muted py-3">
+                        لا توجد نقاط أو إنجازات مسجلة حتى الآن.
+                    </div>
+                @endforelse
             </ul>
         </div>
 
