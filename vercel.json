@@ -15,8 +15,8 @@
       "dest": "/public/storage/$1"
     },
     {
-  "src": "/style.css",
-  "dest": "/public/style.css"
+  "src": "/css/style.css",
+  "dest": "/public/css/style.css"
 },
     {
       "src": "/(css|js|images|favicon.ico)/(.*)"
