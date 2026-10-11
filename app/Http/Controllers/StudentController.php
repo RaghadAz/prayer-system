@@ -11,18 +11,19 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'name'=>'required|string|max:255',
-            'username'=>'required|string|max:255|unique:users,username',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
         ]);
-     $password='student123';
-     $user=User::create([
-        'name'=>$request->name,
-        'username'=>$request->username,
-        'email'=>null,
-        'role'=>'student',
-        'password'=> Hash::make($password),
+        $password = 'student123';
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => null,
+            'role' => 'student',
+            'password' => Hash::make($password),
         ]);
 
         StudentProfile::create([
@@ -66,12 +67,23 @@ class StudentController extends Controller
         $ranking = PrayerRecord::select('student_id')
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
+            ->havingRaw('SUM(points) > 0')
             ->orderByDesc('total_points')
             ->get();
 
         $rank = $ranking->search(function ($item) use ($student_id) {
             return $item->student_id == $student_id;
-        }) + 1;
+        });
+        $ranking = PrayerRecord::select('student_id')
+            ->selectRaw('SUM(points) as total_points')
+            ->groupBy('student_id')
+            ->havingRaw('SUM(points) > 0')
+            ->orderByDesc('total_points')
+            ->pluck('student_id')
+            ->toArray();
+
+        $position = array_search($student_id, $ranking);
+        $rank = $position !== false ? $position + 1 : null;
 
         return response()->json([
             'message' => 'Student prayer view',
@@ -86,74 +98,70 @@ class StudentController extends Controller
             'weekly_records' => $weeklyRecords,
         ]);
     }
-public function dashboard()
-{
-    $student = auth::user()->studentProfile;
+    public function dashboard()
+    {
+        $student = auth::user()->studentProfile;
 
-    $todayPoints = $student->prayerRecords()
-        ->where('date', now()->toDateString())
-        ->sum('points');
+        $todayPoints = $student->prayerRecords()
+            ->where('date', now()->toDateString())
+            ->sum('points');
 
-    $weekPoints = $student->prayerRecords()
-        ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
-        ->sum('points');
+        $weekPoints = $student->prayerRecords()
+            ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
+            ->sum('points');
 
-    $monthPoints = $student->prayerRecords()
-        ->whereMonth('date', now()->month)
-        ->sum('points');
+        $monthPoints = $student->prayerRecords()
+            ->whereMonth('date', now()->month)
+            ->sum('points');
 
-    $ranking = StudentProfile::withSum('prayerRecords as total_points', 'points')
-        ->orderByDesc('total_points')
-        ->get()
-        ->pluck('id')
-        ->search($student->id) + 1;
+        $ranking = StudentProfile::withSum('prayerRecords as total_points', 'points')
+            ->orderByDesc('total_points')
+            ->get()
+            ->pluck('id')
+            ->search($student->id) + 1;
 
-    $topThree = StudentProfile::with('user')
-        ->withSum('prayerRecords as total_points', 'points')
-        ->orderByDesc('total_points')
-        ->take(3)
-        ->get();
+        $topThree = StudentProfile::with('user')
+            ->withSum('prayerRecords as total_points', 'points')
+            ->orderByDesc('total_points')
+            ->take(3)
+            ->get();
 
-    return view('student.dashboard', compact(
-        'student',
-        'todayPoints',
-        'weekPoints',
-        'monthPoints',
-        'ranking',
-        'topThree'
-    ));
+        return view('student.dashboard', compact(
+            'student',
+            'todayPoints',
+            'weekPoints',
+            'monthPoints',
+            'ranking',
+            'topThree'
+        ));
+    }
+
+    public function dailyProgram()
+    {
+        return view('student.daily-program');
+    }
+
+    public function saveDailyProgram(Request $request)
+    {
+        $student = Auth::user()->studentProfile;
+
+        $type = $request->has_excuse ? 'dhikr' : 'prayer';
+
+        PrayerRecord::updateOrCreate(
+            [
+                'student_id' => $student->id,
+                'date' => now()->toDateString(),
+            ],
+            [
+                'type' => $type,
+                'fajr_option' => $request->fajr_option,
+                'dhuhr_option' => $request->dhuhr_option,
+                'asr_option' => $request->asr_option,
+                'maghrib_option' => $request->maghrib_option,
+                'isha_option' => $request->isha_option,
+            ]
+        );
+
+        return back()->with('success', 'تم حفظ البرنامج اليومي بنجاح');
+    }
 }
-
-public function dailyProgram()
-{
-    return view('student.daily-program');
-}
-
-public function saveDailyProgram(Request $request)
-{
-    $student = Auth::user()->studentProfile;
-
-    $type = $request->has_excuse ? 'dhikr' : 'prayer';
-
-    PrayerRecord::updateOrCreate(
-        [
-            'student_id' => $student->id,
-            'date' => now()->toDateString(),
-        ],
-        [
-            'type' => $type,
-            'fajr_option' => $request->fajr_option,
-            'dhuhr_option' => $request->dhuhr_option,
-            'asr_option' => $request->asr_option,
-            'maghrib_option' => $request->maghrib_option,
-            'isha_option' => $request->isha_option,
-        ]
-    );
-
-    return back()->with('success', 'تم حفظ البرنامج اليومي بنجاح');
-}
-
-
-}
-
-
