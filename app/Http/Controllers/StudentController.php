@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PrayerRecord;
 use App\Models\StudentProfile;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,9 +56,13 @@ class StudentController extends Controller
             ->where('date', $today)
             ->get();
 
-        $weekStart = now()->subDays(6)->toDateString();
+        $weekStart = now()->isSaturday()
+            ? now()->toDateString()
+            : now()->previous(Carbon::SATURDAY)->toDateString();
+
+        $weekEnd = now()->toDateString();
         $weeklyRecords = PrayerRecord::where('student_id', $student_id)
-            ->where('date', '>=', $weekStart)
+            ->where('date', [$weekStart, $weekEnd])
             ->get();
 
         $totalPoints = PrayerRecord::where('student_id', $student_id)->sum('points');

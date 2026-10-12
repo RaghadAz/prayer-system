@@ -8,6 +8,7 @@ use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\TeacherProfile;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -143,8 +144,8 @@ class TeacherController extends Controller
             ->whereDate('date', now())
             ->sum('points');
 
-        $weekStart = now()->startOfWeek();
-        $weekEnd   = now()->endOfWeek();
+        $weekStart = now()->startOfWeek(Carbon::SATURDAY);
+        $weekEnd   = now()->endOfWeek(Carbon::SATURDAY);
 
         $weeklyPoints = DailyProgramAnswer::whereIn('student_id', $studentsIds)
             ->whereDate('date', '>=', $weekStart)

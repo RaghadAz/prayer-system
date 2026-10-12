@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\TeacherProfile;
 use App\Models\StudentProfile;
-
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -156,6 +156,10 @@ class AdminController extends Controller
             ->sum('points');
 
         // نقاط الأسبوع
+
+        $startOfWeek = Carbon::now()->startOfWeek(Carbon::SATURDAY);
+        $endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
         $weeklyPoints = PrayerRecord::where('student_id', $id)
             ->whereBetween('date', [$weekStart, $today])
             ->sum('points');
