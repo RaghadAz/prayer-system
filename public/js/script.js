@@ -1286,7 +1286,7 @@ fetch(getTodayAnswersUrl)
         })
         .catch(err => {
             console.error("ERROR:", err);
-            alert("الخطأ الحقيقي موجود بالـ Console");
+            alert("الرجاء الانتظار قليلا يتم الحفظ");
         });
 
     });
