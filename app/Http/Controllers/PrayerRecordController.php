@@ -159,25 +159,45 @@ public function dailyReport($studentId)
 
 //     return view('teacher.reports.weekly', compact('summary'));
 // }
-public function weeklyReport($studentId)
+public function weeklyReport(Request $request, $studentId)
 {
+    $date = $request->input('week_date')
+        ? Carbon::parse($request->input('week_date'))
+        : Carbon::now();
+
+    $weekStart = $date->copy()->startOfWeek(Carbon::SATURDAY);
+    $weekEnd   = $date->copy()->endOfWeek(Carbon::SATURDAY);
+
     $records = DailyProgramAnswer::where('student_id', $studentId)
-        ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
+        ->whereBetween('date', [$weekStart, $weekEnd])
         ->get();
 
     return $records;
 }
 
-public function weeklySummary($studentId)
-{
-    $records = DailyProgramAnswer::where('student_id', $studentId)
-        ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
-        ->get();
 
-    return [
-        'total_records' => $records->count(),
-        'total_points'  => $records->sum('points'),
-    ];
+    public function weeklySummary(Request $request, $studentId)
+    {
+
+        $date = $request->input('week_date')
+            ? Carbon::parse($request->input('week_date'))
+            : Carbon::now();
+
+        $weekStart = $date->copy()->startOfWeek(Carbon::SATURDAY);
+        $weekEnd   = $date->copy()->endOfWeek(Carbon::SATURDAY);
+
+
+        $records = DailyProgramAnswer::where('student_id', $studentId)
+            ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
+            ->get();
+
+        return [
+            'total_records' => $records->count(),
+            'total_points'  => $records->sum('points'),
+            'week_start'    => $weekStart->toDateString(),
+            'week_end'      => $weekEnd->toDateString(),
+        ];
+    }
 }
 
 
