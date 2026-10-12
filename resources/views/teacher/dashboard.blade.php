@@ -23,12 +23,12 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="dashboard-card">
                     <h4>📅 نقاط الأسبوع</h4>
                     <h2>{{ $weeklyPoints }}</h2>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
