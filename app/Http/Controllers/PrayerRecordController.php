@@ -203,7 +203,7 @@ public function weeklyReport(Request $request, $studentId)
 
 
 
-}
+
 
 
 
