@@ -25,7 +25,7 @@
         .container {
             position: fixed;
             top: 45%;
-            left: 50%;
+            left: 40%;
             transform: translate(-50%, -50%);
             width: 100%;
             max-width: 1000px;
@@ -37,9 +37,10 @@
         svg,
         .form-container {
             position: absolute;
-            top: 60%;
+            top: 50%;
             left: 60%;
-            transform: translate(-60%, -60%);
+            transform: translate(-50%, -50%);
+
         }
 
         .form-container {
