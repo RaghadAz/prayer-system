@@ -37,9 +37,9 @@
         svg,
         .form-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 60%;
+            left: 60%;
+            transform: translate(-60%, -60%);
         }
 
         .form-container {
