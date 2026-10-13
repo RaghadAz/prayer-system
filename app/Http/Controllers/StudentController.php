@@ -144,13 +144,14 @@ $topThree = StudentProfile::with('user')
     ->withSum(['prayerRecords as total_points' => function ($query) use ($weekStart, $weekEnd) {
         $query->whereBetween('date', [$weekStart, $weekEnd]);
     }], 'points')
-    ->orderByDesc('total_points') 
+    ->orderByDesc('total_points')
     ->limit(3)
     ->get()
     ->map(function ($student) {
         $student->total_points = $student->total_points ?? 0;
         return $student;
-    });
+    })
+    ->take(3);
         return view('student.dashboard', compact(
             'student',
             'todayPoints',
