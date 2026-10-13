@@ -168,8 +168,9 @@ class TeacherController extends Controller
 
         $topStudents = $teacher->students()
             ->with('user')
-            ->withSum('prayerRecords as total_points', 'points')
-            ->get()
+            ->withSum(['prayerRecords as total_points' => function ($query) use ($weekStart, $weekEnd) {
+                $query->whereBetween('date', [$weekStart, $weekEnd]);
+            }], 'points')->get()
             ->map(function ($student) {
                 $student->total_points = $student->total_points ?? 0;
                 return $student;
