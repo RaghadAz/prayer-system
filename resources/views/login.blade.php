@@ -10,23 +10,27 @@
     <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- الستايل المدمج بالكامل -->
     <style>
         html,
         body {
             padding: 0;
             margin: 0;
             font-family: 'Tajawal', sans-serif;
-            background-color: #FAF9F6;
-            overflow: hidden;
-            height: 100vh;
+            background-color: #e7b2df;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .container {
             position: fixed;
-            top: 38%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         svg,
@@ -61,36 +65,30 @@
         .form-container .form-row input[type="text"],
         .form-container .form-row input[type="password"] {
             width: 100%;
-            height: 40px;
+            height: 42px;
             margin: 0;
-            padding: 5px 10px;
+            padding: 5px 12px;
             outline: none;
             border: 2px solid #dddddd;
-            border-radius: 6px;
+            border-radius: 8px;
             transition: border-color 0.2s;
+            background-color: #fff;
         }
 
         .form-container .form-row input.valid {
             border-color: #f4a3f1;
         }
 
-        .form-container .form-row input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin: 0 0 0 10px;
-            border: 2px solid #dddddd;
-        }
-
-        .form-container button[type="submit"],
-        .form-container input[type="submit"] {
+        .form-container button[type="submit"] {
             width: 100%;
             height: 45px;
             cursor: pointer;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             background-color: #e19af7;
             color: #fff;
             font-weight: bold;
+            font-size: 1.1rem;
             transition: background-color 0.2s;
         }
 
@@ -98,11 +96,49 @@
             background-color: #d175ed;
         }
 
-        .form-container label,
-        .form-container input,
-        .form-container input::placeholder {
-            font-size: 15px;
-            font-family: inherit;
+        .form-container label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                top: 50%;
+            }
+
+            .form-container {
+                width: 85%;
+                max-width: 280px;
+            }
+
+            svg {
+                width: 750px;
+                /* تصغير الآلة لتناسب الأجهزة المتوسطة والصغيرة */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                width: 90%;
+                max-width: 260px;
+            }
+
+            svg {
+                width: 600px;
+            }
+
+            .form-container .form-row input[type="text"],
+            .form-container .form-row input[type="password"] {
+                height: 38px;
+                font-size: 14px;
+            }
+
+            .form-container button[type="submit"] {
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -112,21 +148,21 @@
         <div class="form-container">
             <div class="text-center mb-3">
                 <a href="https://www.facebook.com/share/1NzVRJ1ULk/">
-                    <img src="{{ asset('/stylingtools/logo.png') }}" width="80" alt="جامع الخير">
+                    <img src="{{ asset('/stylingtools/logo.png') }}" width="75" alt="جامع الخير">
                 </a>
             </div>
 
             <form action="{{ route('login.submit') }}" method="POST">
                 @csrf
                 @if ($errors->any())
-                    <div style="color: red; margin-bottom: 10px; font-size: 0.9rem;" class="text-center">
+                    <div style="color: red; margin-bottom: 10px; font-size: 0.85rem;" class="text-center">
                         {{ $errors->first() }}
                     </div>
                 @endif
 
                 <div class="form-row">
                     <label class="form-label">اسم المستخدم</label>
-                    <input type="text" name="username" placeholder="أدخل اسم المستخدم" required>
+                    <input type="text" name="username" placeholder="أدخل اسم المستخدم" required autocomplete="off">
                 </div>
 
                 <div class="form-row">
@@ -134,13 +170,11 @@
                     <input type="password" name="password" placeholder="••••••" required>
                 </div>
 
-                <!-- حقل إضافي مخفي أو checkbox تفعيلي إن احتجته لتكتمل حركة الآلة -->
-                <div class="form-row" style="flex-direction: row; align-items: center; display: none;">
+                <div class="form-row" style="display: none;">
                     <input type="checkbox" id="robotCheck" checked>
-                    <label for="robotCheck" style="font-size: 13px;">تذكرني</label>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row mt-2">
                     <button type="submit" class="btn-login" id="submitBtn">
                         دخول
                     </button>
@@ -330,7 +364,7 @@
     <!-- مكتبة GSAP للرسوم المتحركة -->
     <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 
-    <!-- الجافاسكريبت المدمج والمصحح -->
+    <!-- الجافاسكريبت المدمج والتفاعلي -->
     <script>
         const containerEl = document.querySelector('.container');
         const checkboxEl = document.querySelector('#robotCheck');
@@ -400,12 +434,6 @@
         const emailTl = createEmailTl();
         const gearsTls = createGearsTimelines();
         createPullingTimeline(state.handClosed, checkboxEl ? checkboxEl.checked : true);
-
-        if (checkboxEl) {
-            checkboxEl.addEventListener('change', () => {
-                createPullingTimeline(state.handClosed, checkboxEl.checked);
-            })
-        }
 
         if (nameEl) {
             nameEl.addEventListener('input', () => {
