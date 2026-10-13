@@ -133,7 +133,7 @@ class StudentController extends Controller
 
         $ranking = $ranking !== false ? $ranking + 1 : '—';
 
-$date = request()->input('week_date')
+       $date = request()->input('week_date')
     ? Carbon::parse(request()->input('week_date'))
     : Carbon::now();
 
@@ -144,14 +144,15 @@ $topThree = StudentProfile::with('user')
     ->withSum(['prayerRecords as total_points' => function ($query) use ($weekStart, $weekEnd) {
         $query->whereBetween('date', [$weekStart, $weekEnd]);
     }], 'points')
-    ->orderByDesc('total_points')
-    ->limit(3)
     ->get()
     ->map(function ($student) {
         $student->total_points = $student->total_points ?? 0;
         return $student;
     })
+    ->sortByDesc('total_points')
+    ->values() 
     ->take(3);
+
         return view('student.dashboard', compact(
             'student',
             'todayPoints',
