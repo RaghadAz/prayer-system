@@ -16,7 +16,7 @@
             padding: 0;
             margin: 0;
             font-family: 'Tajawal', sans-serif;
-            background-color: #e7b2df;
+            background-color: #FAF9F6;
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -115,7 +115,6 @@
 
             svg {
                 width: 750px;
-                /* تصغير الآلة لتناسب الأجهزة المتوسطة والصغيرة */
             }
         }
 
