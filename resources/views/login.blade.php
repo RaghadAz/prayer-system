@@ -10,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- الستايل المعدل للألوان والخلفية -->
     <style>
         html,
         body {
-            padding: 20;
-            margin: 20;
+            padding: 25;
+            margin: 25;
             font-family: 'Tajawal', sans-serif;
-            background-color: #FAF9F6;
+            background: linear-gradient(135deg, #fce4ec, #ffffff);
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -42,7 +43,7 @@
         }
 
         .form-container {
-            width: 300px;
+            width: 270px;
             z-index: 10;
         }
 
@@ -50,7 +51,8 @@
             width: 1000px;
             pointer-events: none;
             stroke-width: 1.2px;
-            stroke: #f29af5;
+            stroke: #222245;
+            /* لون الأدوات أسود/داكن متل ما كان */
             fill: none;
         }
 
@@ -65,14 +67,14 @@
         .form-container .form-row input[type="text"],
         .form-container .form-row input[type="password"] {
             width: 100%;
-            height: 42px;
-            margin: 20;
-            padding: 5px 12px;
+            height: 40px;
+            margin: 25;
+            padding: 5px 10px;
             outline: none;
             border: 2px solid #dddddd;
-            border-radius: 8px;
-            transition: border-color 0.2s;
+            border-radius: 6px;
             background-color: #fff;
+            transition: border-color 0.2s;
         }
 
         .form-container .form-row input.valid {
@@ -81,28 +83,29 @@
 
         .form-container button[type="submit"] {
             width: 100%;
-            height: 45px;
+            height: 40px;
             cursor: pointer;
             border: none;
-            border-radius: 8px;
-            background-color: #e19af7;
-            color: #fff;
+            border-radius: 6px;
+            background-color: #eeeeee;
+            color: #000;
             font-weight: bold;
-            font-size: 1.1rem;
             transition: background-color 0.2s;
         }
 
         .form-container button[type="submit"]:hover {
-            background-color: #d175ed;
+            background-color: #dddddd;
         }
 
         .form-container label {
-            font-size: 14px;
+            font-size: 15px;
+            font-family: inherit;
             font-weight: bold;
-            color: #444;
+            color: #333;
             margin-bottom: 5px;
         }
 
+        /* تنسيقات التجاوب مع الموبايل */
         @media (max-width: 768px) {
             .container {
                 top: 50%;
@@ -110,7 +113,7 @@
 
             .form-container {
                 width: 85%;
-                max-width: 280px;
+                max-width: 270px;
             }
 
             svg {
@@ -121,22 +124,11 @@
         @media (max-width: 480px) {
             .form-container {
                 width: 90%;
-                max-width: 260px;
+                max-width: 250px;
             }
 
             svg {
                 width: 600px;
-            }
-
-            .form-container .form-row input[type="text"],
-            .form-container .form-row input[type="password"] {
-                height: 38px;
-                font-size: 14px;
-            }
-
-            .form-container button[type="submit"] {
-                height: 40px;
-                font-size: 1rem;
             }
         }
     </style>
@@ -147,14 +139,14 @@
         <div class="form-container">
             <div class="text-center mb-3">
                 <a href="https://www.facebook.com/share/1NzVRJ1ULk/">
-                    <img src="{{ asset('/stylingtools/logo.png') }}" width="75" alt="جامع الخير">
+                    <img src="{{ asset('/stylingtools/logo.png') }}" width="80" alt="جامع الخير">
                 </a>
             </div>
 
             <form action="{{ route('login.submit') }}" method="POST">
                 @csrf
                 @if ($errors->any())
-                    <div style="color: red; margin-bottom: 10px; font-size: 0.85rem;" class="text-center">
+                    <div style="color: red; margin-bottom: 10px; font-size: 0.9rem;" class="text-center">
                         {{ $errors->first() }}
                     </div>
                 @endif
@@ -174,7 +166,7 @@
                 </div>
 
                 <div class="form-row mt-2">
-                    <button type="submit" class="btn-login" id="submitBtn">
+                    <button type="submit" id="submitBtn">
                         دخول
                     </button>
                 </div>
