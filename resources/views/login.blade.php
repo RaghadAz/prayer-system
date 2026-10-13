@@ -13,8 +13,8 @@
     <style>
         html,
         body {
-            padding: 10;
-            margin: 10;
+            padding: 20;
+            margin: 20;
             font-family: 'Tajawal', sans-serif;
             background-color: #FAF9F6;
             overflow-x: hidden;
@@ -66,7 +66,7 @@
         .form-container .form-row input[type="password"] {
             width: 100%;
             height: 42px;
-            margin: 10;
+            margin: 20;
             padding: 5px 12px;
             outline: none;
             border: 2px solid #dddddd;
