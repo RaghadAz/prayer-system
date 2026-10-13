@@ -17,7 +17,7 @@
             padding: 25;
             margin: 25;
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #fce4ec, #ffffff);
+            background: linear-gradient(135deg, #fbafd9, #ffffff);
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -87,14 +87,14 @@
             cursor: pointer;
             border: none;
             border-radius: 6px;
-            background-color: #eeeeee;
+            background-color: #f6b6eb;
             color: #000;
             font-weight: bold;
             transition: background-color 0.2s;
         }
 
         .form-container button[type="submit"]:hover {
-            background-color: #dddddd;
+            background-color: #fb97e7;
         }
 
         .form-container label {
