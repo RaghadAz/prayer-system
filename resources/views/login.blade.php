@@ -671,9 +671,19 @@
         }
 
         function uncoverEyes() {
-           TweenMax.killTweensOf([armL, armR]);
-        TweenMax.to(armL, .6, { x: -93, y: 220, rotation: 105, ease: Quad.easeOut });
-        TweenMax.to(armR, .6, { x: -93, y: 220, rotation: -105, ease: Quad.easeOut });
+            TweenMax.killTweensOf([armL, armR]);
+            TweenMax.to(armL, .6, {
+                x: -93,
+                y: 220,
+                rotation: 105,
+                ease: Quad.easeOut
+            });
+            TweenMax.to(armR, .6, {
+                x: -93,
+                y: 220,
+                rotation: -105,
+                ease: Quad.easeOut
+            });
         }
 
         function resetFace() {
@@ -751,17 +761,11 @@
         email.addEventListener('input', onEmailInput);
         password.addEventListener('focus', onPasswordFocus);
         password.addEventListener('blur', onPasswordBlur);
-        TweenMax.set(armL, {
-            x: -93,
-            y: 220,
-            rotation: 105,
-            transformOrigin: "top left"
-        });
-        TweenMax.set(armR, {
-            x: -93,
-            y: 220,
-            rotation: -105,
-            transformOrigin: "top right"
+        document.addEventListener('click', function(e) {
+            if (!email.contains(e.target) && !password.contains(e.target)) {
+                uncoverEyes();
+                resetFace();
+            }
         });
     </script>
 </body>
