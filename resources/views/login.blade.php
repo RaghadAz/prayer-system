@@ -630,7 +630,7 @@
         function onEmailFocus(e) {
             TweenMax.to([armL, armR], 0.4, {
                 x: -93,
-                y: 300,
+                y: 220,
                 rotation: 105,
                 ease: Quad.easeOut
             });
