@@ -671,24 +671,9 @@
         }
 
         function uncoverEyes() {
-            TweenMax.to(armL, 1.35, {
-                y: 220,
-                ease: Quad.easeOut
-            });
-            TweenMax.to(armL, 1.35, {
-                rotation: 105,
-                ease: Quad.easeOut,
-                delay: .1
-            });
-            TweenMax.to(armR, 1.35, {
-                y: 220,
-                ease: Quad.easeOut
-            });
-            TweenMax.to(armR, 1.35, {
-                rotation: -105,
-                ease: Quad.easeOut,
-                delay: .1
-            });
+           TweenMax.killTweensOf([armL, armR]);
+        TweenMax.to(armL, .6, { x: -93, y: 220, rotation: 105, ease: Quad.easeOut });
+        TweenMax.to(armR, .6, { x: -93, y: 220, rotation: -105, ease: Quad.easeOut });
         }
 
         function resetFace() {
