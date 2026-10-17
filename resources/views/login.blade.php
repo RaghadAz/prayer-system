@@ -630,7 +630,6 @@
         function onEmailFocus(e) {
             uncoverEyes();
             e.target.parentElement.classList.add("focusWithText");
-            getCoord();
         }
 
         function onEmailBlur(e) {
