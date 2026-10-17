@@ -2,7 +2,25 @@
     <h3 class="text-center mb-4">أفضل 3 طالبات</h3>
 
     <div class="row justify-content-center">
-        @forelse($topThree as $index => $student)
+
+         <ul class="list-group mb-4">
+                @forelse($topThree as $index => $record)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>#{{ $index + 1 }}</strong>
+                            {{ optional($record->user)->name ?? 'طالبة' }}
+                        </span>
+                        <span class="badge bg-success rounded-pill">
+                            {{ $record->total_points ?? 0 }} نقطة
+                        </span>
+                    </li>
+                @empty
+                    <li class="list-group-item text-center text-muted py-3">
+                        لا توجد نقاط مسجلة حتى الآن.
+                    </li>
+                @endforelse
+            </ul>
+        {{-- @forelse($topThree as $index => $student)
             @if(isset($student->user))
                 <div class="col-4 text-center">
                     <div style="
@@ -30,6 +48,6 @@
             <div class="col-12 text-center text-muted py-3">
                 لا توجد نقاط أو إنجازات مسجلة حتى الآن.
             </div>
-        @endforelse
+        @endforelse --}}
     </div>
 </div>

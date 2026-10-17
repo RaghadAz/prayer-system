@@ -2,872 +2,775 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول - جامع الخير</title>
 
-    <!-- تضمين الخطوط و Bootstrap -->
+    <!-- خطوط Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- الستايل المعدل للألوان والخلفية -->
+    <!-- مكتبة GSAP للرسوم المتحركة -->
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
+
+    <!-- الستايل المدمج بالكامل -->
     <style>
-        html,
-        body {
-            padding: 25;
-            margin: 25;
-            font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #fbafd9, #ffffff);
-            overflow-x: hidden;
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            position: fixed;
-            top: 45%;
-            left: 40%;
-            transform: translate(-50%, -50%);
+        html,
+        body {
             width: 100%;
-            max-width: 1000px;
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fce4ec, #eff3f4);
+            position: relative;
+            font-size: 16px;
+            font-family: 'Tajawal', 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
 
-        svg,
-        .form-container {
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-
+        form {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 420px;
+            background-color: #FFF;
+            margin: 20px;
+            padding: 2.25em;
+            box-sizing: border-box;
+            border: solid 1px #DDD;
+            border-radius: .5em;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
 
-        .form-container {
-            width: 270px;
-            z-index: 10;
-        }
-
-        svg {
-            width: 1000px;
+        form .svgContainer {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5em;
+            border-radius: 50%;
+            background: none;
+            border: solid 2.5px #3A5E77;
+            overflow: hidden;
             pointer-events: none;
-            stroke-width: 1.2px;
-            stroke: #222245;
-            /* لون الأدوات أسود/داكن متل ما كان */
-            fill: none;
         }
 
-        .form-container .form-row {
+        form .svgContainer div {
+            position: relative;
             width: 100%;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            height: 0;
+            overflow: hidden;
+            padding-bottom: 100%;
         }
 
-        .form-container .form-row input[type="text"],
-        .form-container .form-row input[type="password"] {
+        form .svgContainer .mySVG {
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: 40px;
-            margin: 25;
-            padding: 5px 10px;
-            outline: none;
-            border: 2px solid #dddddd;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        form .inputGroup {
+            margin: 0 0 1.5em;
+            padding: 0;
+            position: relative;
+        }
+
+        form .inputGroup:last-of-type {
+            margin-bottom: 0;
+        }
+
+        form label {
+            margin: 0 0 8px;
+            display: block;
+            font-size: 1.1em;
+            color: #217093;
+            font-weight: 700;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            display: block;
+            margin: 0;
+            padding: 0 1em;
+            background-color: #f3fafd;
+            border: solid 2px #217093;
             border-radius: 6px;
-            background-color: #fff;
-            transition: border-color 0.2s;
-        }
-
-        .form-container .form-row input.valid {
-            border-color: #f4a3f1;
-        }
-
-        .form-container button[type="submit"] {
+            -webkit-appearance: none;
+            box-sizing: border-box;
             width: 100%;
-            height: 40px;
-            cursor: pointer;
+            height: 55px;
+            font-size: 1.2em;
+            color: #353538;
+            font-weight: 600;
+            font-family: inherit;
+            transition: box-shadow .2s linear, border-color .25s ease-out;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            border: solid 2px #4eb8dd;
+        }
+
+        form button {
+            display: block;
+            margin: 0;
+            padding: 0;
+            background-color: #4eb8dd;
             border: none;
             border-radius: 6px;
-            background-color: #f6b6eb;
-            color: #000;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-
-        .form-container button[type="submit"]:hover {
-            background-color: #fb97e7;
-        }
-
-        .form-container label {
-            font-size: 15px;
+            box-sizing: border-box;
+            box-shadow: none;
+            width: 100%;
+            height: 55px;
+            font-size: 1.3em;
+            color: #FFF;
+            font-weight: 700;
             font-family: inherit;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color .2s ease-out;
         }
 
-        /* تنسيقات التجاوب مع الموبايل */
-        @media (max-width: 768px) {
-            .container {
-                top: 50%;
-            }
-
-            .form-container {
-                width: 85%;
-                max-width: 270px;
-            }
-
-            svg {
-                width: 750px;
-            }
+        form button:hover,
+        form button:active {
+            background-color: #217093;
         }
 
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* تعديلات التجاوب مع الهواتف */
         @media (max-width: 480px) {
-            .form-container {
-                width: 90%;
-                max-width: 250px;
+            form {
+                padding: 1.5em;
+                margin: 10px;
             }
 
-            svg {
-                width: 600px;
+            form .svgContainer {
+                width: 130px;
+                height: 130px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="form-container">
-            <div class="text-center mb-3">
-                <a href="https://www.facebook.com/share/1NzVRJ1ULk/">
-                    <img src="{{ asset('/stylingtools/logo.png') }}" width="80" alt="جامع الخير">
-                </a>
+
+    <form action="{{ route('login.submit') }}" method="POST">
+        @csrf
+
+        <!-- الشعار أو الأفاتار المتحرك -->
+        <div class="svgContainer">
+            <div>
+                <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 200 200">
+                    <defs>
+                        <circle id="armMaskPath" cx="100" cy="100" r="100" />
+                    </defs>
+                    <clipPath id="armMask">
+                        <use xlink:href="#armMaskPath" overflow="visible" />
+                    </clipPath>
+                    <circle cx="100" cy="100" r="100" fill="#a9ddf3" />
+                    <g class="body">
+                        <path fill="#FFFFFF"
+                            d="M193.3,135.9c-5.8-8.4-15.5-13.9-26.5-13.9H151V72c0-27.6-22.4-50-50-50S51,44.4,51,72v50H32.1 c-10.6,0-20,5.1-25.8,13l0,78h187L193.3,135.9z" />
+                        <path fill="none" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M193.3,135.9 c-5.8-8.4-15.5-13.9-26.5-13.9H151V72c0-27.6-22.4-50-50-50S51,44.4,51,72v50H32.1c-10.6,0-20,5.1-25.8,13" />
+                        <path fill="#DDF1FA"
+                            d="M100,156.4c-22.9,0-43,11.1-54.1,27.7c15.6,10,34.2,15.9,54.1,15.9s38.5-5.8,54.1-15.9 C143,167.5,122.9,156.4,100,156.4z" />
+                    </g>
+                    <g class="earL">
+                        <g class="outerEar" fill="#ddf1fa" stroke="#3a5e77" stroke-width="2.5">
+                            <circle cx="47" cy="83" r="11.5" />
+                            <path d="M46.3 78.9c-2.3 0-4.1 1.9-4.1 4.1 0 2.3 1.9 4.1 4.1 4.1" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </g>
+                        <g class="earHair">
+                            <rect x="51" y="64" fill="#FFFFFF" width="15" height="35" />
+                            <path
+                                d="M53.4 62.8C48.5 67.4 45 72.2 42.8 77c3.4-.1 6.8-.1 10.1.1-4 3.7-6.8 7.6-8.2 11.6 2.1 0 4.2 0 6.3.2-2.6 4.1-3.8 8.3-3.7 12.5 1.2-.7 3.4-1.4 5.2-1.9"
+                                fill="#fff" stroke="#3a5e77" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </g>
+                    </g>
+                    <g class="earR">
+                        <g class="outerEar" fill="#ddf1fa" stroke="#3a5e77" stroke-width="2.5">
+                            <circle cx="155" cy="83" r="11.5" />
+                            <path d="M155.7 78.9c2.3 0 4.1 1.9 4.1 4.1 0 2.3-1.9 4.1-4.1 4.1" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </g>
+                        <g class="earHair">
+                            <rect x="131" y="64" fill="#FFFFFF" width="20" height="35" />
+                            <path
+                                d="M148.6 62.8c4.9 4.6 8.4 9.4 10.6 14.2-3.4-.1-6.8-.1-10.1.1 4 3.7 6.8 7.6 8.2 11.6-2.1 0-4.2 0-6.3.2 2.6 4.1 3.8 8.3 3.7 12.5-1.2-.7-3.4-1.4-5.2-1.9"
+                                fill="#fff" stroke="#3a5e77" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </g>
+                    </g>
+                    <path class="chin"
+                        d="M84.1 121.6c2.7 2.9 6.1 5.4 9.8 7.5l.9-4.5c2.9 2.5 6.3 4.8 10.2 6.5 0-1.9-.1-3.9-.2-5.8 3 1.2 6.2 2 9.7 2.5-.3-2.1-.7-4.1-1.2-6.1"
+                        fill="none" stroke="#3a5e77" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path class="face" fill="#DDF1FA"
+                        d="M134.5,46v35.5c0,21.815-15.446,39.5-34.5,39.5s-34.5-17.685-34.5-39.5V46" />
+                    <path class="hair" fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M81.457,27.929 c1.755-4.084,5.51-8.262,11.253-11.77c0.979,2.565,1.883,5.14,2.712,7.723c3.162-4.265,8.626-8.27,16.272-11.235 c-0.737,3.293-1.588,6.573-2.554,9.837c4.857-2.116,11.049-3.64,18.428-4.156c-2.403,3.23-5.021,6.391-7.852,9.474" />
+                    <g class="eyebrow">
+                        <path fill="#FFFFFF"
+                            d="M138.142,55.064c-4.93,1.259-9.874,2.118-14.787,2.599c-0.336,3.341-0.776,6.689-1.322,10.037 c-4.569-1.465-8.909-3.222-12.996-5.226c-0.98,3.075-2.07,6.137-3.267,9.179c-5.514-3.067-10.559-6.545-15.097-10.329 c-1.806,2.889-3.745,5.73-5.816,8.515c-7.916-4.124-15.053-9.114-21.296-14.738l1.107-11.768h73.475V55.064z" />
+                        <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M63.56,55.102 c6.243,5.624,13.38,10.614,21.296,14.738c2.071-2.785,4.01-5.626,5.816-8.515c4.537,3.785,9.583,7.263,15.097,10.329 c1.197-3.043,2.287-6.104,3.267-9.179c4.087,2.004,8.427,3.761,12.996,5.226c0.545-3.348,0.986-6.696,1.322-10.037 c4.913-0.481,9.857-1.34,14.787-2.599" />
+                    </g>
+                    <g class="eyeL">
+                        <circle cx="85.5" cy="78.5" r="3.5" fill="#3a5e77" />
+                        <circle cx="84" cy="76" r="1" fill="#fff" />
+                    </g>
+                    <g class="eyeR">
+                        <circle cx="114.5" cy="78.5" r="3.5" fill="#3a5e77" />
+                        <circle cx="113" cy="76" r="1" fill="#fff" />
+                    </g>
+                    <g class="mouth">
+                        <path class="mouthBG" fill="#617E92"
+                            d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z" />
+                        <path style="display: none;" class="mouthSmallBG" fill="#617E92"
+                            d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z" />
+                        <path style="display: none;" class="mouthMediumBG"
+                            d="M95,104.2c-4.5,0-8.2-3.7-8.2-8.2v-2c0-1.2,1-2.2,2.2-2.2h22c1.2,0,2.2,1,2.2,2.2v2 c0,4.5-3.7,8.2-8.2,8.2H95z" />
+                        <path style="display: none;" class="mouthLargeBG"
+                            d="M100 110.2c-9 0-16.2-7.3-16.2-16.2 0-2.3 1.9-4.2 4.2-4.2h24c2.3 0 4.2 1.9 4.2 4.2 0 9-7.2 16.2-16.2 16.2z"
+                            fill="#617e92" stroke="#3a5e77" stroke-linejoin="round" stroke-width="2.5" />
+                        <defs>
+                            <path id="mouthMaskPath"
+                                d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z" />
+                        </defs>
+                        <clipPath id="mouthMask">
+                            <use xlink:href="#mouthMaskPath" overflow="visible" />
+                        </clipPath>
+                        <g clip-path="url(#mouthMask)">
+                            <g class="tongue">
+                                <circle cx="100" cy="107" r="8" fill="#cc4a6c" />
+                                <ellipse class="tongueHighlight" cx="100" cy="100.5" rx="3"
+                                    ry="1.5" opacity=".1" fill="#fff" />
+                            </g>
+                        </g>
+                        <path clip-path="url(#mouthMask)" class="tooth" style="fill:#FFFFFF;"
+                            d="M106,97h-4c-1.1,0-2-0.9-2-2v-2h8v2C108,96.1,107.1,97,106,97z" />
+                        <path class="mouthOutline" fill="none" stroke="#3A5E77" stroke-width="2.5"
+                            stroke-linejoin="round"
+                            d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z" />
+                    </g>
+                    <path class="nose"
+                        d="M97.7 79.9h4.7c1.9 0 3 2.2 1.9 3.7l-2.3 3.3c-.9 1.3-2.9 1.3-3.8 0l-2.3-3.3c-1.3-1.6-.2-3.7 1.8-3.7z"
+                        fill="#3a5e77" />
+                    <g class="arms" clip-path="url(#armMask)">
+                        <g class="armL">
+                            <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="2.5"
+                                d="M121.3 97.4L111 58.7l38.8-10.4 20 36.1z" />
+                            <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="2.5"
+                                d="M134.4 52.5l19.3-5.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1L146 59.7M160.8 76.5l19.4-5.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-18.3 4.9M158.3 66.8l23.1-6.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-23.1 6.2M150.9 58.4l26-7c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-21.3 5.7" />
+                            <path fill="#a9ddf3"
+                                d="M178.8 74.7l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM180.1 64l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM175.5 54.9l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM152.1 49.4l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8z" />
+                            <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M123.5 96.8c-41.4 14.9-84.1 30.7-108.2 35.5L1.2 80c33.5-9.9 71.9-16.5 111.9-21.8" />
+                            <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M108.5 59.4c7.7-5.3 14.3-8.4 22.8-13.2-2.4 5.3-4.7 10.3-6.7 15.1 4.3.3 8.4.7 12.3 1.3-4.2 5-8.1 9.6-11.5 13.9 3.1 1.1 6 2.4 8.7 3.8-1.4 2.9-2.7 5.8-3.9 8.5 2.5 3.5 4.6 7.2 6.3 11-4.9-.8-9-.7-16.2-2.7M94.5 102.8c-.6 4-3.8 8.9-9.4 14.7-2.6-1.8-5-3.7-7.2-5.7-2.5 4.1-6.6 8.8-12.2 14-1.9-2.2-3.4-4.5-4.5-6.9-4.4 3.3-9.5 6.9-15.4 10.8-.2-3.4.1-7.1 1.1-10.9M97.5 62.9c-1.7-2.4-5.9-4.1-12.4-5.2-.9 2.2-1.8 4.3-2.5 6.5-3.8-1.8-9.4-3.1-17-3.8.5 2.3 1.2 4.5 1.9 6.8-5-.6-11.2-.9-18.4-1 2 2.9.9 3.5 3.9 6.2" />
+                        </g>
+                        <g class="armR">
+                            <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="2.5"
+                                d="M265.4 97.3l10.4-38.6-38.9-10.5-20 36.1z" />
+                            <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="2.5"
+                                d="M252.4 52.4L233 47.2c-2.7-.7-5.4.9-6.1 3.5-.7 2.7.9 5.4 3.5 6.1l10.3 2.8M226 76.4l-19.4-5.2c-2.7-.7-5.4.9-6.1 3.5-.7 2.7.9 5.4 3.5 6.1l18.3 4.9M228.4 66.7l-23.1-6.2c-2.7-.7-5.4.9-6.1 3.5-.7 2.7.9 5.4 3.5 6.1l23.1 6.2M235.8 58.3l-26-7c-2.7-.7-5.4.9-6.1 3.5-.7 2.7.9 5.4 3.5 6.1l21.3 5.7" />
+                            <path fill="#a9ddf3"
+                                d="M207.9 74.7l-2.2-.6c-1.1-.3-2.2.3-2.4 1.4-.3 1.1.3 2.2 1.4 2.4l2.2.6 1-3.8zM206.7 64l-2.2-.6c-1.1-.3-2.2.3-2.4 1.4-.3 1.1.3 2.2 1.4 2.4l2.2.6 1-3.8zM211.2 54.8l-2.2-.6c-1.1-.3-2.2.3-2.4 1.4-.3 1.1.3 2.2 1.4 2.4l2.2.6 1-3.8zM234.6 49.4l-2.2-.6c-1.1-.3-2.2.3-2.4 1.4-.3 1.1.3 2.2 1.4 2.4l2.2.6 1-3.8z" />
+                            <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M263.3 96.7c41.4 14.9 84.1 30.7 108.2 35.5l14-52.3C352 70 313.6 63.5 273.6 58.1" />
+                            <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M278.2 59.3l-18.6-10 2.5 11.9-10.7 6.5 9.9 8.7-13.9 6.4 9.1 5.9-13.2 9.2 23.1-.9M284.5 100.1c-.4 4 1.8 8.9 6.7 14.8 3.5-1.8 6.7-3.6 9.7-5.5 1.8 4.2 5.1 8.9 10.1 14.1 2.7-2.1 5.1-4.4 7.1-6.8 4.1 3.4 9 7 14.7 11 1.2-3.4 1.8-7 1.7-10.9M314 66.7s5.4-5.7 12.6-7.4c1.7 2.9 3.3 5.7 4.9 8.6 3.8-2.5 9.8-4.4 18.2-5.7.1 3.1.1 6.1 0 9.2 5.5-1 12.5-1.6 20.8-1.9-1.4 3.9-2.5 8.4-2.5 8.4" />
+                        </g>
+                    </g>
+                </svg>
             </div>
-
-            <form action="{{ route('login.submit') }}" method="POST">
-                @csrf
-                @if ($errors->any())
-                    <div style="color: red; margin-bottom: 10px; font-size: 0.9rem;" class="text-center">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-
-                <div class="form-row">
-                    <label class="form-label">اسم المستخدم</label>
-                    <input type="text" name="username" placeholder="أدخل اسم المستخدم" required autocomplete="off">
-                </div>
-
-                <div class="form-row">
-                    <label class="form-label">كلمة السر</label>
-                    <input type="password" name="password" placeholder="••••••" required>
-                </div>
-
-                <div class="form-row" style="display: none;">
-                    <input type="checkbox" id="robotCheck" checked>
-                </div>
-
-                <div class="form-row mt-2">
-                    <button type="submit" id="submitBtn">
-                        دخول
-                    </button>
-                </div>
-            </form>
         </div>
 
-        <svg viewBox="0 0 1000 1000" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="710" y="527" width="16" height="47" rx="10" ry="10"></rect>
+        <!-- رسائل الخطأ من لاراول إن وجدت -->
+        @if ($errors->any())
+            <div style="color: red; margin-bottom: 15px; font-size: 0.95rem; text-align: center;">
+                {{ $errors->first() }}
+            </div>
+        @endif
 
-            <g class="grabbing-hand">
-                <path
-                    d="M48.89,54.39c-3.51.76-15.72,3-22.83-.68a14,14,0,0,0-6.41-1.52h0A3.79,3.79,0,0,1,17,51.09a3.7,3.7,0,0,1-1.1-2.64V27.75A3.75,3.75,0,0,1,19.63,24H24.1" />
-                <path class="grabbing-hand-finger-open"
-                    d="M57.05,29.76l24.82,0a4.07,4.07,0,0,0,4.11-4h0a4.07,4.07,0,0,0-4-4.11L48.69,21.3" />
-                <path class="grabbing-hand-finger-open"
-                    d="M59.34,37.74l28.81.61a4.06,4.06,0,0,0,4.14-4h0a4.06,4.06,0,0,0-4-4.15L57,29.64" />
-                <path class="grabbing-hand-finger-open"
-                    d="M57.13,45.9l26.94.78a4.07,4.07,0,0,0,4.15-4h0a4.07,4.07,0,0,0-4-4.14l-24.84-.8" />
-                <path class="grabbing-hand-finger-open"
-                    d="M48.89,54.39l27.82.36a4.06,4.06,0,0,0,4.2-3.93h0A4.06,4.06,0,0,0,77,46.62l-19.88-.78" />
-                <path class="grabbing-hand-finger-open"
-                    d="M40.78,28c5.75-5.85,12.66-22,10.5-25.88-2.25-4.09-6,.1-14.73,8.66C30.84,16.36,30.91,17.1,24.32,24" />
-            </g>
+        <div class="inputGroup">
+            <label for="email">اسم المستخدم</label>
+            <input type="text" id="email" name="username" class="email" maxlength="256" required
+                autocomplete="off" />
+        </div>
 
-            <g class="pull-system">
-                <line class="checkbox-pull-line" x1="0" y1="0" x2="0" y2="0" />
-                <g class="checkbox-pull-circle">
-                    <circle cx="0" cy="0" r="10" />
-                    <circle cx="0" cy="0" r="4" fill="#000000" />
-                </g>
-                <circle class="submit-btn-circle" cx="0" cy="0" r="3" stroke="none" fill="#000" />
-                <path class="submit-btn-connector" d=""></path>
-            </g>
+        <div class="inputGroup">
+            <label for="password">كلمة السر</label>
+            <input type="password" id="password" name="password" class="password" required />
+        </div>
 
-            <g class="spray-hand-container">
-                <g class="pushing-hand">
-                    <circle cx="18" cy="0" r="5" fill="#000000" />
-                    <circle cx="18" cy="-70" r="5" fill="#000000" />
-                    <path d="M18,-70 v70" stroke-width="4" />
-                    <g>
-                        <path d="M25.3,32.9V60.2a4.2,4.2,0,0,0,4.2,4.2h0a4.2,4.2,0,0,0,4.2-4.2V26.7" />
-                        <rect x="3.9" y="18.4" width="8.4" height="21.47" rx="3.7"
-                            transform="translate(10.2 -1) rotate(19.4)" />
-                        <path
-                            d="M20.9,24a3.4,3.4,0,0,0-1.7-1.1h0a4.2,4.2,0,0,0-5.4,2.5L9.1,38.8a4.3,4.3,0,0,0,2.6,5.4h0a4.3,4.3,0,0,0,5.4-2.6l1.8-5.1" />
-                        <path d="M18.4,37.9,17.3,43a4.2,4.2,0,0,0,3.4,4.9h0a4.3,4.3,0,0,0,4.5-2.3" />
-                        <path fill="white"
-                            d="M29,16.8c-6.4,5-15,13.2-12.8,17.8s6,.7,15.8-6.7c6.4-4.8,7.4-12.6.5-19.2V4.2A3.8,3.8,0,0,0,28.7.5H8A3.5,3.5,0,0,0,5.4,1.6,3.7,3.7,0,0,0,4.3,4.2V8.7" />
-                        <path d="M4.3,8.7c-5.8,6.4-3.6,20-2.2,24.8" />
-                    </g>
-                </g>
-                <g class="sprayer">
-                    <g class="sprayer-head">
-                        <defs>
-                            <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="100%"
-                                fy="50%">
-                                <stop offset="0%" stop-color="#777777" stop-opacity="0" />
-                                <stop offset="100%" stop-color="#777777" stop-opacity="1" />
-                            </radialGradient>
-                        </defs>
-                        <rect x="82.39" y="19.85" width="13.06" height="16.79" rx="1.46" />
-                        <rect x="74.55" y="22.56" width="7.84" height="6.1" rx="1.13" />
+        <div class="inputGroup" style="margin-top: 1.5em;">
+            <button id="login" type="submit">دخول</button>
+        </div>
+    </form>
 
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="22.4"
-                            y1="14.76" x2="74.27" y2="25.2" />
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="21.51"
-                            y1="21.12" x2="74.27" y2="25.2" />
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="21.44"
-                            y1="28.26" x2="74.27" y2="25.2" />
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="22.37"
-                            y1="35.54" x2="74.27" y2="25.2" />
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="24.21"
-                            y1="42.36" x2="74.27" y2="25.2" />
-                        <line class="spray-line" stroke="#777777" stroke-dasharray="8 5" x1="24.31"
-                            y1="7.78" x2="74.27" y2="25.2" />
-
-                        <circle fill="url(#grad1)" stroke="none" class="spray-bubble" cx="25.43"
-                            cy="12.97" r="12.47" />
-                        <circle fill="url(#grad1)" stroke="none" class="spray-bubble" cx="15.6"
-                            cy="25.43" r="15.1" />
-                        <circle fill="url(#grad1)" stroke="none" class="spray-bubble" cx="33.24"
-                            cy="37.13" r="9.21" />
-                        <circle fill="url(#grad1)" stroke="none" class="spray-bubble" cx="35.92"
-                            cy="19.5" r="11.89" />
-                        <circle fill="url(#grad1)" stroke="none" class="spray-bubble" cx="18.82"
-                            cy="34.45" r="11.89" />
-                    </g>
-                    <path
-                        d="M89,42h0a21.3,21.3,0,0,1,21.3,21.3v56.48a5.06,5.06,0,0,1-5.06,5.06H72.6a5.06,5.06,0,0,1-5.06-5.06V63.4A21.45,21.45,0,0,1,89,42Z"
-                        fill="#fff" />
-                    <rect x="78.3" y="36.64" width="21.24" height="6.15" rx="1.93" fill="#fff" />
-                    <rect x="76.33" y="71.46" width="33.96" height="23.23" fill="#cccccc" />
-                </g>
-            </g>
-
-            <g>
-                <line class="gear-connector" x1="0" x2="0" y1="0" y2="0" />
-                <g class="gears"></g>
-            </g>
-
-            <g class="grabbing-hand">
-                <g fill="#ffffff">
-                    <rect class="grabbing-hand-finger-closed" x="44.79" y="13.38" width="8.42" height="22.15"
-                        rx="3.67" transform="translate(20.57 71.26) rotate(-85.25)" />
-                    <rect class="grabbing-hand-finger-closed" x="44.08" y="39.17" width="8.42" height="21.47"
-                        rx="3.67" transform="translate(-5.44 93.9) rotate(-85.25)" />
-                    <rect class="grabbing-hand-finger-closed" x="45.68" y="30.71" width="8.42" height="22.57"
-                        rx="3.67" transform="matrix(0.08, -1, 1, 0.08, 3.91, 88.24)" />
-                    <rect class="grabbing-hand-finger-closed" x="44.98" y="22.21" width="8.42" height="22.57"
-                        rx="3.67" transform="matrix(0.08, -1, 1, 0.08, 11.74, 79.74)" />
-                    <path class="grabbing-hand-finger-closed"
-                        d="M32.18,27.42c5,6.46,13.22,15.06,17.76,12.81,4.18-2.07.69-6-6.66-15.74C38.46,18.1,30.69,17.1,24.1,24" />
-                </g>
-            </g>
-
-            <g class="spiral-container">
-                <path stroke-width=".8" class="spiral-path" d="" />
-            </g>
-
-            <g class="weight-big-container">
-                <line x1="14" x2="60" y1="14" y2="14"></line>
-                <line x1="14" x2="60" y1="14" y2="55"></line>
-                <circle cx="14" cy="14" r="5" fill="#000000" stroke="none" />
-
-                <g class="weight-big" stroke="none">
-                    <path
-                        d="M25.5,16.7c.2-.6.5-1.3.7-2C31.1,3.1,23.2,0,14.3,0S-1.6,4.2,2.4,14.7a22.5,22.5,0,0,1,.8,2.4A14.4,14.4,0,0,0,0,26.2c0,8,6.5,11.6,14.5,11.6S29,34.2,29,26.2A14.6,14.6,0,0,0,25.5,16.7ZM14.4,5c5.6,0,9.3,1.9,7.1,8.5a13.5,13.5,0,0,0-7-1.8,14.6,14.6,0,0,0-7.2,1.9C5.5,7.5,8.8,5,14.4,5Z"
-                        fill="#231f20" />
-                    <path d="M15.1,15.6l-1.8-.2a9.2,9.2,0,0,0-9.1,9.2,6.2,6.2,0,0,0,.2,1.9A13.3,13.3,0,0,1,15.1,15.6Z"
-                        fill="#fff" />
-                </g>
-            </g>
-
-            <g class="scales-container">
-                <defs>
-                    <marker id="ball" viewBox="0 0 10 10" refX="5" refY="5"
-                        markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
-                        <circle cx="5" cy="5" r="3" fill="#000" />
-                    </marker>
-                </defs>
-
-                <rect x="10" y="-19" width="30" height="90" rx="15" ry="15" stroke-width="10"
-                    stroke="#ccc" />
-                <rect class="timing-chain" x="10" y="-19" width="30" height="90" rx="15"
-                    ry="15" stroke="#fff" />
-
-                <rect x="-31" y="-19" width="30" height="144" rx="15" ry="15" stroke-width="10"
-                    stroke="#ccc" />
-                <rect class="timing-chain" x="-31" y="-19" width="30" height="144" rx="15"
-                    ry="15" stroke="#fff" />
-
-                <g class="reels-connector">
-                    <rect x="-8" y="3.2" width="25" height="10" rx="5" ry="5" />
-                    <circle cx="-1" cy="8.5" r="3" fill="#000" stroke="none" />
-                    <circle cx="9.9" cy="8.5" r="3" fill="#000" stroke="none" />
-                </g>
-
-                <g class="car-weight-connector">
-                    <rect x="-36" y="97" width="10" height="95" rx="5" ry="5" />
-                    <circle cx="-31" cy="103" r="3" fill="#000" stroke="none" />
-                    <circle cx="-31" cy="186" r="3" fill="#000" stroke="none" />
-                </g>
-
-                <line class="scales-moving-line" x1="147.6" y1="30.52" x2="40" y2="12"
-                    stroke-width="2" marker-start="url(#ball)" marker-end="url(#ball)" />
-                <path fill="#000000" d="M102.45,30.68,92,20.26c-9.89,9.9-9.89,10.47-9.89,10.47Z" />
-            </g>
-
-            <g class="car-container">
-                <g>
-                    <g class="car">
-                        <circle cx="17" cy="88" r="5" />
-                        <circle cx="17" cy="88" r="2" fill="#000" />
-                        <circle cx="32" cy="88" r="5" />
-                        <circle cx="32" cy="88" r="2" fill="#000" />
-
-                        <path d="M10,65 h30 l-5,15 h-20 l-5,-15 " fill="#000" />
-                    </g>
-
-                    <line x1="-51" y1="95" x2="145" y2="95" />
-                </g>
-            </g>
-        </svg>
-    </div>
-
-    <!-- مكتبة GSAP للرسوم المتحركة -->
-    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
-
-    <!-- الجافاسكريبت المدمج والتفاعلي -->
+    <!-- ملف الجافاسكريبت التفاعلي للشخصية -->
     <script>
-        const containerEl = document.querySelector('.container');
-        const checkboxEl = document.querySelector('#robotCheck');
-        const nameEl = document.querySelector('.form-container input[name="username"]');
-        const emailEl = document.querySelector('.form-container input[name="password"]');
-        const submitBtn = document.querySelector('.form-container #submitBtn');
+        var email = document.querySelector('#email'),
+            password = document.querySelector('#password'),
+            mySVG = document.querySelector('.svgContainer'),
+            armL = document.querySelector('.armL'),
+            armR = document.querySelector('.armR'),
+            eyeL = document.querySelector('.eyeL'),
+            eyeR = document.querySelector('.eyeR'),
+            nose = document.querySelector('.nose'),
+            mouth = document.querySelector('.mouth'),
+            mouthBG = document.querySelector('.mouthBG'),
+            mouthSmallBG = document.querySelector('.mouthSmallBG'),
+            mouthMediumBG = document.querySelector('.mouthMediumBG'),
+            mouthLargeBG = document.querySelector('.mouthLargeBG'),
+            mouthMaskPath = document.querySelector('#mouthMaskPath'),
+            mouthOutline = document.querySelector('.mouthOutline'),
+            tooth = document.querySelector('.tooth'),
+            tongue = document.querySelector('.tongue'),
+            chin = document.querySelector('.chin'),
+            face = document.querySelector('.face'),
+            eyebrow = document.querySelector('.eyebrow'),
+            outerEarL = document.querySelector('.earL .outerEar'),
+            outerEarR = document.querySelector('.earR .outerEar'),
+            earHairL = document.querySelector('.earL .earHair'),
+            earHairR = document.querySelector('.earR .earHair'),
+            hair = document.querySelector('.hair');
 
-        const sprayer = document.querySelector('.sprayer');
-        const sprayHandContainer = document.querySelector('.spray-hand-container');
-        const sprayLines = Array.from(document.querySelectorAll('.spray-line'));
-        const sprayBubbles = Array.from(document.querySelectorAll('.spray-bubble'));
+        var caretPos, curEmailIndex, screenCenter, svgCoords, eyeMaxHorizD = 20,
+            eyeMaxVertD = 10,
+            noseMaxHorizD = 23,
+            noseMaxVertD = 10,
+            dFromC, eyeDistH, eyeLDistV, eyeRDistV, eyeDistR, mouthStatus = "small";
 
-        const pushingHand = document.querySelector('.pushing-hand');
-        const sprayerHead = document.querySelector('.sprayer-head');
-        const gearsContainer = document.querySelector('svg .gears');
-        const gearConnector = document.querySelector('.gear-connector');
+        function getCoord(e) {
+            var carPos = email.selectionEnd,
+                div = document.createElement('div'),
+                span = document.createElement('span'),
+                copyStyle = getComputedStyle(email),
+                emailCoords = {},
+                caretCoords = {},
+                centerCoords = {};
 
-        const pullSystemContainer = document.querySelector('.pull-system');
-        const checkboxPullLine = document.querySelector('.checkbox-pull-line');
-        const checkboxPullCircle = document.querySelector('.checkbox-pull-circle');
-        const btnPullLine = document.querySelector('.submit-btn-connector');
-        const btnHandlerCircle = document.querySelector('.submit-btn-circle');
-
-        const spiralContainer = document.querySelector('.spiral-container');
-        const weightBigContainer = document.querySelector('.weight-big-container');
-
-        const scalesContainer = document.querySelector('.scales-container');
-        const scalesLine = document.querySelector('.scales-moving-line');
-        const weightBig = document.querySelector('.weight-big');
-        const spiralPath = document.querySelector('.spiral-path');
-
-        const carContainer = document.querySelector('.car-container');
-        const car = document.querySelector('.car');
-        const carInclineWrapper = document.querySelector('.car-container g');
-        const timingChains = Array.from(document.querySelectorAll('.timing-chain'));
-        const reelsConnector = document.querySelector('.reels-connector');
-        const carWeightConnector = document.querySelector('.car-weight-connector');
-
-        const grabbingHand = document.querySelectorAll('.grabbing-hand');
-        const grabbingHandOpenFingers = Array.from(document.querySelectorAll('.grabbing-hand-finger-open'));
-        const grabbingHandClosedFingers = Array.from(document.querySelectorAll('.grabbing-hand-finger-closed'));
-
-        layoutPreparation();
-        scaleToFit();
-        window.onresize = scaleToFit;
-
-        function scaleToFit() {
-            const h = 800;
-            if (window.innerHeight < h) {
-                gsap.set(containerEl, {
-                    scale: window.innerHeight / h,
-                    transformOrigin: "50% 75%"
-                })
-            }
-        }
-
-        let sprayRepeatCounter = 0;
-        const state = {
-            handClosed: false,
-            sumbitBtnOnPlace: false,
-            sumbitBtnTextOpacity: 0,
-            pullProgress: 0
-        }
-        let nameValid = false;
-        let emailValid = false;
-
-        const emailTl = createEmailTl();
-        const gearsTls = createGearsTimelines();
-        createPullingTimeline(state.handClosed, checkboxEl ? checkboxEl.checked : true);
-
-        if (nameEl) {
-            nameEl.addEventListener('input', () => {
-                nameValid = nameEl.value.length > 0;
-                if (nameValid) {
-                    nameEl.classList.add("valid");
-                    gearsTls.forEach(tl => {
-                        if (tl.paused()) {
-                            tl.play();
-                            gsap.fromTo(tl, {
-                                timeScale: 0
-                            }, {
-                                timeScale: 1
-                            })
-                        }
-                    })
-                } else {
-                    nameEl.classList.remove("valid");
-                    gearsTls.forEach(tl => {
-                        if (!tl.paused()) {
-                            gsap.to(tl, {
-                                timeScale: 0,
-                                onComplete: () => {
-                                    tl.pause();
-                                }
-                            })
-                        }
-                    })
-                    sprayRepeatCounter = 0;
-                }
-            })
-        }
-
-        if (emailEl) {
-            emailEl.addEventListener('input', () => {
-                emailValid = emailEl.value.length > 0;
-                if (emailValid) {
-                    emailTl.play();
-                    emailEl.classList.add("valid");
-                } else {
-                    emailTl.reverse();
-                    emailEl.classList.remove("valid");
-                }
-            })
-        }
-
-        function layoutPreparation() {
-            gsap.set(pullSystemContainer, {
-                x: 375,
-                y: 646
-            })
-            gsap.set(sprayHandContainer, {
-                x: 700,
-                y: 621
-            })
-            gsap.set(sprayer, {
-                x: -59.5,
-                y: 53
-            })
-            gsap.set(carContainer, {
-                x: 190,
-                y: 802
-            })
-            gsap.set(scalesContainer, {
-                x: 170,
-                y: 710
-            })
-            gsap.set(grabbingHand, {
-                x: 297,
-                y: 830
-            })
-            gsap.set(grabbingHandClosedFingers, {
-                opacity: 0
-            })
-            gsap.set(spiralContainer, {
-                x: 305,
-                y: 435,
-                svgOrigin: "14 14",
-                scaleX: -1
-            })
-            gsap.set(weightBigContainer, {
-                x: 305,
-                y: 435
-            })
-            gsap.set([sprayLines, sprayBubbles], {
-                opacity: 0
-            })
-            gsap.set(timingChains[0], {
-                attr: {
-                    "stroke-width": "5",
-                    "stroke-dasharray": "0 12"
-                }
-            })
-            gsap.set(timingChains[1], {
-                attr: {
-                    "stroke-width": "5",
-                    "stroke-dasharray": "0 12"
-                }
-            })
-            gsap.set(checkboxPullLine, {
-                attr: {
-                    y1: -105,
-                    y2: 44
-                }
+            [].forEach.call(copyStyle, function(prop) {
+                div.style[prop] = copyStyle[prop];
             });
-            gsap.set(checkboxPullCircle, {
-                y: 44
+            div.style.position = 'absolute';
+            document.body.appendChild(div);
+            div.textContent = email.value.substr(0, carPos);
+            span.textContent = email.value.substr(carPos) || '.';
+            div.appendChild(span);
+
+            emailCoords = getPosition(email);
+            caretCoords = getPosition(span);
+            centerCoords = getPosition(mySVG);
+            svgCoords = getPosition(mySVG);
+            screenCenter = centerCoords.x + (mySVG.offsetWidth / 2);
+            caretPos = caretCoords.x + emailCoords.x;
+
+            dFromC = screenCenter - caretPos;
+            var pFromC = Math.round((caretPos / screenCenter) * 100) / 100;
+            if (pFromC < 1) {
+
+            } else if (pFromC > 1) {
+                pFromC -= 2;
+                pFromC = Math.abs(pFromC);
+            }
+
+            eyeDistH = -dFromC * .05;
+            if (eyeDistH > eyeMaxHorizD) {
+                eyeDistH = eyeMaxHorizD;
+            } else if (eyeDistH < -eyeMaxHorizD) {
+                eyeDistH = -eyeMaxHorizD;
+            }
+
+            var eyeLCoords = {
+                x: svgCoords.x + 84,
+                y: svgCoords.y + 76
+            };
+            var eyeRCoords = {
+                x: svgCoords.x + 113,
+                y: svgCoords.y + 76
+            };
+            var noseCoords = {
+                x: svgCoords.x + 97,
+                y: svgCoords.y + 81
+            };
+            var mouthCoords = {
+                x: svgCoords.x + 100,
+                y: svgCoords.y + 100
+            };
+            var eyeLAngle = getAngle(eyeLCoords.x, eyeLCoords.y, emailCoords.x + caretCoords.x, emailCoords.y + 25);
+            var eyeLX = Math.cos(eyeLAngle) * eyeMaxHorizD;
+            var eyeLY = Math.sin(eyeLAngle) * eyeMaxVertD;
+            var eyeRAngle = getAngle(eyeRCoords.x, eyeRCoords.y, emailCoords.x + caretCoords.x, emailCoords.y + 25);
+            var eyeRX = Math.cos(eyeRAngle) * eyeMaxHorizD;
+            var eyeRY = Math.sin(eyeRAngle) * eyeMaxVertD;
+            var noseAngle = getAngle(noseCoords.x, noseCoords.y, emailCoords.x + caretCoords.x, emailCoords.y + 25);
+            var noseX = Math.cos(noseAngle) * noseMaxHorizD;
+            var noseY = Math.sin(noseAngle) * noseMaxVertD;
+            var mouthAngle = getAngle(mouthCoords.x, mouthCoords.y, emailCoords.x + caretCoords.x, emailCoords.y + 25);
+            var mouthX = Math.cos(mouthAngle) * noseMaxHorizD;
+            var mouthY = Math.sin(mouthAngle) * noseMaxVertD;
+            var mouthR = Math.cos(mouthAngle) * 6;
+            var chinX = mouthX * .8;
+            var chinY = mouthY * .5;
+            var chinS = 1 - ((dFromC * .15) / 100);
+            if (chinS > 1) {
+                chinS = 1 - (chinS - 1);
+            }
+            var faceX = mouthX * .3;
+            var faceY = mouthY * .4;
+            var faceSkew = Math.cos(mouthAngle) * 5;
+            var eyebrowSkew = Math.cos(mouthAngle) * 25;
+            var outerEarX = Math.cos(mouthAngle) * 4;
+            var outerEarY = Math.cos(mouthAngle) * 5;
+            var hairX = Math.cos(mouthAngle) * 6;
+            var hairS = 1.2;
+
+            TweenMax.to(eyeL, 1, {
+                x: -eyeLX,
+                y: -eyeLY,
+                ease: Expo.easeOut
             });
-        }
+            TweenMax.to(eyeR, 1, {
+                x: -eyeRX,
+                y: -eyeRY,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(nose, 1, {
+                x: -noseX,
+                y: -noseY,
+                rotation: mouthR,
+                transformOrigin: "center center",
+                ease: Expo.easeOut
+            });
+            TweenMax.to(mouth, 1, {
+                x: -mouthX,
+                y: -mouthY,
+                rotation: mouthR,
+                transformOrigin: "center center",
+                ease: Expo.easeOut
+            });
+            TweenMax.to(chin, 1, {
+                x: -chinX,
+                y: -chinY,
+                scaleY: chinS,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(face, 1, {
+                x: -faceX,
+                y: -faceY,
+                skewX: -faceSkew,
+                transformOrigin: "center top",
+                ease: Expo.easeOut
+            });
+            TweenMax.to(eyebrow, 1, {
+                x: -faceX,
+                y: -faceY,
+                skewX: -eyebrowSkew,
+                transformOrigin: "center top",
+                ease: Expo.easeOut
+            });
+            TweenMax.to(outerEarL, 1, {
+                x: outerEarX,
+                y: -outerEarY,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(outerEarR, 1, {
+                x: outerEarX,
+                y: outerEarY,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(earHairL, 1, {
+                x: -outerEarX,
+                y: -outerEarY,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(earHairR, 1, {
+                x: -outerEarX,
+                y: outerEarY,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(hair, 1, {
+                x: hairX,
+                scaleY: hairS,
+                transformOrigin: "center bottom",
+                ease: Expo.easeOut
+            });
 
-        function updateSpiralPath(centerX, centerY, radius, coils, points, offset) {
-            let path = "";
-            let thetaMax = coils * 2 * Math.PI;
-            const awayStep = radius / thetaMax;
-            const chord = 2 * Math.PI / points;
-            thetaMax -= offset * points * chord;
+            document.body.removeChild(div);
+        };
 
-            for (let theta = 0; theta <= thetaMax; theta += chord) {
-                const away = awayStep * theta;
-                const x = centerX + Math.cos(theta) * away;
-                const y = centerY + Math.sin(theta) * away;
+        function onEmailInput(e) {
+            getCoord(e);
+            var value = e.target.value;
+            curEmailIndex = value.length;
 
-                if (theta === 0) {
-                    path += `M${x},${y}`;
-                } else {
-                    const prevAway = awayStep * (theta - chord);
-                    const arcRadius = (away + prevAway) / 2;
-                    path += ` A${arcRadius},${arcRadius} 0 0,1 ${x},${y}`;
-                }
-            }
-
-            const outerAngle = thetaMax + .5 * Math.PI;
-            const outerLength = 50 + 25 * offset;
-            const endPoint = [Math.cos(outerAngle) * outerLength, Math.sin(outerAngle) * outerLength];
-            path += (' l' + endPoint[0] + ',' + endPoint[1]);
-
-            gsap.set(spiralPath, {
-                attr: {
-                    d: path
-                }
-            })
-            gsap.set(weightBig, {
-                x: -47 + 3 * offset,
-                y: 12 + outerLength
-            })
-        }
-
-        function createEmailTl() {
-            const spiralTurnsNumber = 8;
-            const spiralProgress = {
-                v: 0
-            }
-            const hammerTimeStart = 1.85;
-            const fingersDelay = .5;
-            const fingersTimeDelta = .03;
-            const tl = gsap.timeline({
-                    paused: true,
-                    defaults: {
-                        ease: "none",
-                        duration: 2
-                    },
-                    onUpdate: () => {
-                        updateSpiralPath(14, 14, 45, 17, 200, spiralTurnsNumber * spiralProgress.v);
-                    },
-                })
-                .to(spiralProgress, {
-                    v: 1
-                }, 0)
-                .to(spiralContainer, {
-                    rotation: -spiralTurnsNumber * 360
-                }, 0)
-                .fromTo(scalesLine, {
-                    rotation: -20,
-                    svgOrigin: "92 20"
-                }, {
-                    duration: .15,
-                    rotation: -1,
-                    svgOrigin: "92 20"
-                }, hammerTimeStart)
-                .fromTo(timingChains[0], {
-                    attr: {
-                        "stroke-dashoffset": 2
-                    }
-                }, {
-                    duration: .15,
-                    attr: {
-                        "stroke-dashoffset": 20
-                    }
-                }, hammerTimeStart)
-                .fromTo(timingChains[1], {
-                    attr: {
-                        "stroke-dashoffset": 24
-                    }
-                }, {
-                    duration: .15,
-                    attr: {
-                        "stroke-dashoffset": 6
-                    }
-                }, hammerTimeStart)
-                .to(reelsConnector, {
-                    duration: .15,
-                    y: 18
-                }, hammerTimeStart)
-                .to(carWeightConnector, {
-                    duration: .15,
-                    y: -18
-                }, hammerTimeStart)
-                .to(carInclineWrapper, {
-                    duration: .15,
-                    rotation: 6,
-                    svgOrigin: "120 93"
-                }, hammerTimeStart)
-                .fromTo(car, {
-                    x: -50
-                }, {
-                    duration: .6,
-                    x: 95,
-                    ease: "power2.in"
-                }, hammerTimeStart);
-
-            for (let i = 0; i < 5; i++) {
-                tl.set(grabbingHandOpenFingers[i], {
-                        opacity: 0
-                    }, hammerTimeStart + fingersDelay + fingersTimeDelta * (i + 1))
-                    .set(grabbingHandClosedFingers[i], {
-                        opacity: 1
-                    }, hammerTimeStart + fingersDelay + fingersTimeDelta * (i + 1))
-            }
-            tl.fromTo(state, {
-                    handClosed: false
-                }, {
-                    duration: .01,
-                    handClosed: true
-                }, ">")
-                .to(grabbingHand, {
-                    duration: fingersTimeDelta * 5,
-                    x: "+=20"
-                }, hammerTimeStart + fingersDelay);
-
-            tl.progress(0.001);
-            return tl;
-        }
-
-        function createGearsTimelines() {
-            const tls = []
-            const params = {
-                baseSize: 15,
-                pitch: 11,
-                teethCurve: .6,
-                startPos: {
-                    x: 634,
-                    y: 389
-                },
-                speed: .2
-            }
-            const data = [{
-                angle: 0,
-                teethNumber: 10,
-                hasHole: true
-            }, {
-                angle: -.5,
-                teethNumber: 32,
-                hasHole: true
-            }, {
-                angle: 1.65,
-                teethNumber: 12,
-                hasHole: false
-            }];
-            const handleRadius = 14;
-            const gears = [];
-
-            data.forEach((d, dIdx) => {
-                const radius = (d.teethNumber * params.baseSize) / (2 * Math.PI);
-                let x, y, startAngle;
-
-                if (dIdx === 0) {
-                    startAngle = 0;
-                    x = params.startPos.x;
-                    y = params.startPos.y;
-                } else {
-                    const parent = gears[dIdx - 1];
-                    const size = parent.teethNumber / d.teethNumber;
-                    x = parent.center.x + Math.cos(d.angle) * (parent.radius + radius);
-                    y = parent.center.y + Math.sin(d.angle) * (parent.radius + radius);
-                    startAngle = (1 + size) * d.angle - size * parent.angle;
-                }
-
-                const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                gearsContainer.appendChild(group);
-                group.appendChild(path);
-
-                const gear = {
-                    idx: dIdx,
-                    center: {
-                        x,
-                        y
-                    },
-                    radius,
-                    angle: startAngle,
-                    teethNumber: d.teethNumber,
-                    hasHole: d.hasHole,
-                    toothAngle: 2 * Math.PI / d.teethNumber,
-                    toothCurveAngle: params.teethCurve / d.teethNumber,
-                    group
-                }
-
-                const rOut = gear.radius + .25 * params.pitch;
-                const rIn = rOut - .75 * params.pitch;
-                let pathD = "M" + (gear.center.x + Math.cos(gear.angle - gear.toothAngle + gear.toothCurveAngle) *
-                    rOut) + ", " + (gear.center.y + Math.sin(gear.angle - gear.toothAngle + gear
-                    .toothCurveAngle) * rOut) + " ";
-                for (let a = gear.angle; a < (gear.angle + 2 * Math.PI - .5 * gear.toothAngle); a += gear
-                    .toothAngle) {
-                    const pa = (a - .5 * gear.toothAngle);
-                    pathD += ("L" + (gear.center.x + Math.cos(pa - gear.toothCurveAngle) * rOut) + ", " + (gear
-                        .center.y + Math.sin(pa - gear.toothCurveAngle) * rOut) + " ");
-                    pathD += ("L" + (gear.center.x + Math.cos(pa) * rIn) + ", " + (gear.center.y + Math.sin(pa) *
-                        rIn) + " ");
-                    pathD += ("L" + (gear.center.x + Math.cos(a) * rIn) + ", " + (gear.center.y + Math.sin(a) *
-                        rIn) + " ");
-                    pathD += ("L" + (gear.center.x + Math.cos(a + gear.toothCurveAngle) * rOut) + ", " + (gear
-                        .center.y + Math.sin(a + gear.toothCurveAngle) * rOut) + " ");
-                }
-
-                if (gear.hasHole) {
-                    const holeRadius = .5 * rIn;
-                    pathD += ("M" + (gear.center.x - holeRadius) + ", " + (gear.center.y) + " ");
-                    pathD += `A ${holeRadius} ${holeRadius} 1 1 0 ${gear.center.x + holeRadius} ${gear.center.y} `;
-                    pathD += `A ${holeRadius} ${holeRadius} 1 1 0 ${gear.center.x - holeRadius} ${gear.center.y}`;
-                }
-
-                if (dIdx === 0) {
-                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                    gsap.set(circle, {
-                        attr: {
-                            cx: gear.center.x,
-                            cy: gear.center.y,
-                            r: 5,
-                            fill: "#000000"
-                        }
-                    })
-                    gearsContainer.appendChild(circle);
-                    gsap.set(path, {
-                        attr: {
-                            fill: "#000000",
-                            "fill-opacity": .25
-                        }
-                    })
-                } else if (dIdx === (data.length - 1)) {
-                    gsap.set(path, {
-                        attr: {
-                            fill: "#000000",
-                            "fill-opacity": .25
-                        }
-                    })
-                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                    gsap.set(circle, {
-                        attr: {
-                            cx: gear.center.x + handleRadius,
-                            cy: gear.center.y,
-                            r: 5,
-                            fill: "#000000"
-                        }
-                    })
-                    gear.group.appendChild(circle);
-                }
-
-                path.setAttribute("d", pathD);
-
-                const tl = gsap.timeline({
-                        repeat: -1,
-                        paused: true
-                    })
-                    .to(group, {
-                        duration: params.speed * gear.teethNumber,
-                        rotation: 360 * (gear.idx % 2 ? -1 : 1),
-                        svgOrigin: gear.center.x + " " + gear.center.y,
-                        ease: "none",
+            if (curEmailIndex > 0) {
+                if (mouthStatus == "small") {
+                    mouthStatus = "medium";
+                    TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
+                        morphSVG: mouthMediumBG,
+                        shapeIndex: 8,
+                        ease: Expo.easeOut
                     });
-
-                if (dIdx === (data.length - 1)) {
-                    tl.eventCallback("onUpdate", () => {
-                        const angle = tl.progress() * 2 * Math.PI;
-                        const deltaY = Math.sin(angle) * handleRadius;
-                        gsap.set(pushingHand, {
-                            y: deltaY
-                        })
-                        if (deltaY > 8) {
-                            const d = Math.max(0, deltaY - 8);
-                            gsap.set(sprayerHead, {
-                                y: d
-                            })
-                            let sprayProgress = Math.max(0, tl.progress() - .1);
-                            sprayProgress *= (1 / .2);
-                            let bubblesOpacity = (sprayProgress > 1) ? 0 : sprayProgress;
-                            bubblesOpacity *= (1 - Math.pow(bubblesOpacity, 8));
-
-                            gsap.set(sprayLines, {
-                                attr: {
-                                    "stroke-dashoffset": 70 * sprayProgress
-                                },
-                                opacity: Math.pow(bubblesOpacity, 2)
-                            })
-                            sprayBubbles.forEach((b, bIdx) => {
-                                gsap.set(b, {
-                                    x: 25 * (1 - sprayProgress) * (1 + .1 * bIdx),
-                                    scale: .5 + 1.4 * Math.pow(sprayProgress, 2),
-                                    transformOrigin: "center center",
-                                    opacity: bubblesOpacity
-                                })
-                            })
-                        }
-                        gsap.set(gearConnector, {
-                            attr: {
-                                x1: gear.center.x + handleRadius * Math.cos(angle),
-                                y1: gear.center.y + handleRadius * Math.sin(angle),
-                                x2: 700 + 18,
-                                y2: 646 - 100 + deltaY
-                            }
-                        })
+                    TweenMax.to(tooth, 1, {
+                        x: 0,
+                        y: 0,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to(tongue, 1, {
+                        x: 0,
+                        y: 1,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to([eyeL, eyeR], 1, {
+                        scaleX: .85,
+                        scaleY: .85,
+                        ease: Expo.easeOut
                     });
                 }
-
-                tl.progress(0.6)
-                tls.push(tl);
-                gears.push(gear);
-            })
-
-            return tls;
+                if (value.length > 3) {
+                    mouthStatus = "large";
+                    TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
+                        morphSVG: mouthLargeBG,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to(tooth, 1, {
+                        x: 3,
+                        y: -2,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to(tongue, 1, {
+                        y: 2,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to([eyeL, eyeR], 1, {
+                        scaleX: .65,
+                        scaleY: .65,
+                        ease: Expo.easeOut,
+                        transformOrigin: "center center"
+                    });
+                } else {
+                    mouthStatus = "medium";
+                    TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
+                        morphSVG: mouthMediumBG,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to(tooth, 1, {
+                        x: 0,
+                        y: 0,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to(tongue, 1, {
+                        x: 0,
+                        y: 1,
+                        ease: Expo.easeOut
+                    });
+                    TweenMax.to([eyeL, eyeR], 1, {
+                        scaleX: .85,
+                        scaleY: .85,
+                        ease: Expo.easeOut
+                    });
+                }
+            } else {
+                mouthStatus = "small";
+                TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
+                    morphSVG: mouthSmallBG,
+                    shapeIndex: 9,
+                    ease: Expo.easeOut
+                });
+                TweenMax.to(tooth, 1, {
+                    x: 0,
+                    y: 0,
+                    ease: Expo.easeOut
+                });
+                TweenMax.to(tongue, 1, {
+                    y: 0,
+                    ease: Expo.easeOut
+                });
+                TweenMax.to([eyeL, eyeR], 1, {
+                    scaleX: 1,
+                    scaleY: 1,
+                    ease: Expo.easeOut
+                });
+            }
         }
 
-        function createPullingTimeline(isFixed, BtnPulled) {
-            let tl = gsap.timeline({
-                defaults: {
-                    ease: "power1.inOut",
-                    duration: 1
-                },
-                onUpdate: () => {}
+        function onEmailFocus(e) {
+            getCoord();
+        }
+
+        function onEmailBlur(e) {
+            resetFace();
+        }
+
+        function onPasswordFocus(e) {
+            coverEyes();
+        }
+
+        function onPasswordBlur(e) {
+            uncoverEyes();
+        }
+
+        function coverEyes() {
+            TweenMax.to(armL, .45, {
+                x: -93,
+                y: 2,
+                rotation: 0,
+                ease: Quad.easeOut
             });
-            return tl;
+            TweenMax.to(armR, .45, {
+                x: -93,
+                y: 2,
+                rotation: 0,
+                ease: Quad.easeOut,
+                delay: .1
+            });
         }
+
+        function uncoverEyes() {
+            TweenMax.to(armL, 1.35, {
+                y: 220,
+                ease: Quad.easeOut
+            });
+            TweenMax.to(armL, 1.35, {
+                rotation: 105,
+                ease: Quad.easeOut,
+                delay: .1
+            });
+            TweenMax.to(armR, 1.35, {
+                y: 220,
+                ease: Quad.easeOut
+            });
+            TweenMax.to(armR, 1.35, {
+                rotation: -105,
+                ease: Quad.easeOut,
+                delay: .1
+            });
+        }
+
+        function resetFace() {
+            TweenMax.to([eyeL, eyeR], 1, {
+                x: 0,
+                y: 0,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(nose, 1, {
+                x: 0,
+                y: 0,
+                scaleX: 1,
+                scaleY: 1,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(mouth, 1, {
+                x: 0,
+                y: 0,
+                rotation: 0,
+                ease: Expo.easeOut
+            });
+            TweenMax.to(chin, 1, {
+                x: 0,
+                y: 0,
+                scaleY: 1,
+                ease: Expo.easeOut
+            });
+            TweenMax.to([face, eyebrow], 1, {
+                x: 0,
+                y: 0,
+                skewX: 0,
+                ease: Expo.easeOut
+            });
+            TweenMax.to([outerEarL, outerEarR, earHairL, earHairR, hair], 1, {
+                x: 0,
+                y: 0,
+                scaleY: 1,
+                ease: Expo.easeOut
+            });
+        }
+
+        function getAngle(x1, y1, x2, y2) {
+            var angle = Math.atan2(y1 - y2, x1 - x2);
+            return angle;
+        }
+
+        function getPosition(el) {
+            var xPos = 0;
+            var yPos = 0;
+
+            while (el) {
+                if (el.tagName == "BODY") {
+                    var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+                    var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+                    xPos += (el.offsetLeft - xScroll + el.clientLeft);
+                    yPos += (el.offsetTop - yScroll + el.clientTop);
+                } else {
+                    xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                    yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+                }
+
+                el = el.offsetParent;
+            }
+            return {
+                x: xPos,
+                y: yPos
+            };
+        }
+
+        email.addEventListener('focus', onEmailFocus);
+        email.addEventListener('blur', onEmailBlur);
+        email.addEventListener('input', onEmailInput);
+        password.addEventListener('focus', onPasswordFocus);
+        password.addEventListener('blur', onPasswordBlur);
+
+        TweenMax.set(armL, {
+            x: -93,
+            y: 220,
+            rotation: 105,
+            transformOrigin: "top left"
+        });
+        TweenMax.set(armR, {
+            x: -93,
+            y: 220,
+            rotation: -105,
+            transformOrigin: "top right"
+        });
     </script>
 </body>
 
