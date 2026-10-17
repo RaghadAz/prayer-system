@@ -628,8 +628,15 @@
         }
 
         function onEmailFocus(e) {
-            uncoverEyes();
+            TweenMax.to([armL, armR], 0.4, {
+                x: -93,
+                y: 300,
+                rotation: 105,
+                ease: Quad.easeOut
+            });
+            updateFacePosition(e.target.value.length);
             e.target.parentElement.classList.add("focusWithText");
+
         }
 
         function onEmailBlur(e) {
