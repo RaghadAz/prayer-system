@@ -767,6 +767,18 @@
                 resetFace();
             }
         });
+        TweenMax.set(armL, {
+            x: -93,
+            y: 220,
+            rotation: 105,
+            transformOrigin: "top left"
+        });
+        TweenMax.set(armR, {
+            x: -93,
+            y: 220,
+            rotation: -105,
+            transformOrigin: "top right"
+        });
     </script>
 </body>
 
