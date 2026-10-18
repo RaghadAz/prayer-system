@@ -399,15 +399,6 @@ background: #fff5f8;
 
 
 
-/* بوكس أفضل 3 */
-.dashboard-box {
-    background: #fdf7ff;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    border: 2px solid #e8cfff;
-    margin-top: 25px;
-}
 
 
 
@@ -457,14 +448,6 @@ background: #d32f2f;}
 
 
 
-/* صندوق الجدول */
-.students-box {
-    background: #fdf7ff;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    border: 2px solid #e8cfff;
-}
 .student-link {
  color: #ad1457;
     font-weight: bold;
