@@ -9,64 +9,67 @@ use Illuminate\Support\Facades\Auth;
 class StudentDailyProgramController extends Controller
 {
 
-     public function saveDailyProgram(Request $request)
-{
+    public function saveDailyProgram(Request $request)
+    {
 
 
-    $studentId = Auth::user()->studentProfile->id;
-    $date = now()->toDateString();
+        $studentId = Auth::user()->studentProfile->id;
+        $date = now()->toDateString();
 
-    foreach ($request->answers as $questionId => $answerText) {
+        foreach ($request->answers as $questionId => $answerText) {
 
-        DailyProgramAnswer::updateOrCreate(
-            [
-                'student_id' => $studentId,
-                'date' => $date,
-                'question_id' => $questionId,
-            ],
-            [
-                'answer_text' => $answerText,
-                'points' => $this->calculatePoints($questionId, $answerText),
-                'set_name' => $request->setName,
-            ]
-        );
+            DailyProgramAnswer::updateOrCreate(
+                [
+                    'student_id' => $studentId,
+                    'date' => $date,
+                    'question_id' => $questionId,
+                ],
+                [
+                    'answer_text' => $answerText,
+                    'points' => $this->calculatePoints($questionId, $answerText),
+                    'set_name' => $request->setName,
+                ]
+            );
+        }
+
+
+        return response()->json(['message' => 'تم حفظ الإجابات بنجاح']);
     }
+    private function calculatePoints($questionId, $answerText)
+    {
+        $answerText = trim($answerText);
+        if ($answerText === 'حاضر') return 3;
+        if ($answerText === 'قضاء') return 1;
+        if ($answerText === ' - ') return 0;
+
+        if ($answerText === 'ركعتين') return 2;
+        if ($answerText === ' - ') return 0;
+
+        if ($answerText === 'نص صفحة') return 5;
+        if ($answerText === '2 اية') return 3;
+        if ($answerText === '1 اية') return 1;
+        if ($answerText === '0') return 0;
+
+        if ($answerText === 'جيد') return 5;
+        if ($answerText === 'وسط') return 3;
+        if ($answerText === 'ضفيف') return 0;
 
 
-    return response()->json(['message' => 'تم حفظ الإجابات بنجاح']);
-}
-private function calculatePoints($questionId, $answerText)
-{    $answerText = trim($answerText);
-    if ($answerText === 'أول الوقت') return 5;
-    if ($answerText === 'وسط الوقت') return 3;
-    if ($answerText === 'آخر الوقت') return 2;
-    if ($answerText === 'قضاء') return 0;
+        if (is_numeric($answerText)) return intval($answerText);
 
-    if ($answerText === 'ركعتين') return 2;
-    if ($answerText === '4 ركعات') return 4;
-    if ($answerText === 'لم أصلها') return 0;
+        if ($answerText === 'تم') return 1;
 
-    if ($answerText === 'أكثر من جزء') return 5;
-    if ($answerText === '10-20 صفحة') return 3;
-    if ($answerText === '1-10 صفحات') return 1;
-    if ($answerText === '0') return 0;
+        return 0;
+    }
+    public function getTodayAnswers()
+    {
+        $studentId = Auth::user()->studentProfile->id;
+        $date = now()->toDateString();
 
-    if (is_numeric($answerText)) return intval($answerText);
+        $answers = DailyProgramAnswer::where('student_id', $studentId)
+            ->where('date', $date)
+            ->pluck('answer_text', 'question_id');
 
-    if ($answerText === 'تم') return 1;
-
-    return 0;
-}
-public function getTodayAnswers()
-{
-    $studentId = Auth::user()->studentProfile->id;
-    $date = now()->toDateString();
-
-    $answers = DailyProgramAnswer::where('student_id', $studentId)
-        ->where('date', $date)
-        ->pluck('answer_text', 'question_id');
-
-    return response()->json($answers);
-}
-
+        return response()->json($answers);
+    }
 }

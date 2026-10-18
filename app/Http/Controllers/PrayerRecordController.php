@@ -56,10 +56,8 @@ class PrayerRecordController extends Controller
     private function calculatePoints( $status)
     {
         return match ($status) {
-            'first_time'  => 5,
-            'middle_time' => 3,
-            'last_time'   => 2,
-            'qada'        => 0,
+            'first_time'  => 3,
+            'qada'        => 1,
             default => 0,
         };
     }

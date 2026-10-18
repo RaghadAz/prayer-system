@@ -767,6 +767,7 @@
                 resetFace();
             }
         });
+        uncoverEyes();
         TweenMax.set(armL, {
             x: -93,
             y: 220,

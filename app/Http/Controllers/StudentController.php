@@ -133,25 +133,27 @@ class StudentController extends Controller
 
         $ranking = $ranking !== false ? $ranking + 1 : '—';
 
-       $date = request()->input('week_date')
-    ? Carbon::parse(request()->input('week_date'))
-    : Carbon::now();
+        $date = request()->input('week_date')
+            ? Carbon::parse(request()->input('week_date'))
+            : Carbon::now();
 
-$weekStart = $date->copy()->startOfWeek(Carbon::SATURDAY);
-$weekEnd   = $date->copy()->endOfWeek(Carbon::SATURDAY);
+        $weekStart = $date->copy()->startOfWeek(Carbon::SATURDAY);
+        $weekEnd   = $date->copy()->endOfWeek(Carbon::SATURDAY);
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
-$topThree = StudentProfile::with('user')
-    ->withSum(['prayerRecords as total_points' => function ($query) use ($weekStart, $weekEnd) {
-        $query->whereBetween('date', [$weekStart, $weekEnd]);
-    }], 'points')
-    ->get()
-    ->map(function ($student) {
-        $student->total_points = $student->total_points ?? 0;
-        return $student;
-    })
-    ->sortByDesc('total_points')
-    ->values() 
-    ->take(3);
+        $topThree = StudentProfile::with('user')
+            ->withSum(['prayerRecords as total_points' => function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
+            }], 'points')
+            ->get()
+            ->map(function ($student) {
+                $student->total_points = $student->total_points ?? 0;
+                return $student;
+            })
+            ->sortByDesc('total_points')
+            ->values()
+            ->take(3);
 
         return view('student.dashboard', compact(
             'student',

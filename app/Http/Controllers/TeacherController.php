@@ -146,6 +146,8 @@ class TeacherController extends Controller
 
         $weekStart = now()->startOfWeek(Carbon::SATURDAY);
         $weekEnd   = now()->endOfWeek(Carbon::SATURDAY);
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
         $weeklyPoints = DailyProgramAnswer::whereIn('student_id', $studentsIds)
             ->whereDate('date', '>=', $weekStart)
@@ -153,7 +155,7 @@ class TeacherController extends Controller
             ->sum('points');
 
         $monthlyPoints = DailyProgramAnswer::whereIn('student_id', $studentsIds)
-            ->whereMonth('date', now()->month)
+            ->whereMonth('date', Carbon::now()->startOfMonth())
             ->sum('points');
 
         $recentRecords = DailyProgramAnswer::whereIn('student_id', $studentsIds)
@@ -168,8 +170,8 @@ class TeacherController extends Controller
 
         $topStudents = $teacher->students()
             ->with('user')
-            ->withSum(['prayerRecords as total_points' => function ($query) use ($weekStart, $weekEnd) {
-                $query->whereBetween('date', [$weekStart, $weekEnd]);
+            ->withSum(['prayerRecords as total_points' => function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
             }], 'points')->get()
             ->map(function ($student) {
                 $student->total_points = $student->total_points ?? 0;
@@ -238,21 +240,21 @@ class TeacherController extends Controller
             'm9' => 'سنة العصر',
             'm10' => 'سنة المغرب',
             'm11' => 'سنة العشاء',
-            'm12' => 'الضحى',
-            'm13' => 'الأوابين',
-            'm14' => 'قيام الليل',
-            'm15' => 'الوتر',
-            'm16' => 'تلاوة القرآن الكريم',
-            'm17' => 'حفظ القرآن الكريم',
-            'm18' => 'بر الأم',
-            'm19' => 'بر الأب',
-            'm20' =>  'الورد الصباحي',
-            'm21' => 'الورد المسائي',
-            'm22' => 'ساعات الدراسة',
-            'm23' => 'الوقت الضائع',
-            'm24' => 'عمل خير',
-            'm25' => 'وفت النوم',
-            'm26' => 'إحياء السنة الأسبوعية',
+            // 'm12' => 'الضحى',
+            // 'm13' => 'الأوابين',
+            // 'm14' => 'قيام الليل',
+            // 'm15' => 'الوتر',
+            // 'm16' => 'تلاوة القرآن الكريم',
+            'm12' => 'حفظ القرآن الكريم',
+            'm13' => 'بر الوالدين',
+            // 'm19' => 'بر الأب',
+            // 'm20' =>  'الورد الصباحي',
+            // 'm21' => 'الورد المسائي',
+            'm14' => 'ساعات الدراسة',
+            // 'm23' => 'الوقت الضائع',
+            'm15' => 'عمل منزلي',
+            'm16' => 'وفت النوم',
+            // 'm26' => 'إحياء السنة الأسبوعية',
 
         ];
 

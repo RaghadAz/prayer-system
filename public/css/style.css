@@ -1,30 +1,28 @@
-body{
-  background-color:#dab1ea;
-  height:auto;
-  margin: 0;
-  min-height: 100vh;
-  padding-top: 90px;
-  box-sizing: border-box;
+body {
+    background: linear-gradient(135deg, #fce4ec, #fff0f5);
+    height: auto;
+    margin: 0;
+    min-height: 100vh;
+    padding-top: 90px;
+    box-sizing: border-box;
+    font-family: "Tajawal", sans-serif;
 }
 .navbar{
-display: flex;
-justify-content:space-between;
-align-items:center;
-background-color: #e5bdf6;
-top: 0;
-left: 0;
-right: 0;
-padding: 5px 15px;
-position:fixed;
-z-index: 1000;
-height:75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8bbd0;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 15px;
+    position: fixed;
+    z-index: 1000;
+    height: 75px;
+    direction: rtl;
 }
 
-/* Keep navbar layout LTR so logo stays on the left and links on the right
-   even if the page uses dir="rtl". Individual link text remains RTL. */
-.navbar {
-  direction: ltr;
-}
+
 .options ul {
     list-style-type:none;
     list-style-position: inside;
@@ -43,10 +41,12 @@ height:75px;
     margin:10px;
 }
 .options a {
-  color:#9d6ab0;
+color: #ad1457;
+    text-decoration: none;
+    font-weight: 600;
 }
 .options a:hover{
-  color: #5d3f6a;
+color: #880e4f;
 }
 .logo img {
   height: auto;
@@ -84,20 +84,20 @@ height: auto;
 .page-header {
   margin: 1.25rem 0 1.5rem;
   padding: 1.2rem 1.25rem;
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 18px;
   backdrop-filter: blur(4px);
 }
 
 .page-header h1 {
   margin: 0 0 0.4rem;
-  color: #5d3f6a;
+  color: #ad1457;
   font-size: clamp(1.7rem, 4vw, 2.2rem);
 }
 
 .page-header p {
   margin: 0;
-  color: #4b3754;
+  color: #880e4f;
   line-height: 1.8;
 }
 
@@ -113,7 +113,7 @@ height: auto;
 }
 
 .controls {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 16px;
   padding: 1rem 1.1rem;
 }
@@ -122,7 +122,7 @@ height: auto;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  color: #5d3f6a;
+  color: #ad1457;
   font-weight: 700;
   cursor: pointer;
 }
@@ -140,7 +140,7 @@ height: auto;
 .toggle-label .switch {
   width: 46px;
   height: 26px;
-  background: #d9d9d9;
+  background: #f8bbd0;
   border-radius: 18px;
   position: relative;
   display: inline-block;
@@ -162,7 +162,7 @@ height: auto;
 }
 
 .toggle-label input[type="checkbox"]:checked + .switch {
-  background: #9d6ab0; /* purple track when on */
+  background: #f48fb1; /* purple track when on */
 }
 
 .toggle-label input[type="checkbox"]:checked + .switch::after {
@@ -179,14 +179,14 @@ height: auto;
 }
 
 .question-card {
-  background: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.45);
   border-radius: 18px;
   padding: 1.6rem 1.1rem 1rem;
   border: 0;
   margin: 0;
   min-inline-size: 0;
   position: relative;
-  box-shadow: 0 10px 28px rgba(93, 63, 106, 0.08);
+  box-shadow: 0 10px 28px rgba(173, 20, 87, 0.08);
 }
 
 .question-card legend {
@@ -194,7 +194,7 @@ height: auto;
   top: 0.5rem;
   right: 1rem; /* respects RTL layout */
   font-weight: 700;
-  color: #4b3754;
+  color: #880e4f;
   padding: 0 0.2rem;
   margin: 0;
 }
@@ -238,7 +238,7 @@ height: auto;
 .flower-caption {
   font-size: 0.9rem;
   text-align: center;
-  color: #3f3146;
+  color: #880e4f;
 }
 
 .form-actions {
@@ -250,19 +250,19 @@ height: auto;
   border: 0;
   border-radius: 999px;
   padding: 0.85rem 1.5rem;
-  background: #9d6ab0;
+  background: #f48fb1;
   color: #fff;
   font-weight: 700;
   cursor: pointer;
 }
 
 .submit-btn:hover {
-  background: #875b98;
+  background: #ec407a;
 }
 
 .save-status {
   min-height: 1.4em;
-  color: #4b3754;
+  color: #880e4f;
   font-weight: 600;
 }
 
@@ -317,48 +317,48 @@ height: auto;
 .dashboard-title {
     font-size: 28px;
     font-weight: bold;
-    color: #6a2fa0;
+    color: #ad1457;
     margin-bottom: 25px;
 }
 
 .dashboard-card {
-    background: #f7e9ff;
+    background: #fff0f3;
     border-radius: 18px;
     padding: 25px;
-    text-align: center;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+   text-align: center;
+    box-shadow: 0 6px 18px rgba(244, 143, 177, 0.15);
     transition: 0.3s ease;
-    border: 2px solid #e8cfff;
+    border: 2px solid #f8bbd0;
 }
 
 .dashboard-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+box-shadow: 0 12px 25px rgba(244, 143, 177, 0.25);
 }
 
-.dashboard-card h5 {
-    color: #6a2fa0;
+.dashboard-card h4, .dashboard-card h5 {
+    color: #ad1457;
     font-weight: 600;
 }
 
-.dashboard-card h3 {
+.dashboard-card h2, .dashboard-card h3 {
     font-weight: bold;
-    color: #9b3de8;
+    color: #d81b60;
 }
 
 
 /* البوكسات الكبيرة */
-.dashboard-box {
-    background: #fdf7ff; /* بنفسجي فاتح جداً */
+.dashboard-box, .students-box, .student-page {
+    background: #fff5f8;
     border-radius: 18px;
     padding: 25px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    border: 2px solid #e8cfff;
+    box-shadow: 0 6px 18px rgba(244, 143, 177, 0.15);
+    border: 2px solid #f8bbd0;
     margin-top: 25px;
 }
 
 .dashboard-box h4 {
-    color: #6a2fa0;
+    color: #ad1457;
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -370,13 +370,16 @@ height: auto;
     overflow: hidden;
 }
 .table th {
-    background: #e8cfff;
-    color: #4a2a6a;
+  background: #f8bbd0;
+    color: #880e4f;
     font-weight: bold;
+    text-align: center;
 }
 
 .table td {
-    background: #faf0ff;
+background: #fff5f8;
+    text-align: center;
+    font-weight: 600;
 }
 
 /* زر تسجيل الخروج */
@@ -392,49 +395,10 @@ height: auto;
 .logout-btn:hover {
     background: #c9302c;
 }
-body {
-    background: linear-gradient(135deg, #d97ef5, #eee9ec);
-    font-family: "Tajawal", sans-serif;
-}
-/* خلفية عامة مثل الهوم */
-body {
-    background: linear-gradient(135deg, #d97ef5, #eee9ec);
-    font-family: "Tajawal", sans-serif;
-}
 
-/* عنوان الداشبورد */
-.dashboard-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #6a2fa0;
-    margin-bottom: 25px;
-}
 
-/* كروت الإحصائيات */
-.dashboard-card {
-    background: #f7e9ff; /* لافندر فاتح */
-    border-radius: 18px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    transition: 0.3s ease;
-    border: 2px solid #e8cfff;
-}
 
-.dashboard-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
 
-.dashboard-card h4 {
-    color: #6a2fa0;
-    font-weight: 600;
-}
-
-.dashboard-card h2 {
-    font-weight: bold;
-    color: #9b3de8;
-}
 
 /* بوكس أفضل 3 */
 .dashboard-box {
@@ -446,67 +410,52 @@ body {
     margin-top: 25px;
 }
 
-.dashboard-box h4 {
-    color: #6a2fa0;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
+
 
 /* جدول أفضل 3 */
 .list-group-item {
-    background: #faf0ff;
-    border: 1px solid #e8cfff;
+ background: #fff5f8;
+    border: 1px solid #f8bbd0;
     border-radius: 10px !important;
     margin-bottom: 8px;
 }
 
 /* زر عرض الطالبات */
-.btn-purple {
-    background: #b45de8;
+.btn-purple ,.btn-students {
+
+   display: block;
+    background: #f48fb1;
     border: none;
-    padding: 12px;
+    padding: 12px 20px;
     font-size: 16px;
+    font-weight: bold;
+    color: white;
     border-radius: 12px;
     transition: 0.3s ease;
+    text-align: center;
 }
 
-.btn-purple:hover {
-    background: #9b3de8;
+.btn-purple:hover, .btn-students:hover {
+    background: #ec407a;
+    transform: translateY(-2px);
 }
 
 /* زر تسجيل الخروج */
 .logout-btn {
-    background: #d9534f;
+  background: #e57373;
     border: none;
     padding: 12px;
     font-size: 16px;
     border-radius: 12px;
+    color: white;
     transition: 0.3s ease;
 }
 
 .logout-btn:hover {
-    background: #c9302c;
-}
-.btn-students {
-    display: block;
-    width: 60%;
-    margin: 20px auto;
-    background: #b45de8;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 14px;
-    border: none;
-    transition: 0.3s ease;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
+background: #d32f2f;}
 
-.btn-students:hover {
-    background: #9b3de8;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
+
+
 /* عنوان الصفحة */
 .students-title {
     font-size: 28px;
@@ -523,36 +472,14 @@ body {
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     border: 2px solid #e8cfff;
 }
-
-/* تنسيق الجدول */
-.table {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.table th {
-    background: #e8cfff;
-    color: #4a2a6a;
-    font-weight: bold;
-    text-align: center;
-}
-
-.table td {
-    background: #faf0ff;
-    text-align: center;
-    font-weight: 600;
-}
-
-/* الروابط داخل الجدول */
 .student-link {
-    color: #6a2fa0;
+ color: #ad1457;
     font-weight: bold;
     text-decoration: none;
 }
 
 .student-link:hover {
-    color: #9b3de8;
+    color: #880e4f;
     text-decoration: underline;
 }
 .student-page {
@@ -573,7 +500,7 @@ body {
 .student-header h2 {
     font-size: 30px;
     font-weight: bold;
-    color: #6a2fa0;
+    color: #ad1457;
 }
 
 .section-box {
@@ -581,16 +508,16 @@ body {
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 25px;
-    border: 2px solid #e8cfff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 2px solid #f8bbd0;
+box-shadow: 0 4px 12px rgba(244, 143, 177, 0.1);
 }
 
 .section-box h3 {
     font-size: 22px;
     margin-bottom: 15px;
-    color: #6a2fa0;
+   color: #ad1457;
     font-weight: bold;
-    border-right: 4px solid #b45de8;
+    border-right: 4px solid #f48fb1;
     padding-right: 10px;
 }
 

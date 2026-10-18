@@ -26,7 +26,7 @@
         <ul>
             <li><a class="nav-link" href="{{ route('student.home') }}">الصفحة الرئيسية</a></li>
             <li><a class="nav-link" href="{{ route('student.daily.program') }}">البرنامج اليومي</a></li>
-            <li><a class="nav-link" href="{{ route('student.weekly.sunnah') }}">إحياء سنة</a></li>
+            {{-- <li><a class="nav-link" href="{{ route('student.weekly.sunnah') }}">إحياء سنة</a></li> --}}
             <li><a class="nav-link" href="{{ route('student.dashboard') }}">الإنجاز</a></li>
         </ul>
     </div>
