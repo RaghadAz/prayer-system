@@ -19,7 +19,7 @@ body {
     position: fixed;
     z-index: 1000;
     height: 75px;
-    direction: rtl;
+    direction: ltr;
 }
 
 
@@ -314,7 +314,7 @@ height: auto;
     border-radius: 14px;
   }
 }
-.dashboard-title {
+.dashboard-title ,.students-title {
     font-size: 28px;
     font-weight: bold;
     color: #ad1457;
@@ -382,7 +382,6 @@ background: #fff5f8;
     font-weight: 600;
 }
 
-/* زر تسجيل الخروج */
 .logout-btn {
     background: #d9534f;
     border: none;
@@ -456,13 +455,7 @@ background: #d32f2f;}
 
 
 
-/* عنوان الصفحة */
-.students-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #6a2fa0;
-    margin-bottom: 25px;
-}
+
 
 /* صندوق الجدول */
 .students-box {
@@ -522,32 +515,5 @@ box-shadow: 0 4px 12px rgba(244, 143, 177, 0.1);
 }
 
 /* جدول */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-}
 
-table th, table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    text-align: center;
-}
 
-table th {
-    background: #e8cfff;
-    color: #4a2a6a;
-    font-weight: bold;
-}
-
-table td {
-    background: #faf0ff;
-    font-weight: 600;
-}
-
-table tr:hover td {
-    background: #f3e6ff;
-}
