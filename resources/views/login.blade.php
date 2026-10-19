@@ -670,30 +670,30 @@
             });
         }
 
-      function uncoverEyes() {
+        function uncoverEyes() {
 
-    TweenMax.killTweensOf([armL, armR]);
+            TweenMax.killTweensOf([armL, armR]);
 
-    TweenMax.set([armL, armR], {
-        clearProps: "transform"
-    });
+            TweenMax.set([armL, armR], {
+                clearProps: "transform"
+            });
 
-    TweenMax.to(armL, .6, {
-        x: -93,
-        y: 220,
-        rotation: 105,
-        transformOrigin: "top left",
-        ease: Quad.easeOut
-    });
+            TweenMax.to(armL, .6, {
+                x: -93,
+                y: 220,
+                rotation: 105,
+                transformOrigin: "top left",
+                ease: Quad.easeOut
+            });
 
-    TweenMax.to(armR, .6, {
-        x: -93,
-        y: 220,
-        rotation: -105,
-        transformOrigin: "top right",
-        ease: Quad.easeOut
-    });
-}
+            TweenMax.to(armR, .6, {
+                x: -93,
+                y: 220,
+                rotation: -105,
+                transformOrigin: "top right",
+                ease: Quad.easeOut
+            });
+        }
 
         function resetFace() {
             TweenMax.to([eyeL, eyeR], 1, {
@@ -776,18 +776,23 @@
                 resetFace();
             }
         });
-        uncoverEyes();
-        TweenMax.set(armL, {
-            x: -93,
-            y: 220,
-            rotation: 105,
-            transformOrigin: "top left"
-        });
-        TweenMax.set(armR, {
-            x: -93,
-            y: 220,
-            rotation: -105,
-            transformOrigin: "top right"
+        window.addEventListener('load', () => {
+
+            TweenMax.set(armL, {
+                x: -93,
+                y: 220,
+                rotation: 105,
+                transformOrigin: "top left"
+            });
+
+            TweenMax.set(armR, {
+                x: -93,
+                y: 220,
+                rotation: -105,
+                transformOrigin: "top right"
+            });
+
+            resetFace();
         });
     </script>
 </body>
