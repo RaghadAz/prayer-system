@@ -15,12 +15,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    padding: 5px 15px;
+    padding: 10px;
     position: fixed;
     z-index: 1000;
     height: 75px;
     direction: ltr;
-    margin: 10px;
+}
+.br{
+    color: black;
+
 }
 
 
