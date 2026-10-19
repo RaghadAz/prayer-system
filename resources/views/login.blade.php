@@ -670,21 +670,30 @@
             });
         }
 
-        function uncoverEyes() {
-            TweenMax.killTweensOf([armL, armR]);
-            TweenMax.to(armL, .6, {
-                x: -93,
-                y: 220,
-                rotation: 105,
-                ease: Quad.easeOut
-            });
-            TweenMax.to(armR, .6, {
-                x: -93,
-                y: 220,
-                rotation: -105,
-                ease: Quad.easeOut
-            });
-        }
+      function uncoverEyes() {
+
+    TweenMax.killTweensOf([armL, armR]);
+
+    TweenMax.set([armL, armR], {
+        clearProps: "transform"
+    });
+
+    TweenMax.to(armL, .6, {
+        x: -93,
+        y: 220,
+        rotation: 105,
+        transformOrigin: "top left",
+        ease: Quad.easeOut
+    });
+
+    TweenMax.to(armR, .6, {
+        x: -93,
+        y: 220,
+        rotation: -105,
+        transformOrigin: "top right",
+        ease: Quad.easeOut
+    });
+}
 
         function resetFace() {
             TweenMax.to([eyeL, eyeR], 1, {
@@ -761,7 +770,7 @@
         email.addEventListener('input', onEmailInput);
         password.addEventListener('focus', onPasswordFocus);
         password.addEventListener('blur', onPasswordBlur);
-        document.addEventListener('click', function(e) {
+        document.addEventListener('mousedown', function(e) {
             if (!email.contains(e.target) && !password.contains(e.target)) {
                 uncoverEyes();
                 resetFace();
