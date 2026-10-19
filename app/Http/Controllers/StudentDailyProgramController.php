@@ -74,10 +74,23 @@ class StudentDailyProgramController extends Controller
         $studentId = Auth::user()->studentProfile->id;
         $date = now()->toDateString();
 
-        $answers = DailyProgramAnswer::where('student_id', $studentId)
-            ->where('date', $date)
-            ->pluck('answer_text', 'question_id');
+        // $answers = DailyProgramAnswer::where('student_id', $studentId)
+        //     ->where('date', $date)
+        //     ->pluck('answer_text', 'question_id');
 
-        return response()->json($answers);
+        // return response()->json($answers);
+
+        $today = DailyProgramAnswer::where(
+            'student_id',
+            $studentId
+        )->where(
+            'date',
+            now()->toDateString()
+        )->get();
+
+        return response()->json([
+            'set_name' => $today->first()?->set_name,
+            'answers' => $today->pluck('answer_text', 'question_id')
+        ]);
     }
 }
