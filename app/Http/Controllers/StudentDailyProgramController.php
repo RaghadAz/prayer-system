@@ -42,13 +42,21 @@ class StudentDailyProgramController extends Controller
         if ($answerText === 'قضاء') return 1;
         if ($answerText === ' - ') return 0;
 
+        if ($answerText === '50') return 3;
+        if ($answerText === '10') return 1;
+
         if ($answerText === 'ركعتين') return 2;
         if ($answerText === ' - ') return 0;
+
+        if ($answerText === '2-5 أحاديث') return 1;
+        if ($answerText === '1 حديث') return 3;
 
         if ($answerText === 'نص صفحة') return 5;
         if ($answerText === '2 اية') return 3;
         if ($answerText === '1 اية') return 1;
         if ($answerText === '0') return 0;
+
+
 
         if ($answerText === 'جيد') return 5;
         if ($answerText === 'وسط') return 3;
