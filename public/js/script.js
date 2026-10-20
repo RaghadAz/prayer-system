@@ -1238,11 +1238,18 @@ fetch(getTodayAnswersUrl)
     .then(saved => {
         for (let qid in saved) {
             const answerText = saved[qid];
-
+if (!answerText) continue;
             // منلاقي السؤال
-            const activeSet = questionSets[getActiveSetName()];
-            const question = activeSet.find(q => q.id === qid);
+          const activeSetName = (typeof getActiveSetName === 'function') ? getActiveSetName() : 'default';
+            const activeSet = questionSets[activeSetName];
 
+            let question = activeSet ? activeSet.find(q => q.id === qid) : null;
+            if (!question) {
+                for (let setName in questionSets) {
+                    question = questionSets[setName].find(q => q.id === qid);
+                    if (question) break;
+                }
+            }
             if (!question) continue;
 
             // منلاقي رقم الخيار
