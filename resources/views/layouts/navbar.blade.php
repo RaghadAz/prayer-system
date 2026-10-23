@@ -19,7 +19,7 @@
 </div> --}}
 <nav class="navbar">
     <div class="logo">
-        <a href="https://www.facebook.com/share/1ZcLhBXBce/">
+        <a href="https://www.facebook.com/share/1ZcLhBXBce/" target="_blank" rel="noopener noreferrer">
             <img src="{{ asset('stylingtools/logo.png') }}" alt="Logo">
         </a>
     </div>
