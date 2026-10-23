@@ -634,7 +634,7 @@
                 rotation: 105,
                 ease: Quad.easeOut
             });
-            updateFacePosition(e.target.value.length);
+            // updateFacePosition(e.target.value.length);
             e.target.parentElement.classList.add("focusWithText");
 
         }
