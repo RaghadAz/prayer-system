@@ -19,7 +19,9 @@
 </div> --}}
 <nav class="navbar">
     <div class="logo">
-        <img src="{{ asset('stylingtools/logo.png') }}" alt="Logo">
+        <a href="https://www.facebook.com/share/1ZcLhBXBce/">
+            <img src="{{ asset('stylingtools/logo.png') }}" alt="Logo">
+        </a>
     </div>
 
     <div class="options">
