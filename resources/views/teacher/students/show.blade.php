@@ -13,16 +13,22 @@
         <div class="section-box">
             <h3>تقرير اليوم</h3>
 
+            @php
+                // تحويل سجلات اليوم إلى مصفوفة مفتاحها question_id لسهولة البحث السريع
+                $dailyAssoc = $daily->keyBy('question_id');
+            @endphp
+
             @if ($daily->count() == 0)
                 <p>لا يوجد بيانات لهذا اليوم.</p>
             @else
                 <ul>
-                    @foreach ($daily as $rec)
-                        <li>
-                            {{ $questionNames[$rec->question_id] ?? $rec->question_id }}
-                            — {{ $rec->answer_text }}
-                            {{-- — {{ $rec->points }} نقطة --}}
-                        </li>
+                    @foreach ($questionNames as $qid => $qName)
+                        @if (isset($dailyAssoc[$qid]))
+                            @php $rec = $dailyAssoc[$qid]; @endphp
+                            <li>
+                                {{ $qName }} — {{ $rec->answer_text }}
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             @endif
@@ -45,6 +51,11 @@
         <div class="section-box">
             <h3>تقرير الأسبوع (ملخص)</h3>
 
+            @php
+                // تحويل الملخص الأسبوعي لمصفوفة مفتاحها question_id
+                $weeklyAssoc = collect($weeklySummary)->keyBy('question_id');
+            @endphp
+
             <table class="table">
                 <thead>
                     <tr>
@@ -54,15 +65,17 @@
                         <th>النقاط</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    @foreach ($weeklySummary as $item)
-                        <tr>
-                            <td>{{ $questionNames[$item['question_id']] ?? $item['question_id'] }}</td>
-                            <td>{{ $item['answer_text'] }}</td>
-                            <td>{{ $item['count'] }}</td>
-                            <td>{{ $item['points'] }}</td>
-                        </tr>
+                    @foreach ($questionNames as $qid => $qName)
+                        @if (isset($weeklyAssoc[$qid]))
+                            @php $item = $weeklyAssoc[$qid]; @endphp
+                            <tr>
+                                <td>{{ $qName }}</td>
+                                <td>{{ $item['answer_text'] }}</td>
+                                <td>{{ $item['count'] }}</td>
+                                <td>{{ $item['points'] }}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

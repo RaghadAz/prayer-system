@@ -253,7 +253,7 @@ class TeacherController extends Controller
             'm14' => 'ساعات الدراسة',
             // 'm23' => 'الوقت الضائع',
             'm15' => 'عمل منزلي',
-            'm16' => 'وفت النوم',
+            'm16' => 'وقت النوم',
             // 'm26' => 'إحياء السنة الأسبوعية',
 
         ];
@@ -269,7 +269,11 @@ class TeacherController extends Controller
             ->get();
 
         $weeklySummary = $this->buildFullSummary($weekly);
-
+        $sortedSummary = collect($weeklySummary)->sortBy(function ($value, $key) use ($questionNames) {
+            $keys = array_keys($questionNames);
+            $pos = array_search($key, $keys);
+            return $pos !== false ? $pos : 999; // إن وجد يترتب، وإن لم يوجد يوضع بالاختيار الأخير
+        });
         $weeklyTotals = [
             'total_records' => $weekly->count(),
             'total_points'  => $weekly->sum('points'),

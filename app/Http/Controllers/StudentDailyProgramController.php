@@ -48,19 +48,28 @@ class StudentDailyProgramController extends Controller
         if ($answerText === 'ركعتين') return 2;
         if ($answerText === ' - ') return 0;
 
-        if ($answerText === '2-5 أحاديث') return 1;
-        if ($answerText === '1 حديث') return 3;
+        if ($answerText === '2-5 أحاديث') return 3;
+        if ($answerText === '1 حديث') return 1;
 
-        if ($answerText === 'نص صفحة') return 5;
+        if ($answerText === 'نص صفحة') return 4;
         if ($answerText === '2 اية') return 3;
         if ($answerText === '1 اية') return 1;
         if ($answerText === '0') return 0;
 
 
+        if ($answerText === '3-5 ساعات') return 4;
+        if ($answerText === 'ساعة-ساعتين') return 3;
+        if ($answerText === 'أقل من ساعة') return 1;
+        if ($answerText === '0') return 0;
 
-        if ($answerText === 'جيد') return 5;
-        if ($answerText === 'وسط') return 3;
+
+
+        if ($answerText === 'جيد') return 3;
+        if ($answerText === 'وسط') return 1;
         if ($answerText === 'ضفيف') return 0;
+
+        if ($answerText === '9-10') return 1;
+        if ($answerText === '11-12') return 0;
 
 
         if (is_numeric($answerText)) return intval($answerText);
