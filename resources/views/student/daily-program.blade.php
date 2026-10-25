@@ -7,25 +7,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script>
-        const currentTeacherId = {{ optional($student)->teacher_id ?? 1 }};
+        const currentTeacherId = {{ $teacherId ?? 1 }};
 
         function getActiveSetName() {
-            try {
-=                const toggleBtn = document.getElementById('toggle') ||
-                    document.querySelector('input[type="checkbox"]') ||
-                    document.querySelector('.toggle');
+            const toggleBtn = document.getElementById('toggle') || document.querySelector('input[type="checkbox"]');
+        const isAlternate = toggleBtn ? toggleBtn.checked : false;
 
-                const isAlternate = toggleBtn ? toggleBtn.checked : false;
+        if (Number(currentTeacherId) !== 1) {
+            return isAlternate ? 'alternate2' : 'teacher2';
+        }
 
-                if (Number(currentTeacherId) !== 1) {
-                    return isAlternate ? 'alternate2' : 'teacher2';
-                }
-
-                return isAlternate ? 'alternate' : 'default';
-            } catch (e) {
-                console.error("Error in getActiveSetName:", e);
-                return Number(currentTeacherId) !== 1 ? 'teacher2' : 'default';
-            }
+        return isAlternate ? 'alternate' : 'default';
         }
     </script>
     <main class="content">
