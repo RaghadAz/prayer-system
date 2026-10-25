@@ -29,7 +29,7 @@ class StudentController extends Controller
 
         StudentProfile::create([
             'user_id' => $user->id,
-            'teacher_id' => $request->teacher_id,
+            'teacher_id' => auth::user()->teacher_id,
         ]);
 
         return response()->json([
@@ -71,17 +71,19 @@ class StudentController extends Controller
         $weeklyPoints = $weeklyRecords->sum('points') ?? 0;
 
         $todayPoints = $todayRecords->sum('points') ?? 0;
+            $teacherId = auth::user()->teacher_id;
+$studentIdsInGroup = StudentProfile::where('teacher_id', $teacherId)->pluck('id');
 
-        $ranking = PrayerRecord::select('student_id')
-            ->selectRaw('SUM(points) as total_points')
-            ->groupBy('student_id')
-            ->havingRaw('SUM(points) > 0')
-            ->orderByDesc('total_points')
-            ->get();
+        // $ranking = PrayerRecord::select('student_id',$studentIdsInGroup)
+        //     ->selectRaw('SUM(points) as total_points')
+        //     ->groupBy('student_id')
+        //     ->havingRaw('SUM(points) > 0')
+        //     ->orderByDesc('total_points')
+        //     ->get();
 
-        $rank = $ranking->search(function ($item) use ($student_id) {
-            return $item->student_id == $student_id;
-        });
+        // $rank = $ranking->search(function ($item) use ($student_id) {
+        //     return $item->student_id == $student_id;
+        // });
         $ranking = PrayerRecord::select('student_id')
             ->selectRaw('SUM(points) as total_points')
             ->groupBy('student_id')
@@ -123,7 +125,8 @@ class StudentController extends Controller
             ->whereMonth('date', now()->month)
             ->sum('points') ?? 0;
 
-        $ranking = StudentProfile::withSum('prayerRecords as total_points', 'points')
+        $ranking = StudentProfile::where('teacher_id',$student->teacher_id)
+            ->withSum('prayerRecords as total_points', 'points')
             ->get()
             ->sortByDesc(function ($item) {
                 return $item->total_points ?? 0;
@@ -142,7 +145,8 @@ class StudentController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
-        $topThree = StudentProfile::with('user')
+        $topThree = StudentProfile::where('teacher_id',$student->teacher_id)
+            ->with('user')
             ->withSum(['prayerRecords as total_points' => function ($query) use ($startOfMonth, $endOfMonth) {
                 $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
             }], 'points')
