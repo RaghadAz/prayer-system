@@ -1202,7 +1202,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggle = document.getElementById('questionToggle');
     const saveBtn = document.getElementById('saveProgramBtn');
 
-    function getActiveSetName() {
+  function getActiveSetName() {
+د        const teacherId = typeof currentTeacherId !== 'undefined' ? currentTeacherId : 1;
+
+        if (Number(teacherId) !== 1) {
+            return toggle.checked ? 'alternate2' : 'teacher2';
+        }
+
         return toggle.checked ? 'alternate' : 'default';
     }
 

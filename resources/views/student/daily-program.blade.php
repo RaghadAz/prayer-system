@@ -6,20 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script>
-        const currentTeacherId = {{ $teacherId ?? 1 }};
-
-        function getActiveSetName() {
-            const toggleBtn = document.getElementById('toggle') || document.querySelector('input[type="checkbox"]');
-        const isAlternate = toggleBtn ? toggleBtn.checked : false;
-
-        if (Number(currentTeacherId) !== 1) {
-            return isAlternate ? 'alternate2' : 'teacher2';
-        }
-
-        return isAlternate ? 'alternate' : 'default';
-        }
-    </script>
     <main class="content">
         <section class="page-header">
             <h1>البرنامج اليومي</h1>
