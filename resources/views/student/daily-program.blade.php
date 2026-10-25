@@ -37,6 +37,9 @@
         </form>
     </main>
     <script>
+        window.currentTeacherId = {{ $teacherId ?? 155 }}; // أو المعلمة الثانية حسب الـ ID عندك
+    </script>
+    <script>
         const getTodayAnswersUrl = "{{ route('student.daily.today') }}";
     </script>
 
