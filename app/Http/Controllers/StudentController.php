@@ -171,7 +171,11 @@ class StudentController extends Controller
 
     public function dailyProgram()
     {
-        return view('student.daily-program', compact('teacherId'));
+        $student = Auth::user()->studentProfile;
+
+        $teacherId = $student ? $student->teacher_id : 1;
+
+        return view('student.daily-program', compact('student', 'teacherId'));
     }
 
     public function saveDailyProgram(Request $request)
