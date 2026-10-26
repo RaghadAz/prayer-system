@@ -144,42 +144,35 @@ class AdminController extends Controller
     }
 
     public function showStudent($id)
-    {
-        $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
+{
+    $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
 
-        $today = now()->toDateString();
-        $weekStart = now()->subDays(6)->toDateString();
-        $monthStart = now()->subDays(29)->toDateString();
+    $today = now()->toDateString();
+    $weekStart = now()->subDays(6)->toDateString();
+    $monthStart = now()->subDays(29)->toDateString();
 
-        $todayPoints = PrayerRecord::where('student_id', $id)
-            ->where('date', $today)
-            ->sum('points');
+    $todayPoints = DailyProgramAnswer::where('student_id', $id)
+        ->where('date', $today)
+        ->sum('points');
 
-        // نقاط الأسبوع
+    $weeklyPoints = DailyProgramAnswer::where('student_id', $id)
+        ->whereBetween('date', [$weekStart, $today])
+        ->sum('points');
 
-        $startOfWeek = Carbon::now()->startOfWeek(Carbon::SATURDAY);
-        $endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+    $monthlyPoints = DailyProgramAnswer::where('student_id', $id)
+        ->whereBetween('date', [$monthStart, $today])
+        ->sum('points');
 
-        $weeklyPoints = PrayerRecord::where('student_id', $id)
-            ->whereBetween('date', [$weekStart, $today])
-            ->sum('points');
+    $records = DailyProgramAnswer::where('student_id', $id)
+        ->orderByDesc('date')
+        ->get();
 
-        // نقاط الشهر
-        $monthlyPoints = PrayerRecord::where('student_id', $id)
-            ->whereBetween('date', [$monthStart, $today])
-            ->sum('points');
-
-        // كل الصلوات
-        $records = PrayerRecord::where('student_id', $id)
-            ->orderByDesc('date', 'desc')
-            ->get();
-
-        return view('admin.show-student', compact(
-            'student',
-            'todayPoints',
-            'weeklyPoints',
-            'monthlyPoints',
-            'records'
-        ));
-    }
+    return view('admin.show-student', compact(
+        'student',
+        'todayPoints',
+        'weeklyPoints',
+        'monthlyPoints',
+        'records'
+    ));
+}
 }
