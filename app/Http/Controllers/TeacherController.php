@@ -316,6 +316,7 @@ class TeacherController extends Controller
             'student',
             'daily',
             'weekly',
+            'weeklySummary',
             'sortedSummary',
             'weeklyTotals',
             'questionNames'
