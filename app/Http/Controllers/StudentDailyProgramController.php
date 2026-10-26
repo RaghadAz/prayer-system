@@ -15,7 +15,7 @@ class StudentDailyProgramController extends Controller
 
         $studentId = Auth::user()->studentProfile->id;
         $date = now()->toDateString();
-
+        $setName = $request->input('setName', 'default');
         foreach ($request->answers as $questionId => $answerText) {
 
             DailyProgramAnswer::updateOrCreate(
@@ -26,8 +26,8 @@ class StudentDailyProgramController extends Controller
                 ],
                 [
                     'answer_text' => $answerText,
-                    'points' => $this->calculatePoints($questionId, $answerText),
-                    'set_name' => $request->setName,
+                    'points' => $this->calculatePoints($questionId, $answerText, $setName),
+                    'set_name' => $setName,
                 ]
             );
         }
@@ -85,8 +85,6 @@ class StudentDailyProgramController extends Controller
             if ($answerText === '1 حديث') return 1;
 
             if ($answerText === '0') return 0;
-
-
         }
 
         if ($answerText === 'حاضر') return 3;
