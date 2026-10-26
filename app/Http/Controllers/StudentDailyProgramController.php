@@ -75,7 +75,7 @@ class StudentDailyProgramController extends Controller
 
             if ($answerText === '200') return 3;
             if ($answerText === '100') return 1;
-            if ($answerText === '250') return 5;
+            if ($answerText === '250') return 4;
             if ($answerText === '150-200') return 3;
             if ($answerText === '100-150') return 2;
             if ($answerText === '1-100') return 1;
