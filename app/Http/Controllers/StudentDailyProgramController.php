@@ -44,22 +44,18 @@ class StudentDailyProgramController extends Controller
             if ($answerText === 'نصف الوقت') return 1;
             if ($answerText === 'اخر الوقت') return 0;
             if ($answerText === '4 ركعات') return 3;
-            if ($answerText === 'ركعتين') return 1;
+            if ($answerText === 'ركعتين') return 2;
             if ($answerText === ' - ') return 0;
-            if ($answerText === '6 ركعات أو أكثر') return 5;
-            if ($answerText === 'ركعة') return 1;
+            if ($answerText === '4 ركعات أو أكثر') return 3;
             if ($answerText === '3 ركعات') return 2;
-            if ($answerText === 'أكثر من جزء') return 5;
-            if ($answerText === '10-20 صفحة') return 3;
-            if ($answerText === '1-10 صفحات') return 2;
-            if ($answerText === '5-7 صفحة') return 5;
-            if ($answerText === '2-4 صفحة') return 3;
-            if ($answerText === 'صفحة') return 2;
+            if ($answerText === 'جزء') return 5;
+            if ($answerText === '10 صفحة') return 3;
+            if ($answerText === '5 صفحات') return 2;
+            if ($answerText === 'صفحة او اكثر') return 4;
             if ($answerText === 'نص صفحة') return 1;
             if ($answerText === 'جيد') return 3;
             if ($answerText === 'وسط') return 1;
             if ($answerText === 'ضعيف') return 0;
-            if ($answerText === 'ساعة') return 3;
             if ($answerText === 'نصف ساعة') return 2;
             if ($answerText === 'ربع ساعة') return 1;
             if ($answerText === 'تم') return 1;
@@ -79,8 +75,7 @@ class StudentDailyProgramController extends Controller
             if ($answerText === '150-200') return 3;
             if ($answerText === '100-150') return 2;
             if ($answerText === '1-100') return 1;
-            if ($answerText === '8-10 أحاديث') return 5;
-            if ($answerText === '5-7 أحاديث') return 3;
+            if ($answerText === '5 أحاديث او اكثر') return 5;
             if ($answerText === '2-4 أحاديث') return 2;
             if ($answerText === '1 حديث') return 1;
 
