@@ -318,7 +318,7 @@ class TeacherController extends Controller
             'weekly',
             'sortedSummary',
             'weeklyTotals',
-            'questionNames1'
+            'questionNames'
         ));
     }
 
