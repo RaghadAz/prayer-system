@@ -228,7 +228,8 @@ class TeacherController extends Controller
 
     public function showStudent($id)
     {
-        $teacherId = auth::id();
+        $student = StudentProfile::with('user')->findOrFail($id);
+        $teacherId = $student->teacher_id;
         if ($teacherId == 1) {
 
             $questionNames = [
@@ -306,7 +307,7 @@ class TeacherController extends Controller
         $sortedSummary = collect($weeklySummary)->sortBy(function ($value, $key) use ($questionNames) {
             $keys = array_keys($questionNames);
             $pos = array_search($key, $keys);
-            return $pos !== false ? $pos : 999; // إن وجد يترتب، وإن لم يوجد يوضع بالاختيار الأخير
+            return $pos !== false ? $pos : 999;
         });
         $weeklyTotals = [
             'total_records' => $weekly->count(),
