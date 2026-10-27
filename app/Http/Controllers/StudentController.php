@@ -147,15 +147,15 @@ class StudentController extends Controller
 
         $topThree = StudentProfile::where('teacher_id', $student->teacher_id)
             ->with('user')
-            ->withSum(['prayerRecords as total_points' => function ($query) use ($startOfMonth, $endOfMonth) {
-                $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
+            ->withSum(['prayerRecords as weekly_points' => function ($query) use ($weekStart, $weekEnd) {
+                $query->whereBetween('date', [$weekStart->toDateString(), $weekEnd->toDateString()]);
             }], 'points')
             ->get()
             ->map(function ($student) {
-                $student->total_points = $student->total_points ?? 0;
+                $student->weekly_points = $student->weekly_points ?? 0;
                 return $student;
             })
-            ->sortByDesc('total_points')
+            ->sortByDesc('weekly_points')
             ->values()
             ->take(3);
 

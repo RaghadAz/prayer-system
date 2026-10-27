@@ -39,7 +39,9 @@
             <h3 class="text-center">{{ $ranking }}</h3>
         </div>
 
-        <div class="dashboard-box">
+
+        @include('student.top-three')
+        {{-- <div class="dashboard-box">
             <h4>🏆 أفضل 3 طالبات</h4>
 
             <table class="table">
@@ -64,7 +66,7 @@
                     @endforelse
                 </tbody>
             </table>
-        </div>
+        </div> --}}
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
