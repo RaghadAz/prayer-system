@@ -32,10 +32,8 @@
 
         </div>
 
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
+        <div class="dashboard-box">
                 <h5>🏆 أفضل 3 طالبات للأسبوع الحالي</h5>
-            </div>
             <div class="card-body">
                 @forelse($topStudentsWeekly as $index => $student)
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -49,7 +47,7 @@
         </div>
 
         <div class="dashboard-box">
-            <h5>🌟 أفضل 3 طالبات لشهر {{ $monthName }} (رقم الشهر: {{ $monthNumber }})</h5>
+            <h5>🌟 أفضل 3 طالبات لشهر {{ $monthName }} </h5>
             <ul class="list-group mb-4">
                 @forelse($topStudents as $index => $record)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
