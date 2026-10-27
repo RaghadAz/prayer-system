@@ -38,7 +38,7 @@
                 @forelse($topStudentsWeekly as $index => $student)
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span><strong>#{{ $index + 1 }}</strong> {{ $student->user->name ?? 'طالبة' }}</span>
-                        <span class="badge bg-success fs-6">{{ $student->weekly_points }} نقطة</span>
+                        <span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">{{ $student->weekly_points }} نقطة</span>
                     </div>
                 @empty
                     <p class="text-muted mb-0">لا توجد نقاط مسجلة هذا الأسبوع حتى الآن.</p>
@@ -55,8 +55,7 @@
                             <strong>#{{ $index + 1 }}</strong>
                             {{ optional($record->user)->name ?? 'طالبة' }}
                         </span>
-                        <span class="badge bg-success rounded-pill">
-                            {{ $record->total_points ?? 0 }} نقطة
+<span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">                            {{ $record->total_points ?? 0 }} نقطة
                         </span>
                     </li>
                 @empty

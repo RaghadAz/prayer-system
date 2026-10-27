@@ -8,7 +8,7 @@
                         <strong>#{{ $index + 1 }}</strong>
                         {{ optional($record->user)->name ?? 'طالبة' }}
                     </span>
-                    <span class="badge bg-success rounded-pill px-3 py-2">
+                    <span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">
                         {{ $record->weekly_points ?? 0 }} نقطة
                     </span>
                 </li>
