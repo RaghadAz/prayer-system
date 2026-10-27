@@ -32,9 +32,24 @@
 
         </div>
 
-        <div class="dashboard-box">
-            <h4>🏆 أفضل 3 طالبات</h4>
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5>🏆 أفضل 3 طالبات للأسبوع الحالي</h5>
+            </div>
+            <div class="card-body">
+                @forelse($topStudentsWeekly as $index => $student)
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span><strong>#{{ $index + 1 }}</strong> {{ $student->user->name ?? 'طالبة' }}</span>
+                        <span class="badge bg-success fs-6">{{ $student->weekly_points }} نقطة</span>
+                    </div>
+                @empty
+                    <p class="text-muted mb-0">لا توجد نقاط مسجلة هذا الأسبوع حتى الآن.</p>
+                @endforelse
+            </div>
+        </div>
 
+        <div class="dashboard-box">
+            <h5>🌟 أفضل 3 طالبات لشهر {{ $monthName }} (رقم الشهر: {{ $monthNumber }})</h5>
             <ul class="list-group mb-4">
                 @forelse($topStudents as $index => $record)
                     <li class="list-group-item d-flex justify-content-between align-items-center">

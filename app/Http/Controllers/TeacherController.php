@@ -149,6 +149,9 @@ class TeacherController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
+        $monthName = Carbon::now()->translatedFormat('F');
+        $monthNumber = Carbon::now()->format('m');
+
         $weeklyPoints = DailyProgramAnswer::whereIn('student_id', $studentsIds)
             ->whereDate('date', '>=', $weekStart)
             ->whereDate('date', '<=', $weekEnd)
@@ -184,13 +187,36 @@ class TeacherController extends Controller
             ->values()
             ->take(3);
 
+
+
+        $topStudentsWeekly = $teacher->students()
+            ->with('user')
+            ->withSum(['prayerRecords as weekly_points' => function ($query) use ($weekStart, $weekEnd) {
+                $query->whereBetween('date', [$weekStart, $weekEnd]);
+            }], 'points')->get()
+            ->map(function ($student) {
+                $student->weekly_points = $student->weekly_points ?? 0;
+                return $student;
+            })
+            ->filter(function ($student) {
+                return $student->weekly_points > 0;
+            })
+            ->sortByDesc('weekly_points')
+            ->values()
+            ->take(3);
+
+
+
         return view('teacher.dashboard', [
             'studentsCount' => $students->count(),
             'todayPoints'   => $todayPoints,
             'weeklyPoints'  => $weeklyPoints,
             'monthlyPoints' => $monthlyPoints,
             'topStudents'   => $topStudents,
+            'topStudentsWeekly' => $topStudentsWeekly,
             'recentRecords' => $recentRecords,
+            'monthName'         => Carbon::now()->translatedFormat('F'),
+            'monthNumber'       => Carbon::now()->format('m'),
         ]);
     }
 
