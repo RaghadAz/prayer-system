@@ -11,7 +11,7 @@ class RankingController extends Controller
     {
         $students = StudentProfile::where('user_id', $user_id)
             ->with('user')
-            ->withSum('prayerRecords as total_score', 'points')
+            ->withSum('prayerRecords as weekPoints', 'points')
             ->first();
 
 
