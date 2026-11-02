@@ -236,8 +236,13 @@ class TeacherController extends Controller
             ->withSum(['prayerRecords as weekPoints' => function ($query) use ($weekStart, $weekEnd) {
                 $query->whereBetween('date', [$weekStart, $weekEnd]);
             }], 'points')
-            ->orderByDesc('weekPoints')
-            ->get();
+            ->get()
+            ->map(function ($student) {
+            $student->weekPoints = $student->weekPoints ?? 0;
+            return $student;
+        })
+        ->sortByDesc('weekPoints')
+        ->values();
 
         return view('teacher.students', compact('students'));
     }
