@@ -229,11 +229,14 @@ class TeacherController extends Controller
         if (!$teacher) {
             return redirect('/login');
         }
-
+        $weekStart = now()->startOfWeek(\Carbon\Carbon::SATURDAY)->toDateString();
+        $weekEnd   = now()->endOfWeek(\Carbon\Carbon::SATURDAY)->toDateString();
         $students = $teacher->students()
             ->with('user')
-            ->withSum('prayerRecords as total_points', 'points')
-            ->orderByDesc('total_points')
+            ->withSum(['prayerRecords as weekPoints' => function ($query) use ($weekStart, $weekEnd) {
+                $query->whereBetween('date', [$weekStart, $weekEnd]);
+            }], 'points')
+            ->orderByDesc('weekPoints')
             ->get();
 
         return view('teacher.students', compact('students'));
@@ -304,10 +307,10 @@ class TeacherController extends Controller
                 't13' => 'الأوابين',
                 't14' => 'قيام الليل',
                 't15' => 'الوتر',
-                't16' => 'تلاوة القرآن',
-                't17' => 'حفظ القرآن',
-                't18' => 'بر الوالدين',
-                't19' => 'تهجد',
+                't16' => 'تهجد',
+                't17' => 'تلاوة القرآن',
+                't18' => 'حفظ القرآن',
+                't19' => 'بر الوالدين',
                 't20' => 'الورد الصباحي',
                 't21' => 'الورد المسائي',
                 't22' => 'ساعات الدراسة',

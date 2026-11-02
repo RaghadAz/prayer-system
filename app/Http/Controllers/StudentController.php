@@ -125,16 +125,6 @@ class StudentController extends Controller
             ->whereMonth('date', now()->month)
             ->sum('points') ?? 0;
 
-        $ranking = StudentProfile::where('teacher_id', $student->teacher_id)
-            ->withSum('prayerRecords as weekPoints', 'points')
-            ->get()
-            ->sortByDesc(function ($item) {
-                return $item->weekPoints ?? 0;
-            })
-            ->pluck('id')
-            ->search($student->id);
-
-        $ranking = $ranking !== false ? $ranking + 1 : '—';
 
         $date = request()->input('week_date')
             ? Carbon::parse(request()->input('week_date'))
@@ -144,6 +134,20 @@ class StudentController extends Controller
         $weekEnd   = $date->copy()->endOfWeek(Carbon::SATURDAY);
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
+
+
+        $ranking = StudentProfile::where('teacher_id', $student->teacher_id)
+            ->withSum(['prayerRecords as weekPoints' => function ($query) use ($weekStart, $weekEnd) {
+                $query->whereBetween('date', [$weekStart, $weekEnd]);
+            }], 'points')
+            ->get()
+            ->sortByDesc(function ($item) {
+                return $item->weekPoints ?? 0;
+            })
+            ->pluck('id')
+            ->search($student->id);
+
+        $ranking = $ranking !== false ? $ranking + 1 : '—';
 
         $topThree = StudentProfile::where('teacher_id', $student->teacher_id)
             ->with('user')
