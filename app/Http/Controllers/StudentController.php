@@ -126,10 +126,10 @@ class StudentController extends Controller
             ->sum('points') ?? 0;
 
         $ranking = StudentProfile::where('teacher_id', $student->teacher_id)
-            ->withSum('prayerRecords as total_points', 'points')
+            ->withSum('prayerRecords as weekPoints', 'points')
             ->get()
             ->sortByDesc(function ($item) {
-                return $item->total_points ?? 0;
+                return $item->weekPoints ?? 0;
             })
             ->pluck('id')
             ->search($student->id);
