@@ -33,7 +33,7 @@
                                 </a>
                             </td> --}}
 
-                            <td>{{ $student->total_points }}</td>
+                            <td>{{ $student->weekPoints }}</td>
                         </tr>
                     @endforeach
                 </tbody>
