@@ -344,7 +344,7 @@
         </div>
     </form>
 
-    <script>
+    {{-- <script>
         var email = document.querySelector('#email'),
             password = document.querySelector('#password'),
             mySVG = document.querySelector('.svgContainer'),
@@ -800,7 +800,7 @@
 
             resetFace();
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>
