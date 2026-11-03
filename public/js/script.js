@@ -1350,6 +1350,22 @@ if (!answerText) continue;
         }
     });
 
+function openMessageModal() {
+    document.getElementById('messageModal').style.display = 'flex';
+}
+
+function closeMessageModal() {
+    document.getElementById('messageModal').style.display = 'none';
+}
+
+// إغلاق النافذة إذا ضغطت الطالبة خارج الصندوق
+window.onclick = function(event) {
+    let modal = document.getElementById('messageModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
     // ⭐ زر السيف
     saveBtn.addEventListener('click', function () {
 
