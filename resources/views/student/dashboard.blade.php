@@ -4,6 +4,7 @@
     @include('layouts.navbar')
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="{{ asset('js/script.js') }}"></script>
 
     <div class="container mt-4">
 
@@ -17,7 +18,6 @@
             <span class="pulse-dot"></span>
         </button>
 
-        <!-- الـ Modal / Dialog -->
         <div id="messageModal" class="custom-modal" style="display: none;">
             <div class="modal-content">
                 <div class="modal-header">
