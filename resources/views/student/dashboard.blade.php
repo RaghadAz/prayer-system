@@ -31,7 +31,7 @@
                         🌸</p>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="closeMessageModal()" class="btn-ok">حسناً، فهمت</button>
+                    <button onclick="closeMessageModal()" class="btn-ok">إغلاق </button>
                 </div>
             </div>
         </div>
