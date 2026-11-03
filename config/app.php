@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Paris',
+    'timezone' => 'Asia/Damascus',
+    // Europe/Paris
 
     /*
     |--------------------------------------------------------------------------
