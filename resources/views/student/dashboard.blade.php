@@ -4,12 +4,12 @@
     @include('layouts.navbar')
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <script src="{{ asset('js/script.js') }}"></script>
+    {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
 
     <div class="container mt-4">
 
         <h2 class="dashboard-title text-center">📘 لوحة الطالب — {{ $student->user->name }}</h2>
-        <button onclick="openMessageModal()" class="notification-badge-btn" title="رسالة الإدارة">
+        <button onclick="openMessageModal()" class="notification-badge-btn" title="رسالة لكِ">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                 class="bi bi-envelope-heart" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -21,7 +21,7 @@
         <div id="messageModal" class="custom-modal" style="display: none;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>📢 رسالة مهمة للطالبات</h3>
+                    <h3>📢 رسالة لكِ </h3>
                     <button onclick="closeMessageModal()" class="close-btn">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -101,3 +101,21 @@
 
     </div>
 @endsection
+
+
+<script>
+    function openMessageModal() {
+        document.getElementById('messageModal').style.display = 'flex';
+    }
+
+    function closeMessageModal() {
+        document.getElementById('messageModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById('messageModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
