@@ -58,7 +58,7 @@
             margin: 0 auto 1.5em;
             border-radius: 50%;
             background: none;
-            border: solid 2.5px #d81b60;
+            border: solid 2.5px #f48fb1;
             overflow: hidden;
             display: flex;
             align-items: center;
