@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول - جامع الخير</title>
 
-    <!-- خطوط Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700&display=swap" rel="stylesheet">
 
-    <!-- مكتبة GSAP للرسوم المتحركة -->
-    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script> --}}
 
-    <!-- الستايل المدمج بألوان البيبي بينك والوردي الفاتح -->
     <style>
         * {
             margin: 0;
@@ -63,24 +60,29 @@
             background: none;
             border: solid 2.5px #d81b60;
             overflow: hidden;
-            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
-        form .svgContainer div {
-            position: relative;
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            padding-bottom: 100%;
-        }
-
-        form .svgContainer .mySVG {
-            position: absolute;
-            left: 0;
-            top: 0;
+        form .svgContainer div,
+        form .svgContainer a {
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        form .svgContainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            animation: none;
+            transition: none;
         }
 
         form .inputGroup {
