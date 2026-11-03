@@ -173,7 +173,13 @@
         @csrf
 
         <div class="svgContainer">
-            <div>
+            <div class="logo">
+                <a href="https://www.facebook.com/share/1ZcLhBXBce/" target="_blank" rel="">
+                    <img src="{{ asset('stylingtools/logo.png') }}" alt="Logo">
+                </a>
+            </div>
+
+            {{-- <div>
                 <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="0 0 200 200">
                     <defs>
@@ -312,7 +318,7 @@
                         </g>
                     </g>
                 </svg>
-            </div>
+            </div> --}}
         </div>
 
         @if ($errors->any())
