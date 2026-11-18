@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
 
-    <h2 class="mb-4 text-center">لوحة التحكم - الأنسة</h2>
+    <h2 class="mb-4 text-center">لوحة التحكم  </h2>
 
     <div class="row">
 

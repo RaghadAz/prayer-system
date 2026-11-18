@@ -5,13 +5,13 @@
 
     <div class="container mt-4">
 
-        <h2 class="dashboard-title text-center">لوحة تحكم الأنسة</h2>
+        <h2 class="dashboard-title text-center">لوحة تحكم </h2>
 
         <div class="row">
 
             <div class="col-md-4">
                 <div class="dashboard-card">
-                    <h4>👧 عدد الطالبات</h4>
+                    <h4> عدد الطالبات</h4>
                     <h2>{{ $studentsCount }}</h2>
                 </div>
             </div>

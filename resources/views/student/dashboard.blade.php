@@ -8,7 +8,7 @@
 
     <div class="container mt-4">
 
-        <h2 class="dashboard-title text-center">📘 لوحة الطالب — {{ $student->user->name }}</h2>
+        <h2 class="dashboard-title text-center"> لوحة الطالب — {{ $student->user->name }}</h2>
         <button onclick="openMessageModal()" class="notification-badge-btn" title="رسالة لكِ">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                 class="bi bi-envelope-heart" viewBox="0 0 16 16">
