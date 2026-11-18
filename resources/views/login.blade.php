@@ -171,12 +171,6 @@
 
 <body>
 
-    <div>
-        <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn">
-            تحميل التطبيق للأندرويد
-        </a>
-    </div>
-    <hr>
     <form action="{{ route('login.submit') }}" method="POST">
         @csrf
 

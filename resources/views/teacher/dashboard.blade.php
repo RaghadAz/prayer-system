@@ -65,6 +65,9 @@
                 @endforelse
             </ul>
         </div>
+ <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn-students text-white">
+            تحميل التطبيق للأندرويد
+        </a>
 
         <a href="{{ route('teacher.students') }}" class="btn-students text-white">عرض الطالبات</a>
 

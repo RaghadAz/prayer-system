@@ -30,4 +30,10 @@
     <div class="des1">
         <img src="{{ asset('stylingtools/Post by @aly-vettoretto · 1 image.gif') }}" alt="">
     </div>
+
+    <div>
+        <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn">
+            تحميل التطبيق للأندرويد
+        </a>
+    </div>
 @endsection

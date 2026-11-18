@@ -1194,6 +1194,15 @@ const questionSets = {
      ],
 
 };
+
+
+
+  if (navigator.userAgent.includes('wv')) {
+      const downloadBox = document.getElementById('appDownloadBox');
+      if (downloadBox) downloadBox.style.display = 'none';
+  }
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
     let collectedAnswers = {};
