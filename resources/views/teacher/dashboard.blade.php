@@ -33,12 +33,13 @@
         </div>
 
         <div class="dashboard-box">
-                <h5>🏆 أفضل 3 طالبات للأسبوع الحالي</h5>
+            <h5>🏆 أفضل 3 طالبات للأسبوع الحالي</h5>
             <div class="card-body">
                 @forelse($topStudentsWeekly as $index => $student)
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span><strong>#{{ $index + 1 }}</strong> {{ $student->user->name ?? 'طالبة' }}</span>
-                        <span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">{{ $student->weekly_points }} نقطة</span>
+                        <span class="badge rounded-pill px-3 py-2 text-white"
+                            style="background-color: #e83e8c;">{{ $student->weekly_points }} نقطة</span>
                     </div>
                 @empty
                     <p class="text-muted mb-0">لا توجد نقاط مسجلة هذا الأسبوع حتى الآن.</p>
@@ -55,7 +56,8 @@
                             <strong>#{{ $index + 1 }}</strong>
                             {{ optional($record->user)->name ?? 'طالبة' }}
                         </span>
-<span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">                            {{ $record->total_points ?? 0 }} نقطة
+                        <span class="badge rounded-pill px-3 py-2 text-white" style="background-color: #e83e8c;">
+                            {{ $record->total_points ?? 0 }} نقطة
                         </span>
                     </li>
                 @empty
@@ -65,7 +67,8 @@
                 @endforelse
             </ul>
         </div>
- <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn-students text-white">
+        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/app-arm64-v8a-release.apk" download
+            class="btn-students text-white">
             تحميل التطبيق للأندرويد
         </a>
 

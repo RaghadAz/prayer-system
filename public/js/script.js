@@ -1197,10 +1197,15 @@ const questionSets = {
 
 
 
-  if (navigator.userAgent.includes('wv')) {
-      const downloadBox = document.getElementById('appDownloadBox');
-      if (downloadBox) downloadBox.style.display = 'none';
-  }
+ document.addEventListener("DOMContentLoaded", function() {
+      const ua = navigator.userAgent || "";
+      if (ua.includes('wv') || ua.includes('PrayerSystemApp')) {
+          const box = document.getElementById('appDownloadBox');
+          if (box) {
+              box.style.setProperty('display', 'none', 'important');
+          }
+      }
+  });
 
 
 document.addEventListener('DOMContentLoaded', function () {
