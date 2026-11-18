@@ -31,7 +31,7 @@
         <img src="{{ asset('stylingtools/Post by @aly-vettoretto · 1 image.gif') }}" alt="">
     </div>
 
-    <div>
+    <div class="welcome">
         <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn">
             تحميل التطبيق للأندرويد
         </a>
