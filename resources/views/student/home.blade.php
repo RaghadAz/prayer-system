@@ -32,7 +32,8 @@
     </div>
 
     <div class="welcome">
-        <a href="{{ asset('downloads/prayer-system.apk') }}" download class="btn">
+        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/app-arm64-v8a-release.apk"
+            style="display: inline-flex; align-items: center; gap: 8px; background: #FFF0F5; color: #AD1457; border: 1.5px solid #F48FB1; padding: 8px 18px; border-radius: 50px; font-size: 13.5px; font-weight: bold; text-decoration: none;">
             تحميل التطبيق للأندرويد
         </a>
     </div>
