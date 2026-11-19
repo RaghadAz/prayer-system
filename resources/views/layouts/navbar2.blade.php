@@ -304,7 +304,7 @@
 
         <header class="pink-app-bar">
             <div class="app-bar-content">
-                <a onclick="goBackSmart('@yield('back_url', url('/'))')" class="nav-link">
+                <a onclick="goBackSmart('/')" class="nav-link">
 
                     رجوع
                 </a>
