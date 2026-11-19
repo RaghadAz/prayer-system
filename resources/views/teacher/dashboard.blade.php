@@ -5,7 +5,7 @@
 
     <div class="container mt-4">
 
-        <h2 class="dashboard-title text-center">لوحة تحكم </h2>
+        <h2 class="dashboard-title text-center">لوحة التحكم </h2>
 
         <div class="row">
 
