@@ -67,7 +67,7 @@
                 @endforelse
             </ul>
         </div>
-        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/app-arm64-v8a-release.apk" download
+        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/kh.apk" download
             class="btn-students text-white">
             تحميل التطبيق للأندرويد
         </a>
