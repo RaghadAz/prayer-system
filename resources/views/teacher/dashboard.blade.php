@@ -68,12 +68,10 @@
             </ul>
         </div>
 
-        @unless (request()->header('X-Requested-With') === 'com.your.package')
-            <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/kh.apk" download
-                class="btn-students text-white">
-                تحميل التطبيق للأندرويد
-            </a>
-        @endunless
+        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/kh.apk" download
+            class="btn-students text-white">
+            تحميل التطبيق للأندرويد
+        </a>
 
         <a href="{{ route('teacher.students') }}" class="btn-students text-white">عرض الطالبات</a>
 
@@ -82,5 +80,21 @@
             <button class="logout-btn w-100 text-white">تسجيل خروج</button>
         </form>
 
+
     </div>
 @endsection
+
+<script>
+    (function() {
+        var ua = navigator.userAgent || '';
+        var isAndroid = /Android/i.test(ua);
+        var isWebView = ua.includes('wv') ||
+            ua.includes('PrayerSystemApp') ||
+            (isAndroid && (!window.chrome || Object.keys(window.chrome).length === 0));
+
+        if (isWebView) {
+            var box = document.getElementById('appDownloadBox');
+            if (box) box.remove();
+        }
+    })();
+</script>

@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.navbar2')
+
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
