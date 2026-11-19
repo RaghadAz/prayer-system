@@ -41,7 +41,7 @@
                 ua.includes('PrayerSystemApp') ||
                 (isAndroid && (!window.chrome || Object.keys(window.chrome).length === 0));
 
-            if (isWebView||isAndroid) {
+            if (isWebView) {
                 document.getElementById('appDownloadBox')?.style.setProperty('display', 'none', 'important');
 
             }
