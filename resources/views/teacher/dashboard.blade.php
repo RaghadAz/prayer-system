@@ -67,10 +67,13 @@
                 @endforelse
             </ul>
         </div>
-        <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/kh.apk" download
-            class="btn-students text-white">
-            تحميل التطبيق للأندرويد
-        </a>
+
+        @unless (request()->header('X-Requested-With') === 'com.your.package')
+            <a href="https://github.com/RaghadAz/prayer-system/releases/download/v1.0.0/kh.apk" download
+                class="btn-students text-white">
+                تحميل التطبيق للأندرويد
+            </a>
+        @endunless
 
         <a href="{{ route('teacher.students') }}" class="btn-students text-white">عرض الطالبات</a>
 
