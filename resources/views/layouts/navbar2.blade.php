@@ -192,108 +192,108 @@
 </html> --}}
 
 
- <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Cairo', sans-serif;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #FFF0F5;
-            color: #4A2535;
-            min-height: 100vh;
-        }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #FFF0F5;
+        color: #4A2535;
+        min-height: 100vh;
+    }
 
-        .pink-app-bar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 240, 245, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1.5px solid #F8BBD0;
-            padding: 10px 16px;
-            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.08);
-        }
+    .pink-app-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 240, 245, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1.5px solid #F8BBD0;
+        padding: 10px 16px;
+        box-shadow: 0 4px 15px rgba(216, 27, 96, 0.08);
+    }
 
-        .app-bar-content {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .app-bar-content {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-        .app-bar-title {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 700;
-            color: #880E4F;
-            text-align: center;
-        }
+    .app-bar-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: #880E4F;
+        text-align: center;
+    }
 
-        .pink-back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background-color: #FFFFFF;
-            color: #d81b60;
-            border: 1.5px solid #F48FB1;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(216, 27, 96, 0.1);
-            transition: all 0.2s ease;
-        }
+    .pink-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #FFFFFF;
+        color: #d81b60;
+        border: 1.5px solid #F48FB1;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(216, 27, 96, 0.1);
+        transition: all 0.2s ease;
+    }
 
-        .pink-back-btn:active {
-            transform: scale(0.95);
-            background-color: #FCE4EC;
-        }
+    .pink-back-btn:active {
+        transform: scale(0.95);
+        background-color: #FCE4EC;
+    }
 
-        .app-bar-spacer {
-            width: 68px;
-        }
+    .app-bar-spacer {
+        width: 68px;
+    }
 
-        .main-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 16px;
-        }
+    .main-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 16px;
+    }
 
-        .custom-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background-color: #FFF0F5;
-            color: #880E4F;
-            border: 2px solid #F48FB1;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 14.5px;
-            font-weight: 700;
-            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.22);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 99999;
-            pointer-events: none;
-            white-space: nowrap;
-        }
+    .custom-toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background-color: #FFF0F5;
+        color: #880E4F;
+        border: 2px solid #F48FB1;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 14.5px;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(216, 27, 96, 0.22);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 99999;
+        pointer-events: none;
+        white-space: nowrap;
+    }
 
-        .custom-toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-    </style>
+    .custom-toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+</style>
 <nav class="navbar">
     <div class="logo">
         <a href="https://www.facebook.com/share/1ZcLhBXBce/" target="_blank" rel="noopener noreferrer">
@@ -301,20 +301,20 @@
         </a>
     </div>
 
-    @unless (View::hasSection('hide_app_bar'))
-        <header class="pink-app-bar">
-            <div class="app-bar-content">
-                <button type="button" onclick="goBackSmart('@yield('back_url', url('/'))')" class="pink-back-btn">
+            <h1 class="nav-link">('page_title', 'جامع الخير')</h1>
 
-                    <span>رجوع</span>
-                </button>
 
-                <h1 class="app-bar-title">@yield('page_title', 'جامع الخير')</h1>
+    <header class="pink-app-bar">
+        <div class="app-bar-content">
+            <button type="button" onclick="goBackSmart('('back_url', url('/'))')" class="nav-link">
 
-                <div class="app-bar-spacer"></div>
-            </div>
-        </header>
-    @endunless
+                <span>رجوع</span>
+            </button>
+
+
+
+        </div>
+    </header>
 </nav>
 
 
