@@ -28,7 +28,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td><a href="{{ route('admin.showStudent', $student->id) }}"
                                 class="student-link">{{ $student->user->name }}</a></td>
-                        <td>{{ $weeklyPoints ?? 0 }}</td>
+                        <td>{{ $student->weeklyPoints ?? 0 }}</td>
                         <td>
                             {{ $student->teacher ? $student->teacher->user->name : '—' }}
                         </td>
