@@ -26,8 +26,7 @@
                 @foreach ($students as $index => $student)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td><a href="{{ route('admin.showStudent', $student->id) }}"
-                                class="student-link">{{ $student->user->name }}</a></td>
+                        <td><a href="{{ route('admin.showStudent', $student->id) }}" class="student-link">{{ $student->user->name }}</a></td>
                         <td>{{ $student->weeklyPoints }}</td>
                         <td>
                             {{ $student->teacher ? $student->teacher->user->name : '—' }}

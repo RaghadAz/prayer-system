@@ -17,7 +17,7 @@
             <tr>
                 <th>#</th>
                 <th>اسم الأنسة</th>
-                <th>اسم المستخدم</th>
+                {{-- <th>اسم المستخدم</th> --}}
                 <th>عدد الطالبات</th>
                 <th>العمليات</th>
             </tr>
@@ -27,15 +27,17 @@
             @foreach($teachers as $index => $teacher)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $teacher->user->name }}</td>
-                    <td>{{ $teacher->user->username }}</td>
+                    <td><a href="{{ route('admin.showTeacher', $teacher->id) }}" class="btn btn-info btn-sm">
+    {{ $teacher->user->name }}
+</a></td>
+                    {{-- <td>{{ $teacher->user->username }}</td> --}}
                     <td>{{ $teacher->students_count }}</td>
 
-                    <td>
+                    {{-- <td>
 
                       <a href="{{ route('admin.showTeacher', $teacher->id) }}" class="btn btn-info btn-sm">
     عرض
-</a>
+</a> --}}
 
 
                         <form action="{{ route('admin.deleteUser', $teacher->user->id) }}"
