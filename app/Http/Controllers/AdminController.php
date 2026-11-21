@@ -126,27 +126,27 @@ class AdminController extends Controller
         return view('admin.teachers', compact('teachers'));
     }
 
-   public function listStudents()
-{
-    $weekStart = now()->startOfWeek(Carbon::SATURDAY)->toDateString();
-    $weekEnd   = now()->endOfWeek(Carbon::SATURDAY)->toDateString();
+    public function listStudents()
+    {
+        $weekStart = now()->startOfWeek(Carbon::SATURDAY)->toDateString();
+        $weekEnd   = now()->endOfWeek(Carbon::FRIDAY)->toDateString();
 
-    $students = StudentProfile::with('user', 'teacher.user')->get();
-    $studentsIds = $students->pluck('id');
+        $students = StudentProfile::with('user', 'teacher.user')->get();
+        $studentsIds = $students->pluck('id');
 
-    $weeklyPointsByStudent = DailyProgramAnswer::whereIn('student_id', $studentsIds)
-        ->whereDate('date', '>=', $weekStart)
-        ->whereDate('date', '<=', $weekEnd)
-        ->selectRaw('student_id, SUM(points) as total_points')
-        ->groupBy('student_id')
-        ->pluck('total_points', 'student_id');
+        $weeklyPointsByStudent = DailyProgramAnswer::whereIn('student_id', $studentsIds)
+            ->whereDate('date', '>=', $weekStart)
+            ->whereDate('date', '<=', $weekEnd)
+            ->selectRaw('student_id, SUM(points) as total_points')
+            ->groupBy('student_id')
+            ->pluck('total_points', 'student_id');
 
-    $students->each(function ($student) use ($weeklyPointsByStudent) {
-        $student->weeklyPoints = (int) ($weeklyPointsByStudent[$student->id] ?? 0);
-    });
+        $students->each(function ($student) use ($weeklyPointsByStudent) {
+            $student->weeklyPoints = (int) ($weeklyPointsByStudent[$student->id] ?? 0);
+        });
 
-    return view('admin.students', compact('students'));
-}
+        return view('admin.students', compact('students'));
+    }
 
     public function showTeacher($id)
     {
