@@ -128,8 +128,8 @@ class AdminController extends Controller
 
     public function listStudents()
     {
-        $weekStart = now()->startOfWeek(Carbon::SATURDAY)->toDateString();
-        $weekEnd   = now()->endOfWeek(Carbon::FRIDAY)->toDateString();
+        $weekStart = now()->startOfWeek(Carbon::SATURDAY)->startOfDay();
+        $weekEnd   = now()->startOfWeek(Carbon::SATURDAY)->addDays(6)->endOfDay();
 
         $students = StudentProfile::with('user', 'teacher.user')->get();
         $studentsIds = $students->pluck('id');
