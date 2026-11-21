@@ -50,12 +50,12 @@
             </ul> --}}
         </div>
 
-        <div class="section-box">
+      <div class="section-box">
             <h3>تقرير الأسبوع (ملخص)</h3>
 
             @php
-                // تحويل الملخص الأسبوعي لمصفوفة مفتاحها question_id
-                $weeklyAssoc = collect($weeklySummary)->keyBy('question_id');
+                // تحويل الملخص الأسبوعي لمصفوفة مجمعة حسب question_id لعرض كل خيار في سطر مستقل
+                $weeklyGrouped = collect($weeklySummary)->groupBy('question_id');
             @endphp
 
             <table class="table">
@@ -69,14 +69,15 @@
                 </thead>
                 <tbody>
                     @foreach ($questionNames as $qid => $qName)
-                        @if (isset($weeklyAssoc[$qid]))
-                            @php $item = $weeklyAssoc[$qid]; @endphp
-                            <tr>
-                                <td>{{ $qName }}</td>
-                                <td>{{ $item['answer_text'] }}</td>
-                                <td>{{ $item['count'] }}</td>
-                                <td>{{ $item['points'] }}</td>
-                            </tr>
+                        @if (isset($weeklyGrouped[$qid]))
+                            @foreach ($weeklyGrouped[$qid] as $item)
+                                <tr>
+                                    <td>{{ $qName }}</td>
+                                    <td>{{ $item['answer_text'] }}</td>
+                                    <td>{{ $item['count'] }}</td>
+                                    <td>{{ $item['points'] }}</td>
+                                </tr>
+                            @endforeach
                         @endif
                     @endforeach
                 </tbody>

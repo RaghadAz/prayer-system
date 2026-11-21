@@ -238,11 +238,11 @@ class TeacherController extends Controller
             }], 'points')
             ->get()
             ->map(function ($student) {
-            $student->weekPoints = $student->weekPoints ?? 0;
-            return $student;
-        })
-        ->sortByDesc('weekPoints')
-        ->values();
+                $student->weekPoints = $student->weekPoints ?? 0;
+                return $student;
+            })
+            ->sortByDesc('weekPoints')
+            ->values();
 
         return view('teacher.students', compact('students'));
     }
@@ -337,12 +337,12 @@ class TeacherController extends Controller
             ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
             ->get();
 
-        $weeklySummary = $this->buildFullSummary($weekly);
-        $sortedSummary = collect($weeklySummary)->sortBy(function ($value, $key) use ($questionNames) {
+       $weeklySummary = $this->buildFullSummary($weekly);
+        $sortedSummary = collect($weeklySummary)->sortBy(function ($value) use ($questionNames) {
             $keys = array_keys($questionNames);
-            $pos = array_search($key, $keys);
+            $pos = array_search($value['question_id'], $keys);
             return $pos !== false ? $pos : 999;
-        });
+        })->values();
         $weeklyTotals = [
             'total_records' => $weekly->count(),
             'total_points'  => $weekly->sum('points'),
@@ -365,20 +365,21 @@ class TeacherController extends Controller
 
         foreach ($records as $rec) {
             $qid = $rec->question_id;
+            $key = $qid . '_' . trim($rec->answer_text);
 
-            if (!isset($summary[$qid])) {
-                $summary[$qid] = [
+            if (!isset($summary[$key])) {
+                $summary[$key] = [
                     'question_id' => $qid,
                     'answer_text' => $rec->answer_text,
                     'points'      => $rec->points,
                     'count'       => 1,
                 ];
             } else {
-                $summary[$qid]['count']++;
-                $summary[$qid]['points'] += $rec->points;
+                $summary[$key]['count']++;
+                $summary[$key]['points'] += $rec->points;
             }
         }
 
-        return $summary;
+        return array_values($summary);
     }
 }

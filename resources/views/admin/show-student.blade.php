@@ -32,33 +32,38 @@
 
         <h4 class="mb-3">سجل الصلوات</h4>
 
-        <table class="table table-bordered text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>التاريخ</th>
-                    <th>الفجر</th>
-                    <th>الظهر</th>
-                    <th>العصر</th>
-                    <th>المغرب</th>
-                    <th>العشاء</th>
-                    <th>النقاط</th>
-                </tr>
-            </thead>
+      <div class="section-box">
+            <h3>تقرير الأسبوع (ملخص)</h3>
 
-            <tbody>
-                @foreach($records as $record)
+            @php
+                $weeklyGrouped = collect($weeklySummary)->groupBy('question_id');
+            @endphp
+
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ $record->date }}</td>
-                        <td>{{ $record->fajr }}</td>
-                        <td>{{ $record->dhuhr }}</td>
-                        <td>{{ $record->asr }}</td>
-                        <td>{{ $record->maghrib }}</td>
-                        <td>{{ $record->isha }}</td>
-                        <td>{{ $record->points }}</td>
+                        <th>السؤال</th>
+                        <th>الجواب</th>
+                        <th>عدد المرات</th>
+                        <th>النقاط</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($questionNames as $qid => $qName)
+                        @if (isset($weeklyGrouped[$qid]))
+                            @foreach ($weeklyGrouped[$qid] as $item)
+                                <tr>
+                                    <td>{{ $qName }}</td>
+                                    <td>{{ $item['answer_text'] }}</td>
+                                    <td>{{ $item['count'] }}</td>
+                                    <td>{{ $item['points'] }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
