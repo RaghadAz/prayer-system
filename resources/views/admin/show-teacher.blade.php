@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.navbar2')
+
 
 @section('content')
 <div class="container mt-4">
@@ -7,7 +9,7 @@
 
     <div class="card p-4 shadow">
 
-        <h4>👩‍🏫 اسم الأنسة: {{ $teacher->user->name }}</h4>
+        <h4> اسم الأنسة: {{ $teacher->user->name }}</h4>
         <h5 class="mt-3">عدد الطالبات: {{ $teacher->students->count() }}</h5>
 
         <hr>

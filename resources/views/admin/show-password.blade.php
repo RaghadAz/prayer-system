@@ -7,7 +7,7 @@
         <div class="card-body text-center">
 
             <h3 class="mb-3" style="font-weight: bold; color:#333;">
-                تم إنشاء المستخدم بنجاح 🎉
+                تم إنشاء المستخدم بنجاح 
             </h3>
 
             <p class="text-muted mb-4">
