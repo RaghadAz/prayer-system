@@ -143,6 +143,31 @@ class AdminController extends Controller
         return view('admin.show-teacher', compact('teacher'));
     }
 
+    private function buildFullSummary($records)
+{
+    $summary = [];
+
+    foreach ($records as $rec) {
+        $qid = $rec->question_id;
+        $answerText = trim((string) $rec->answer_text);
+        $key = $qid . '_' . $answerText;
+
+        if (!isset($summary[$key])) {
+            $summary[$key] = [
+                'question_id' => $qid,
+                'answer_text' => $rec->answer_text,
+                'points'      => (int) $rec->points,
+                'count'       => 1,
+            ];
+        } else {
+            $summary[$key]['count']++;
+            $summary[$key]['points'] += (int) $rec->points;
+        }
+    }
+
+    return array_values($summary);
+}
+
     public function showStudent($id)
 {
     $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
@@ -167,12 +192,30 @@ class AdminController extends Controller
         ->orderByDesc('date')
         ->get();
 
+    $weekly = DailyProgramAnswer::with('question')
+        ->where('student_id', $id)
+        ->whereBetween('date', [$weekStart, $today])
+        ->get();
+
+    $questionNames = $weekly->mapWithKeys(function ($rec) {
+        $qName = $rec->question?->title
+            ?? $rec->question?->question
+            ?? $rec->question?->name
+            ?? ('سؤال #' . $rec->question_id);
+
+        return [$rec->question_id => $qName];
+    })->toArray();
+
+    $weeklySummary = $this->buildFullSummary($weekly);
+
     return view('admin.show-student', compact(
         'student',
         'todayPoints',
         'weeklyPoints',
         'monthlyPoints',
-        'records'
+        'records',
+        'weeklySummary',
+        'questionNames'
     ));
 }
 }
