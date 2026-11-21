@@ -144,33 +144,84 @@ class AdminController extends Controller
     }
 
     private function buildFullSummary($records)
-{
-    $summary = [];
+    {
+        $summary = [];
 
-    foreach ($records as $rec) {
-        $qid = $rec->question_id;
-        $answerText = trim((string) $rec->answer_text);
-        $key = $qid . '_' . $answerText;
+        foreach ($records as $rec) {
+            $qid = $rec->question_id;
+            $answerText = trim((string) $rec->answer_text);
+            $key = $qid . '_' . $answerText;
 
-        if (!isset($summary[$key])) {
-            $summary[$key] = [
-                'question_id' => $qid,
-                'answer_text' => $rec->answer_text,
-                'points'      => (int) $rec->points,
-                'count'       => 1,
-            ];
-        } else {
-            $summary[$key]['count']++;
-            $summary[$key]['points'] += (int) $rec->points;
+            if (!isset($summary[$key])) {
+                $summary[$key] = [
+                    'question_id' => $qid,
+                    'answer_text' => $rec->answer_text,
+                    'points'      => (int) $rec->points,
+                    'count'       => 1,
+                ];
+            } else {
+                $summary[$key]['count']++;
+                $summary[$key]['points'] += (int) $rec->points;
+            }
         }
+
+        return array_values($summary);
     }
 
-    return array_values($summary);
-}
-
-public function showStudent($id)
+   public function showStudent($id)
     {
         $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
+        $teacherId = $student->teacher_id;
+
+        if ($teacherId == 1) {
+            $questionNames = [
+                'm1'  => 'صلاة الفجر',
+                'm2'  => 'صلاة الظهر',
+                'm3'  => 'صلاة العصر',
+                'm4'  => 'صلاة المغرب',
+                'm5'  => 'صلاة العشاء',
+                'm6'  => 'سنة الفجر',
+                'm7'  => 'سنة الظهر القبلية',
+                'm8'  => 'سنة الظهر البعدية',
+                'm9'  => 'سنة العصر',
+                'm10' => 'سنة المغرب',
+                'm11' => 'سنة العشاء',
+                'm12' => 'حفظ القرآن الكريم',
+                'm13' => 'بر الوالدين',
+                'm14' => 'ساعات الدراسة',
+                'm15' => 'عمل منزلي',
+                'm16' => 'وقت النوم',
+            ];
+        } else {
+            $questionNames = [
+                't1'  => 'صلاة الفجر',
+                't2'  => 'صلاة الظهر',
+                't3'  => 'صلاة العصر',
+                't4'  => 'صلاة المغرب',
+                't5'  => 'صلاة العشاء',
+                't6'  => 'سنة الفجر',
+                't7'  => 'سنة الظهر القبلية',
+                't8'  => 'سنة الظهر البعدية',
+                't9'  => 'سنة العصر',
+                't10' => 'سنة المغرب',
+                't11' => 'سنة العشاء',
+                't12' => 'الضحى',
+                't13' => 'الأوابين',
+                't14' => 'قيام الليل',
+                't15' => 'الوتر',
+                't16' => 'تهجد',
+                't17' => 'تلاوة القرآن',
+                't18' => 'حفظ القرآن',
+                't19' => 'بر الوالدين',
+                't20' => 'الورد الصباحي',
+                't21' => 'الورد المسائي',
+                't22' => 'ساعات الدراسة',
+                't23' => 'قراءة للجامعيات',
+                't24' => 'عمل منزلي',
+                't25' => 'سورة الملك',
+                't26' => 'سورة الواقعة',
+            ];
+        }
 
         $today = now()->toDateString();
         $weekStart = now()->subDays(6)->toDateString();
@@ -192,15 +243,16 @@ public function showStudent($id)
             return $rec->date >= $monthStart && $rec->date <= $today;
         })->sum('points');
 
-        // إذا كانت علاقة question موجودة في الموديل سنستخدم اسمها، وإلا نعرض رقم البند بأمان
-        $questionNames = $weekly->mapWithKeys(function ($rec) {
-            $qName = optional($rec->question)->title
-                ?? optional($rec->question)->question
-                ?? optional($rec->question)->name
-                ?? ('البند #' . $rec->question_id);
-
-            return [$rec->question_id => $qName];
-        })->toArray();
+        // دمج الأسماء الموجودة في المصفوفة مع أي سؤال إضافي قد يظهر في سجلات الأسبوع
+        foreach ($weekly as $rec) {
+            $qid = $rec->question_id;
+            if (!isset($questionNames[$qid])) {
+                $questionNames[$qid] = optional($rec->question)->title
+                    ?? optional($rec->question)->question
+                    ?? optional($rec->question)->name
+                    ?? ('البند #' . $qid);
+            }
+        }
 
         $weeklySummary = $this->buildFullSummary($weekly);
 
