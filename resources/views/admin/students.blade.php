@@ -26,17 +26,18 @@
                 @foreach ($students as $index => $student)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $student->user->name }}</td>
-                        <td>{{ $student->user->weeklyPoints }}</td>
+                        <td><a href="{{ route('admin.showStudent', $student->id) }}"
+                                class="student-link">{{ $student->user->name }}</a></td>
+                        <td>{{ $student->weeklyPoints }}</td>
                         <td>
                             {{ $student->teacher ? $student->teacher->user->name : '—' }}
                         </td>
 
                         <td>
 
-                            <a href="{{ route('admin.showStudent', $student->id) }}" class="btn btn-info btn-sm">
+                            {{-- <a href="{{ route('admin.showStudent', $student->id) }}" class="btn btn-info btn-sm">
                                 عرض
-                            </a>
+                            </a> --}}
 
                             <form action="{{ route('admin.deleteUser', $student->user->id) }}" method="POST"
                                 style="display:inline;" onsubmit="return confirm('هل تريدين حذف هذه الطالبة؟');">
