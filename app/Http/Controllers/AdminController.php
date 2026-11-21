@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\TeacherProfile;
 use App\Models\StudentProfile;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -125,14 +126,27 @@ class AdminController extends Controller
         return view('admin.teachers', compact('teachers'));
     }
 
-    public function listStudents()
-    {
-        $students = StudentProfile::with('user')
-            ->with('teacher.user')
-            ->get();
+   public function listStudents()
+{
+    $weekStart = now()->startOfWeek(Carbon::SATURDAY)->toDateString();
+    $weekEnd   = now()->endOfWeek(Carbon::SATURDAY)->toDateString();
 
-        return view('admin.students', compact('students'));
-    }
+    $students = StudentProfile::with('user', 'teacher.user')->get();
+    $studentsIds = $students->pluck('id');
+
+    $weeklyPointsByStudent = DailyProgramAnswer::whereIn('student_id', $studentsIds)
+        ->whereDate('date', '>=', $weekStart)
+        ->whereDate('date', '<=', $weekEnd)
+        ->selectRaw('student_id, SUM(points) as total_points')
+        ->groupBy('student_id')
+        ->pluck('total_points', 'student_id');
+
+    $students->each(function ($student) use ($weeklyPointsByStudent) {
+        $student->weeklyPoints = (int) ($weeklyPointsByStudent[$student->id] ?? 0);
+    });
+
+    return view('admin.students', compact('students'));
+}
 
     public function showTeacher($id)
     {
@@ -168,7 +182,7 @@ class AdminController extends Controller
         return array_values($summary);
     }
 
-   public function showStudent($id)
+    public function showStudent($id)
     {
         $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
         $teacherId = $student->teacher_id;
@@ -243,7 +257,6 @@ class AdminController extends Controller
             return $rec->date >= $monthStart && $rec->date <= $today;
         })->sum('points');
 
-        // دمج الأسماء الموجودة في المصفوفة مع أي سؤال إضافي قد يظهر في سجلات الأسبوع
         foreach ($weekly as $rec) {
             $qid = $rec->question_id;
             if (!isset($questionNames[$qid])) {
