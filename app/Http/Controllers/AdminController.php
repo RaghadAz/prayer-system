@@ -168,54 +168,50 @@ class AdminController extends Controller
     return array_values($summary);
 }
 
-    public function showStudent($id)
-{
-    $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
+public function showStudent($id)
+    {
+        $student = StudentProfile::with('user', 'teacher.user')->findOrFail($id);
 
-    $today = now()->toDateString();
-    $weekStart = now()->subDays(6)->toDateString();
-    $monthStart = now()->subDays(29)->toDateString();
+        $today = now()->toDateString();
+        $weekStart = now()->subDays(6)->toDateString();
+        $monthStart = now()->subDays(29)->toDateString();
 
-    $todayPoints = DailyProgramAnswer::where('student_id', $id)
-        ->where('date', $today)
-        ->sum('points');
+        $records = DailyProgramAnswer::where('student_id', $id)
+            ->orderByDesc('date')
+            ->get();
 
-    $weeklyPoints = DailyProgramAnswer::where('student_id', $id)
-        ->whereBetween('date', [$weekStart, $today])
-        ->sum('points');
+        $todayPoints = $records->where('date', $today)->sum('points');
 
-    $monthlyPoints = DailyProgramAnswer::where('student_id', $id)
-        ->whereBetween('date', [$monthStart, $today])
-        ->sum('points');
+        $weekly = $records->filter(function ($rec) use ($weekStart, $today) {
+            return $rec->date >= $weekStart && $rec->date <= $today;
+        });
 
-    $records = DailyProgramAnswer::where('student_id', $id)
-        ->orderByDesc('date')
-        ->get();
+        $weeklyPoints = $weekly->sum('points');
 
-    $weekly = DailyProgramAnswer::with('question')
-        ->where('student_id', $id)
-        ->whereBetween('date', [$weekStart, $today])
-        ->get();
+        $monthlyPoints = $records->filter(function ($rec) use ($monthStart, $today) {
+            return $rec->date >= $monthStart && $rec->date <= $today;
+        })->sum('points');
 
-    $questionNames = $weekly->mapWithKeys(function ($rec) {
-        $qName = $rec->question?->title
-            ?? $rec->question?->question
-            ?? $rec->question?->name
-            ?? ('سؤال #' . $rec->question_id);
+        // إذا كانت علاقة question موجودة في الموديل سنستخدم اسمها، وإلا نعرض رقم البند بأمان
+        $questionNames = $weekly->mapWithKeys(function ($rec) {
+            $qName = optional($rec->question)->title
+                ?? optional($rec->question)->question
+                ?? optional($rec->question)->name
+                ?? ('البند #' . $rec->question_id);
 
-        return [$rec->question_id => $qName];
-    })->toArray();
+            return [$rec->question_id => $qName];
+        })->toArray();
 
-    $weeklySummary = $this->buildFullSummary($weekly);
+        $weeklySummary = $this->buildFullSummary($weekly);
 
-    return view('admin.show-student', compact(
-        'student',
-        'todayPoints',
-        'weeklyPoints',
-        'monthlyPoints',
-        'records',
-        'weeklySummary',
-        'questionNames'
-    ));
-}
+        return view('admin.show-student', compact(
+            'student',
+            'todayPoints',
+            'weeklyPoints',
+            'monthlyPoints',
+            'records',
+            'weeklySummary',
+            'questionNames'
+        ));
+    }
 }
