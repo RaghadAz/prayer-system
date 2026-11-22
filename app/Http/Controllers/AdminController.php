@@ -128,15 +128,15 @@ class AdminController extends Controller
 
     public function listStudents()
     {
-        $weekStart = now()->startOfWeek(Carbon::SATURDAY)->startOfDay();
-        $weekEnd   = now()->startOfWeek(Carbon::SATURDAY)->addDays(6)->endOfDay();
+         $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
         $students = StudentProfile::with('user', 'teacher.user')->get();
         $studentsIds = $students->pluck('id');
 
         $weeklyPointsByStudent = DailyProgramAnswer::whereIn('student_id', $studentsIds)
-            ->whereDate('date', '>=', $weekStart)
-            ->whereDate('date', '<=', $weekEnd)
+            ->whereDate('date', '>=', $startOfMonth)
+            ->whereDate('date', '<=', $endOfMonth)
             ->selectRaw('student_id, SUM(points) as total_points')
             ->groupBy('student_id')
             ->pluck('total_points', 'student_id');

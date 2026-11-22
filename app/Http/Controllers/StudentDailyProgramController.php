@@ -15,8 +15,11 @@ class StudentDailyProgramController extends Controller
 
         $studentId = Auth::user()->studentProfile->id;
         $date = now()->toDateString();
-        $setName = $request->input('setName', 'default');
-        foreach ($request->answers as $questionId => $answerText) {
+        $setName = trim((string) $request->input('setName', 'default'));
+
+        foreach ((array) $request->answers as $questionId => $answerText) {
+            $cleanQuestionId = trim((string) $questionId);
+            $cleanAnswerText = trim((string) $answerText);
 
             DailyProgramAnswer::updateOrCreate(
                 [
@@ -26,7 +29,7 @@ class StudentDailyProgramController extends Controller
                 ],
                 [
                     'answer_text' => $answerText,
-                    'points' => $this->calculatePoints($questionId, $answerText, $setName),
+                    'points'      => $this->calculatePoints($cleanQuestionId, $cleanAnswerText, $setName),
                     'set_name' => $setName,
                 ]
             );
