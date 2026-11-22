@@ -240,7 +240,8 @@ class AdminController extends Controller
 
         $today = now()->toDateString();
         $weekStart = now()->subDays(6)->toDateString();
-        $monthStart = now()->subDays(29)->toDateString();
+        $startOfMonth = now()->startOfMonth()->toDateString();
+        $endOfMonth   = now()->endOfMonth()->toDateString();
 
         $records = DailyProgramAnswer::where('student_id', $id)
             ->orderByDesc('date')
@@ -254,9 +255,10 @@ class AdminController extends Controller
 
         $weeklyPoints = $weekly->sum('points');
 
-        $monthlyPoints = $records->filter(function ($rec) use ($monthStart, $today) {
-            return $rec->date >= $monthStart && $rec->date <= $today;
-        })->sum('points');
+        $monthlyRecords = $records->filter(function ($rec) use ($startOfMonth, $endOfMonth) {
+            return $rec->date >= $startOfMonth && $rec->date <= $endOfMonth;
+        });
+        $monthlyPoints = $monthlyRecords->sum('points');
 
         foreach ($weekly as $rec) {
             $qid = $rec->question_id;
@@ -268,7 +270,7 @@ class AdminController extends Controller
             }
         }
 
-        $weeklySummary = $this->buildFullSummary($weekly);
+        $weeklySummary = $this->buildFullSummary($monthlyRecords);
 
         return view('admin.show-student', compact(
             'student',
