@@ -77,14 +77,14 @@
             color: #831d46;
         }
     </style>
-
+{{--
     <div class="container mt-3" dir="rtl">
         <div class="pink-hub-wrapper">
             <div class="pink-hub-card">
 
                 <div class="d-grid gap-3">
                     <a href="{{ route('admin.sstudents') }}" class="pink-big-btn pink-big-btn--primary">
-                        <span> نظام المراقبة </span>
+                        <span> ا.سلام </span>
                     </a>
 
                     <a href="{{ route('admin.dashboard') }}" class="pink-big-btn pink-big-btn--soft">
@@ -93,5 +93,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
