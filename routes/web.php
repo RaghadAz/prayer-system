@@ -28,8 +28,8 @@ Route::post('/logout', function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])
-        ->name('admin.dashboard');
+    Route::get('/admin/home', [AdminController::class, 'adminDashboard'])
+        ->name('admin.home');
 
     Route::get('/admin/create-user', [AdminController::class, 'createUserForm'])
         ->name('admin.createUser');
