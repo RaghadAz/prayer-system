@@ -77,7 +77,11 @@
             color: #831d46;
         }
     </style>
-{{--
+
+    <h1>Hello world
+
+    </h1>
+    {{--
     <div class="container mt-3" dir="rtl">
         <div class="pink-hub-wrapper">
             <div class="pink-hub-card">
