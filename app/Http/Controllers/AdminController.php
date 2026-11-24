@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    public function adminHome()
+    {
+        return view('admin.home');
+    }
     public function adminDashboard()
     {
         $today = now()->toDateString();
