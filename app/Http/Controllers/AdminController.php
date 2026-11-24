@@ -20,6 +20,8 @@ class AdminController extends Controller
     {
         return view('admin.home');
     }
+
+
     public function adminDashboard()
     {
         $today = now()->toDateString();
@@ -132,6 +134,29 @@ class AdminController extends Controller
     }
 
     public function listStudents()
+    {
+        $startOfMonth = now()->startOfMonth()->toDateString();
+        $endOfMonth   = now()->endOfMonth()->toDateString();
+
+        $students = StudentProfile::with('user', 'teacher.user')->get();
+        $studentsIds = $students->pluck('id');
+
+        $monthlyPointsByStudent = DailyProgramAnswer::whereIn('student_id', $studentsIds)
+            ->whereBetween('date', [$startOfMonth, $endOfMonth])
+            ->selectRaw('student_id, SUM(points) as total_points')
+            ->groupBy('student_id')
+            ->pluck('total_points', 'student_id');
+
+        $students->each(function ($student) use ($monthlyPointsByStudent) {
+            $points = (int) ($monthlyPointsByStudent[$student->id] ?? 0);
+            $student->monthlyPoints = $points;
+            $student->weeklyPoints  = $points;
+        });
+
+        return view('admin.students', compact('students', 'startOfMonth', 'endOfMonth'));
+    }
+
+    public function adminSstudents()
     {
         $startOfMonth = now()->startOfMonth()->toDateString();
         $endOfMonth   = now()->endOfMonth()->toDateString();
