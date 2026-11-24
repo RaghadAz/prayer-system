@@ -176,7 +176,7 @@ class AdminController extends Controller
             $student->weeklyPoints  = $points;
         });
 
-        return view('admin.students', compact('students', 'startOfMonth', 'endOfMonth'));
+        return view('admin.sstudents', compact('students', 'startOfMonth', 'endOfMonth'));
     }
 
     public function showTeacher($id)
