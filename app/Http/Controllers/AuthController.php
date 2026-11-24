@@ -30,7 +30,7 @@ class AuthController extends Controller
             $role = strtolower(trim($user->role));
 
             if ($role === 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.home');
             }
 
             if ($role === 'teacher') {
