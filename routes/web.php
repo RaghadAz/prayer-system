@@ -34,6 +34,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/sstudents', [AdminController::class, 'adminSstudents'])
         ->name('admin.sstudents');
 
+Route::get('/admin/top3', [AdminController::class, 'adminTop3'])
+        ->name('admin.top3');
+
+
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])
         ->name('admin.dashboard');
 

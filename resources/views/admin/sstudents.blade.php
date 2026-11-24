@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@extends('layouts.navbar2')
+@extends('layouts.snavbar')
 
 
 @section('content')

@@ -179,6 +179,36 @@ class AdminController extends Controller
         return view('admin.sstudents', compact('students', 'startOfMonth', 'endOfMonth'));
     }
 
+    public function Top()
+    {
+        $startOfMonth = now()->startOfMonth()->toDateString();
+        $endOfMonth   = now()->endOfMonth()->toDateString();
+
+        $monthlyPointsByStudent = DailyProgramAnswer::whereBetween('date', [$startOfMonth, $endOfMonth])
+            ->selectRaw('student_id, SUM(points) as total_points')
+            ->groupBy('student_id')
+            ->pluck('total_points', 'student_id');
+
+        $teachersTopStudents = TeacherProfile::with(['user', 'students.user'])
+            ->get()
+            ->map(function ($teacher) use ($monthlyPointsByStudent) {
+                $topThree = $teacher->students
+                    ->map(function ($student) use ($monthlyPointsByStudent) {
+                        $student->total_points = (int) ($monthlyPointsByStudent[$student->id] ?? 0);
+                        return $student;
+                    })
+                    ->filter(function ($student) {
+                        return $student->total_points > 0;
+                    })
+                    ->sortByDesc('total_points')
+                    ->take(3)
+                    ->values();
+
+                $teacher->topStudents = $topThree;
+                return $teacher;
+            });
+    }
+
     public function showTeacher($id)
     {
         $teacher = TeacherProfile::with('user')
