@@ -18,7 +18,7 @@ class AdminController extends Controller
 
     public function adminHome()
     {
-        return view('admin.home');
+        return 'admin home ok';
     }
     public function adminDashboard()
     {
