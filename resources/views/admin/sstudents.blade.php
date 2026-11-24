@@ -34,14 +34,7 @@
                             {{ $student->teacher ? $student->teacher->user->name : '—' }}
                         </td>
 
-                        <td>
 
-                            {{-- <a href="{{ route('admin.showStudent', $student->id) }}" class="btn btn-info btn-sm">
-                                عرض
-                            </a> --}}
-
-
-                        </td>
                     </tr>
                 @endforeach
             </tbody>
