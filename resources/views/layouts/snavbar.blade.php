@@ -8,8 +8,8 @@
     <div class="options">
         <ul>
             <li><a class="nav-link" href="{{ route('admin.home') }}">الصفحة الرئيسية</a></li>
-            <li><a class="nav-link" href="{{ route('admin.sstudents') }}"> قائمة الطالبات </a></li>
-            <li><a class="nav-link" href="{{ route('/') }}"> Top 3 </a></li>
+            <li><a class="nav-link" href="{{ route('admin.sstudents') }}">قائمة الطالبات</a></li>
+            <li><a class="nav-link" href="{{ url('admin.top3') }}">Top 3</a></li>
         </ul>
     </div>
 </nav>
