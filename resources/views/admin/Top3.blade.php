@@ -1,15 +1,18 @@
 @extends('layouts.snavbar')
 @extends('layouts.app')
-
 @section('content')
-    @include('layouts.snavbar')
+    @includeIf('layouts.snavbar')
 
     <div class="container mt-4" dir="rtl">
         <div class="row">
             @foreach ($teachersTopStudents ?? [] as $teacher)
                 @php
-                    $topList = collect(data_get($teacher, 'topStudents', []))->take(5);
-                    $teacherName = data_get($teacher, 'user.name', '—');
+                    $topList = collect(
+                        data_get($teacher, 'topStudents') ??
+                            (data_get($teacher, 'top_students') ?? (data_get($teacher, 'students') ?? [])),
+                    )->take(5);
+
+                    $teacherName = data_get($teacher, 'user.name') ?? (data_get($teacher, 'name') ?? '—');
                 @endphp
 
                 <div class="col-md-6 mb-4">
@@ -32,12 +35,21 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($topList as $index => $student)
+                                            @php
+                                                $studentName =
+                                                    data_get($student, 'user.name') ??
+                                                    (data_get($student, 'name') ?? '—');
+
+                                                $points =
+                                                    data_get($student, 'total_points') ??
+                                                    (data_get($student, 'points') ?? 0);
+                                            @endphp
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ data_get($student, 'user.name', '—') }}</td>
+                                                <td>{{ $studentName }}</td>
                                                 <td>
                                                     <span class="badge bg-primary rounded-pill">
-                                                        {{ data_get($student, 'total_points', 0) }} نقطة
+                                                        {{ $points }} نقطة
                                                     </span>
                                                 </td>
                                             </tr>
