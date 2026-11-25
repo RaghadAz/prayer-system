@@ -1,4 +1,4 @@
-@extends('layouts.snavbar')
+{{-- @extends('layouts.snavbar') --}}
 @extends('layouts.app')
 
 @section('content')
