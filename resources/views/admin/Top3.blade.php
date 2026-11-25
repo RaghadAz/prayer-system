@@ -1,7 +1,5 @@
 @extends('layouts.snavbar')
 @extends('layouts.app')
-@section('content')
-    @includeIf('layouts.snavbar')
 
     <div class="container mt-4" dir="rtl">
         <div class="row">
